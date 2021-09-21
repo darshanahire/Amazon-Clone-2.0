@@ -16,7 +16,7 @@ function Navbar() {
     const [toggle, setToggle] = useState(false)
     const [notification, setNotification] = useState()
     const [cartnotification, setcartNotification] = useState()
-    const [DarkMode,setDarkMode]=useState(true);
+    const [DarkMode,setDarkMode]=useState(false);
     let user = localStorage.getItem("user");
     if(user){
         axios.post('/getuser', { user }).then(async (d) => {
