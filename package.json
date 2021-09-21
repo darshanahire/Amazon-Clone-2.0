@@ -1,0 +1,31 @@
+{
+  "name": "amazon-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "axios": "^0.21.4",
+    "dotenv": "^10.0.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.6",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darshanahire/amazon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darshanahire/amazon/issues"
+  },
+  "homepage": "https://github.com/darshanahire/amazon#readme"
+}
