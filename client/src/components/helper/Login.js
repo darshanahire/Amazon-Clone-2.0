@@ -18,7 +18,7 @@ const Login = () => {
         })
     }
     function sendData(){
-        if(initdata.email!=="" && initdata.password!=="" ){
+        if(!initdata.email && !initdata.password ){
         axios.post("/login",userData).then(async(res)=>{
             console.log(res);
             

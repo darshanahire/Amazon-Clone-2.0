@@ -18,7 +18,7 @@ const [likeed, disLike] = useState(false);
             if(d.status==200){
             disLike(!likeed);}
             else if(d.status==201){
-                alert("Some went Wrong")
+                alert("Plese Login First")
             }
         }
         )}
@@ -43,7 +43,7 @@ return (
     <>
         <div className="individualItem col  my-2 col-md-2" style={{ width: "300px" }}>
             <div className="like-div">
-                <a className="nav-link active" onClick={likeDislike} style={{ height: "20px" }}><img id={idtopass} className="like-png" src={likeed ===true ? "png/like.png":"png/dislike.png"} /></a>
+                <a className="nav-link active cursor" onClick={likeDislike} style={{ height: "20px" }}><img id={idtopass} className="like-png" src={likeed ===true ? "png/like.png":"png/dislike.png"} /></a>
                 <div className="item d-flex justify-content-center my-2">
                     <img className="itemPng" src={prodData.prodImg} alt="" /></div>
                 <div>

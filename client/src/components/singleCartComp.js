@@ -28,7 +28,7 @@ export default function SingleCartComp(props) {
             <div className="individualItem col  my-2 col-md-8 mx-auto" style={{border:"1px solid rgb(197, 197, 197)"}}>
                 <div className="like-div d-flex flex-row">
                     <div className="item d-flex justify-content-center my-2">
-                        <img className="itemPng" src={prodData.prodImg} alt="" /></div>
+                        <img className="itemPng cursor" src={prodData.prodImg} alt="" /></div>
                     <div className="w-100">
                         <h6 style={{ 'margin': '3px 0' }}>{prodData.prodName}</h6>
                         <p className="star_para">{prodData.prodBrand} <br /> ⭐⭐⭐⭐ 4.8 (21032 reviews)</p>

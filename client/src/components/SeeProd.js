@@ -28,7 +28,7 @@ let history=useHistory()
             alert("Item Added to Cart")
             setProdData = d.data;}
             else if(d.status==201){
-            alert("Something Went wrong")
+            alert("Please Login First")
             }
         })}
         else{
@@ -42,9 +42,6 @@ let history=useHistory()
 
     return (
         <>
-        <span><div class="alert alert-success" role="alert">
-  This is a success alert—check it out!
-</div></span>
         <div className="prodContainer" style={{background:"white"}} >
             <div className="SeeProdSideBar " style={{ "position": "initial" }}>
                 <div className="d-flex cursor" onClick={history.goBack}>

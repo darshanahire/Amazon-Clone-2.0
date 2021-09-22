@@ -18,12 +18,15 @@ function Navbar() {
     const [cartnotification, setcartNotification] = useState()
     const [DarkMode,setDarkMode]=useState(false);
     let user = localStorage.getItem("user");
-    if(user){
+    if(user!==undefined){
         axios.post('/getuser', { user }).then(async (d) => {
+            console.log(d.data.liked.length);
+            
             setNotification(d.data.liked.length);
             setcartNotification(d.data.cartdata.length);
 
-        })}
+        })
+    }
     
     return (
         <>
@@ -83,7 +86,7 @@ function Navbar() {
                         <li className="nav-item" onClick={()=>{setDarkMode(!DarkMode)}} >
                             <a className="nav-link" aria-current="page" href="#" >
                                 <IconButton aria-label=" new notifications" color="inherit" style={DarkMode?{"color":'white'}:{"color":'Black'}}>
-                                    <Badge badgeContent={notification} color="secondary">
+                                    <Badge badgeContent={0} color="secondary">
                                         <Brightness4Icon />
                                     </Badge>
                                 </IconButton>

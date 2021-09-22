@@ -1,10 +1,12 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import { BrowserRouter as Router,Route, Link, Switch, } from 'react-router-dom'
 import "../App.css"
 
+
 function LeftSideBar() {
+    const [DarkMode,setDarkMode]=useState(false);
     return (
-        <div className="LeftSideBar">
+        <div className="LeftSideBar" style={DarkMode?{ 'background-color': 'black' }:{ 'background-color': 'white' }}>
             <ul>
                 <li>Categories</li>
                 <li>Echo and Alexa</li>

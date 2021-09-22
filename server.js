@@ -52,7 +52,7 @@ app.post("/getLikedArr", async (req, res) => {
 })
 app.post("/getuser", async (req, res) => {
     const user = req.body.user;
-    let data = await User.findOne({ user: user });    
+    let data = await User.findOne({ user: user });       
     res.status(200).json(data);
 
 })
@@ -77,7 +77,7 @@ app.post("/remove-from-cart", async (req, res) => {
     res.status(200).json(data.cartdata)});}
     catch(err){
         console.log(err);
-        res.status(201).json("SomeThing went wrong");
+        res.status(201).json("Plese Login First");
     }
 })
 app.post("/handlelike", async (req, res) => {
@@ -88,7 +88,7 @@ app.post("/handlelike", async (req, res) => {
     if(!val){
     try{
      await User.findOneAndUpdate({ username: username },{$push:{liked:id}}).then((data)=>{
-        res.status(200).json(data.liked)});
+        res.status(200).json(data)});
     }catch(err){
         console.log(err);
         res.status(201).json("Error occurs")
@@ -96,7 +96,7 @@ app.post("/handlelike", async (req, res) => {
     else{
     try{
     await User.findOneAndUpdate({ username: username },{$pull:{liked:id}}).then((data)=>{
-        res.status(200).json(data.liked)});}
+        res.status(200).json(data)});}
     catch(err){
         console.log(err);
         res.status(201).json("Error occurs")
@@ -106,13 +106,13 @@ app.post("/handlelike", async (req, res) => {
 
 
 app.post("/signup",async(req,res)=>{
-    const userobj =req.body;
+    const userobj =req.body;   
     try{
     await User.create(userobj).then((data)=>{
         res.status(200).json("User Created");
     })}catch(err){
         console.log(err);
-        res.status(201).json("User Not Created");
+        res.status(201).json("username or Email is allready register");
     }
 })
 app.post("/login",async(req,res)=>{
