@@ -32,7 +32,7 @@ app.post("/seeprod", async (req, res) => {
 app.post("/get-cart-items", async (req, res) => {
     const user = req.body.user;
     try{
-    let data = await User.findOne({ user: user });    
+    let data = await User.findOne({ username: user });    
     res.status(200).json(data.cartdata);}
     catch(err){
         res.status(201).json("Something went Wrong") 
@@ -42,7 +42,7 @@ app.post("/get-cart-items", async (req, res) => {
 app.post("/getLikedArr", async (req, res) => {
     const user = req.body.user;
     try{
-    let data = await User.findOne({ user: user });    
+    let data = await User.findOne({ username: user });    
     res.status(200).json(data.liked);}
     catch(err){
     console.log(err);
@@ -52,8 +52,9 @@ app.post("/getLikedArr", async (req, res) => {
 })
 app.post("/getuser", async (req, res) => {
     const user = req.body.user;
-    let data = await User.findOne({ user: user });       
-    res.status(200).json(data);
+    
+    let data = await User.findOne({ username: user });       
+    res.status(200).json(data);    
 
 })
 app.post("/addtocart", async (req, res) => {

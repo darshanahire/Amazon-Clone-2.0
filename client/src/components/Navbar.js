@@ -18,10 +18,8 @@ function Navbar() {
     const [cartnotification, setcartNotification] = useState()
     const [DarkMode,setDarkMode]=useState(false);
     let user = localStorage.getItem("user");
-    if(user!==undefined){
+    if(user!==null){
         axios.post('/getuser', { user }).then(async (d) => {
-            console.log(d.data.liked.length);
-            
             setNotification(d.data.liked.length);
             setcartNotification(d.data.cartdata.length);
 
