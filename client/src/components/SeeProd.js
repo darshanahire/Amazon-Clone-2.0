@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useParams,useHistory } from 'react-router-dom';
+// import Alert from '@mui/material/Alert';
 import axios from 'axios';
-
+let months=["Jan","Feb","March","April","May","June","July","Aug","Sept","Oct","Nov","Dec"];
+let days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 function SeeProd() {
 
 
     let [prodData, setProdData] = useState({});
+    let [date, setDate] = useState();
 
 let history=useHistory()
 
@@ -13,7 +16,9 @@ let history=useHistory()
     console.log(id);
 
     useEffect(() => {
-
+        let d = new Date();
+        let l =days[(d.getDay()+2)%7]+", "+months[d.getMonth()]+ " "+((d.getDate()+2)%31);
+        setDate(l);
         axios.post('/seeprod', { id }).then(async (d) => {
             setProdData(d.data)
         })
@@ -26,18 +31,21 @@ let history=useHistory()
         axios.post('/addtocart', { id, user }).then((d) => {
             if(d.status==200){
             alert("Item Added to Cart")
+            // <Alert severity="success">Item Added to Cart</Alert>
             setProdData = d.data;}
             else if(d.status==201){
             alert("Please Login First")
+            // <Alert severity="error">Please Login First!</Alert>
             }
         })}
         else{
             alert("Please Login First")
+            // <Alert severity="error">Please Login First!</Alert>
         }
     }
 
 
-
+    // require('@/img' + "seeprod1.png" + '')
 
 
     return (
@@ -48,19 +56,19 @@ let history=useHistory()
             <i className="fas fa-arrow-left  fa-lg my-auto mx-2"></i> <h5 className="my-auto">Go back</h5> 
 
                 </div>
-                <img className="seeFullItem" src={prodData.prodImg} alt="" style={{width:"300px"}} />
+                <img className="seeFullItem" src={prodData.prodImg} alt=""  />
                 <div className="row mx-4 my-3">
-                    <div className="col">
-                        <img src="/seeprod1.png" alt="" /><p> Pay on delivary</p>
+                    <div className="col text-center">
+                        <img src={window.location.origin + '/img/seeprod1.png'} alt="" /><p> Pay on delivary</p>
                     </div>
-                    <div className="col">
-                        <img src="img/seeprod2.png" alt="" /><p> 7 Days Replacement</p>
+                    <div className="col text-center">
+                        <img src={window.location.origin + '/img/seeprod2.png'} alt="" /><p> 7 Days Replacement</p>
                     </div>
-                    <div className="col">
-                        <img src="img/seeprod3.png" alt="" /><p> Amazon Delivered</p>
+                    <div className="col text-center">
+                        <img src={window.location.origin + '/img/seeprod3.png'}  alt=""/><p> Amazon Delivered</p>
                     </div>
-                    <div className="col">
-                        <img src="img/seeprod4.png" alt="" /><p> 1 Year Warranty</p>
+                    <div className="col text-center">
+                        <img src={window.location.origin + '/img/seeprod4.png'}  alt=""/><p> 1 Year Warranty</p>
                     </div>
                 </div></div>
 
@@ -76,7 +84,7 @@ let history=useHistory()
                     Inclusive of all taxes</h6>
                 <button className="btnOrange mx-auto my-3 w-75 " >Buy Now</button>
                 <button id={prodData._id} className="btnNocolor mx-auto my-3 w-75 " onClick={addtocart}>Add to Cart</button>
-                <h6 className="mt-5">FREE delivery: Saturday, Aug 21 Details</h6>
+                <h5 className="mt-5">FREE delivery On: {date}</h5>
                 <p> Fastest delivery: Tomorrow <br />
                     Order within 1 hr and 10 mins Details</p>
                 EMI starts at ₹1,036. No Cost EMI available EMI options

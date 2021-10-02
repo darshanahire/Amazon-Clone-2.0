@@ -16,8 +16,9 @@ function Navbar() {
     const [toggle, setToggle] = useState(false)
     const [notification, setNotification] = useState()
     const [cartnotification, setcartNotification] = useState()
-    const [DarkMode,setDarkMode]=useState(false);
+    const [DarkMode,setDarkMode]=useState();
     let user = localStorage.getItem("user");
+    let [color,setColor]=useState("#0C0404")
     if(user!==null){
         axios.post('/getuser', { user }).then(async (d) => {
             setNotification(d.data.liked.length);
@@ -25,11 +26,15 @@ function Navbar() {
 
         })
     }
+    useEffect(() => {
+        let mode=JSON.parse(localStorage.getItem("DarkMode"));
+        setDarkMode(mode);
+    }, [setDarkMode])
     
     return (
         <>
             <div>
-                <nav className="navbar2 fixed-top" style={DarkMode?{ 'background-color': 'black' }:{ 'background-color': 'white' }}>
+                <nav className="navbar2 fixed-top" style={DarkMode?{ 'background-color': color }:{ 'background-color': 'white' }}>
 
                     <Link className="main_logo" to={"/"} ><img src={DarkMode?"img/logoWhite.png":"img/logoBlack.png"} alt="amazon" /></Link>
                     <form className="search_form" style={{ 'justify-content': 'center' }}>
@@ -81,7 +86,7 @@ function Navbar() {
                             {/* <Link className="nav-link linkDecoretionNone" to={'/Login'}><img className="nav-png" src="png/user.png" alt="" id="user_photo" />
                             </Link> */}
                         </li>
-                        <li className="nav-item" onClick={()=>{setDarkMode(!DarkMode)}} >
+                        <li className="nav-item" onClick={()=>{setDarkMode(!DarkMode);localStorage.setItem("DarkMode",!DarkMode)}} >
                             <a className="nav-link" aria-current="page" href="#" >
                                 <IconButton aria-label=" new notifications" color="inherit" style={DarkMode?{"color":'white'}:{"color":'Black'}}>
                                     <Badge badgeContent={0} color="secondary">

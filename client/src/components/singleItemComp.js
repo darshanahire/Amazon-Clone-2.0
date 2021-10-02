@@ -19,11 +19,13 @@ const [likeed, disLike] = useState(false);
             disLike(!likeed);}
             else if(d.status==201){
                 alert("Plese Login First")
+                // <Alert severity="error">Please Login First!</Alert>
             }
         }
         )}
         else{
             alert("Please Login First")
+            // <Alert severity="error">Please Login First!</Alert>
         }
 }
     useEffect(() => {

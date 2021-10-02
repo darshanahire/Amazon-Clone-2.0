@@ -4,8 +4,9 @@ import LeftSideBar from './LeftSideBar'
 import RightContiner from './RightContiner'
 import Categires from './helper/categires'
 import ItemComp from './itemComp'
+import "../App.css"
 function Home() {
-    return (<>
+    return (<><div className="homestyle">
      <Navbar />
         <div className="mainContainer">
             <LeftSideBar />
@@ -17,6 +18,7 @@ function Home() {
                 </div>
             </div>
             </div>
+        </div>
         </>
         )
 }

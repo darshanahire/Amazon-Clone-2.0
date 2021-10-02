@@ -29,9 +29,6 @@ function Categires() {
                 <div className="col">
                     <img className="categiresPng" src="png/user.png" alt="" />
                 </div>
-                <div className="col">
-                    <img className="categiresPng" src="png/dislike.png" alt="" />
-                </div>
             <h4>Hot deals 🔥</h4>
             </div>
         </div>
