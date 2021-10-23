@@ -11,6 +11,7 @@ import Signup from './components/helper/Signup'
 import adminComp from './components/helper/adminComp'
 import SeeProd from './components/SeeProd'
 import CartCom from './components/cartCom'
+import Orders from './components/Orders'
 import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Route exact path="/seeprod/:id" component={SeeProd}/>
       <Route exact path="/admin" component={adminComp}/>
       <Route exact path="/cartCom" component={CartCom}/>
+      <Route exact path="/orders" component={Orders}/>
     </switch>
 
 
