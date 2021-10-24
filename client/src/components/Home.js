@@ -4,7 +4,7 @@ import LeftSideBar from './LeftSideBar'
 import RightContiner from './RightContiner'
 import Categires from './helper/categires'
 import ItemComp from './itemComp'
-import "../App.css"
+import "../index.css"
 function Home() {
     return (<><div className="homestyle">
      <Navbar />

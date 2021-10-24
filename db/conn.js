@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const uri =process.env.Mongo_URI ;
+// const uri ='mongodb://localhost:27017/amazon-products' ;
 
 mongoose.connect(uri, {
     useNewUrlParser: true, useUnifiedTopology: true
