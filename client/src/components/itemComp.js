@@ -7,7 +7,7 @@ function ItemComp() {
     let [prodData, setProdData] = useState([]);
 
 useEffect(() => {
-    axios.post('http://localhost:5000/getallprods').then((d) => {
+    axios.post('/getallprods').then((d) => {
         setProdData(d.data);   
     })
 }, [setProdData])

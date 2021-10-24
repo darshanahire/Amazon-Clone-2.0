@@ -8,7 +8,7 @@ export default function SingleCartComp(props) {
 
     useEffect(() => {
         let id=props.val;
-            axios.post('http://localhost:5000/seeprod', { id }).then(async (d) => {
+            axios.post('/seeprod', { id }).then(async (d) => {
                 let obj=d.data;
                 setProdData(obj)
     })

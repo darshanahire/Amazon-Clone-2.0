@@ -21,7 +21,7 @@ function SeeProd() {
         let d = new Date();
         let l = days[(d.getDay() + 2) % 7] + ", " + months[d.getMonth()] + " " + ((d.getDate() + 2) % 31);
         setDate(l);
-        axios.post('http://localhost:5000/seeprod', { id }).then(async (d) => {
+        axios.post('/seeprod', { id }).then(async (d) => {
             setProdData(d.data)
         })
     }, [setProdData])
@@ -30,7 +30,7 @@ function SeeProd() {
         let user = localStorage.getItem("user")
         if (user) {
             let id = e.target.id;
-            axios.post('http://localhost:5000/addtocart', { id, user }).then((d) => {
+            axios.post('/addtocart', { id, user }).then((d) => {
                 if (d.status == 200) {
                     alert("Item Added to Cart")
                     // <Alert severity="success">Item Added to Cart</Alert>
