@@ -26,8 +26,11 @@ code {
 .bold-6{
   font-weight: 600;
 }
+.bold-7{
+  font-weight: 700;
+}
 .color-cyne{
-  color: #007185;;
+  color: #007eb9;
 }
 .bdr-b-org{
   border-bottom: 2px solid;
@@ -44,11 +47,22 @@ code {
 .h-20{
   height: 20px !important;
 }
+.w-20{
+width: 20% !important;
+}
+.w-40{
+width: 40% !important;
+}
 .color-brown{
   color: #c45500!important;  
 }
 
-
+.color-gray{
+  color: rgb(190, 190, 190);
+}
+.color-darkgray{
+  color: #888!important
+}
 
 
 
@@ -368,4 +382,115 @@ margin: 2px;
 }
 .btn-white:hover{
 background-color: #eefbfd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  color: #455A64;
+  padding-left: 0px;
+  margin-top: 50px
+}
+
+#progressbar li {
+  text-align: center;
+  list-style-type: none;
+  font-size: 13px;
+  width: 25%;
+  float: left;
+  position: relative;
+  font-weight: 400;
+  color: #455A64 !important
+}
+
+#progressbar #step1:before {
+  content: "1";
+  color: #fff;
+  width: 40px;
+text-align: center;
+  margin:auto
+}
+
+#progressbar #step2:before {
+  content: "2";
+  color: #fff;
+  width: 40px;
+  margin:auto
+}
+#progressbar #step3:before {
+  content: "3";
+  color: #fff;
+  width: 40px;
+  margin:auto
+}
+
+#progressbar #step4:before {
+  content: "4";
+  color: #fff;
+  width: 40px;
+  width: 40px;
+  text-align: center;
+  margin:auto
+}
+
+#progressbar li:before {
+  line-height: 40px;
+  display: block;
+  font-size: 12px;
+  background: rgb(235, 235, 235);
+  border-radius: 50%;
+}
+
+#progressbar li:after {
+  content: '';
+  width: 50%;
+  height:10px;
+  background: rgb(235, 235, 235);
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 15px;
+  z-index: -1
+}
+
+#progressbar li:nth-child(2):after {
+  left: 50%;
+  width: 100%
+}
+
+#progressbar li:nth-child(1):after {
+  left: 45%;
+  width: 100%;
+}
+
+#progressbar li:nth-child(3):after {
+  left: 25% !important;
+  width: 100%;
+}
+#progressbar li:nth-child(4):after {
+width: 50%;
+
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+  background: orange
+}
+.green-card{
+  box-shadow: inset 0px 0px 9px 0px green;
 }

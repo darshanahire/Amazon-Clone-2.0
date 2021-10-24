@@ -5,7 +5,6 @@ import "../index.css"
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
-import MailIcon from '@material-ui/icons/Mail';
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp';
 import LocalMallOutlinedIcon  from '@material-ui/icons/LocalMallOutlined';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
@@ -46,7 +45,6 @@ function Navbar() {
                         <li className="nav-item" >
                         <Link className="nav-link linkDecoretionNone cursor" to={'/orders'}>
                                 <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
-                                    {/* <p className="h6">Orders</p> */}
                                     <LocalMallOutlinedIcon />
                                 </IconButton>
                         </Link>
