@@ -9,7 +9,7 @@ function TrackOrder() {
                 <div className="row">
                     <div className="col-md-6 col-12">
                         <h4 className="py-2 color-brown">In Transit : On shedule</h4>
-                        <h5>Expected delivery: <span className="text-success">Monday Nov 10, 2021, by 10 Am</span></h5>
+                        <h5>Expected delivery: <span className="text-success">Monday Nov 20, 2021, by 10 Am</span></h5>
                     </div>
                     <div className="col-md-6 col-12 text-end">
                         <p className="py-3"><span className="bold-6"> Your package is arrived at the courier facility</span> <span className="font-12">(Updated 0 minute(s) ago)</span></p>
@@ -25,18 +25,20 @@ function TrackOrder() {
                         </ul>
                     </div>
                     <div className="row my-5">
-                        <div className="col-2">
-                            <img src="img/iphone.jpg" alt="" width="150px" />
-                        </div>
-                        <div className="col-7" >
-                            <h4>Mi 10i 5G (Atlantic Blue, 6GB RAM, 128GB Storage) - 108MP Quad Camera | Snapdragon 750G Processor</h4>
-                            <h6>Brand: MI
-                            </h6>
+                            <div className="col-12 col-md-2 d-flex justify-content-center">
+                            <img className="my-3 my-md-0" src="img/iphone.jpg" alt="" width="150px" />
+                            </div>
+                            <div className="col-12 col-md-7" >
+                                <h5>Mi 10i 5G (Atlantic Blue, 6GB RAM, 128GB Storage) - 108MP Quad Camera | Snapdragon 750G Processor</h5>
+                                <h6>Brand: MI
+                                </h6>
 
-                            <p className="star_para">Apple <br /> ⭐⭐⭐⭐ 4.8 (21032 reviews)</p>
-                            <button className="btn btn-danger  d-inline border-1 p-1 mt-3 px-3 mt-4">Request To Cancel Order</button>
+                                <p className="star_para">Apple <br /> ⭐⭐⭐⭐ 4.8 (21032 reviews)</p>
+                                <div className="text-md-start text-center">
+                                <button className="btnRed  d-inline border-1 p-1 mt-3 px-3 mx-3">Request to cancel order</button>
+                            </div>
+                            </div>
                         </div>
-                    </div>
                     <div className="card mb-4 p-0">
                     <div className="card-title d-flex border-bottom p-2" style={{ "background-color": "rgb(243, 242, 242)" }}>
                         <span className="col-12 col-md-4 text-center">
@@ -44,8 +46,8 @@ function TrackOrder() {
                         </span>
                     </div>
                     <div className="card-body">
-                        <table className="font-14 d-flex justify-content-around bold-6" width="100%">
-                            <td>
+                        <table className="font-13 d-flex justify-content-around" width="100%">
+                            <td className="trackTable">
                                 <tr>11 November 2021, 6:56 pm, KOLKATA WB IN</tr>
                                 <tr>10 November 2021, 12:35 am, BANGALORE KA IN</tr>
                                 <tr>8 November 2021, 8:59 pm, BANGALORE- KA IN</tr>

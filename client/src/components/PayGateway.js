@@ -6,7 +6,7 @@ function PayGateway() {
         <div style={{ "margin-top": "80px" }}>
             <div className="container">
                 <div className="row justify-content-between">
-                    <div className="col-9">
+                    <div className="col-12 col-lg-9">
                         <h3 className="my-3">Select a payment method</h3>
                         <hr />
                         <div className="card">
@@ -61,28 +61,34 @@ function PayGateway() {
                                     <input type="radio" name="payselect" id="" className="mx-2" disabled />Pay on Delivery
                                     <p className="font-12 mx-4 my-1">Due to high demand and to ensure social distancing, Pay on Delivery is not available</p>
                                 </p>
-                            </div>
-                        </div>
-                        <h5 className="my-3">More payment options</h5>
-                        <hr />
-                        <div className="mb-5">
-                        <h5>Gift Cards, Vouchers & Promotional Codes</h5>
-                        <p className="font-12 color-cyne">Enter a gift card, voucher or promotional code</p>
-                        <div className="d-flex justify-content-between">
-                        <input type="text" className="loginInput w-40 my-3" placeholder="Enter a gift card, voucher or promotional code" />
-                        <img className="mx-1" src="img/giftcard.png" alt="" width="120px"/>
-                        </div>
-                        </div>
-                    </div>
-
-                    <div className="col-3 my-5">
-                        <div className="card my-5">
+                                <div className="card d-flex d-md-none">
                         <Link className="Link" to={'/placedOrder'}>
                             <button className="btnOrange w-75 mx-auto mt-3" >Continue</button>
                             </Link>
                             <p className="font-14 text-center my-3">You can review this order before it's final.</p>
                         </div>
-                        <div className="card " style={{"margin-top":"195%"}}>
+                            </div>
+                        </div>
+                        <h5 className="my-3">More payment options</h5>
+                        <hr />
+                        <div className="mb-lg-5">
+                        <h5>Gift Cards, Vouchers & Promotional Codes</h5>
+                        <p className="font-12 color-cyne">Enter a gift card, voucher or promotional code</p>
+                        <div className="d-flex justify-content-between flex-lg-row flex-column align-items-center">
+                        <input type="text" className="loginInput w-lg-40 w-75 my-3" placeholder="Enter a gift card, voucher or promotional code" />
+                        <img className="mx-1" src="img/giftcard.png" alt="" width="120px"/>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-lg-3 my-lg-5">
+                        <div className="card my-lg-5 border-lg-auto border-none">
+                        <Link className="Link" to={'/placedOrder'}>
+                            <button className="btnOrange w-75 mx-auto mt-3" >Continue</button>
+                            </Link>
+                            <p className="font-14 text-center my-3">You can review this order before it's final.</p>
+                        </div>
+                        <div className="card d-none d-md-flex" style={{"margin-top":"195%"}}>
                         <Link className="Link" to={'/placedOrder'}>
                             <button className="btnOrange w-75 mx-auto mt-3" >Continue</button>
                             </Link>

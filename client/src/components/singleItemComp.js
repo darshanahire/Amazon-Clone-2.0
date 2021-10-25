@@ -43,7 +43,7 @@ const [likeed, disLike] = useState(false);
     }, [disLike])
 return (
     <>
-        <div className="individualItem col  my-2 col-md-2" style={{ width: "300px" }}>
+        <div className="individualItem col-12 w-ml-90  my-2 col-md-2" style={{ width: "300px" }}>
             <div className="like-div">
                 <a className="nav-link active cursor" onClick={likeDislike} style={{ height: "20px" }}><img id={idtopass} className="like-png" src={likeed ===true ? "png/like.png":"png/dislike.png"} /></a>
                 <div className="item d-flex justify-content-center my-2">

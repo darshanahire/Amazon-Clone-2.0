@@ -85,9 +85,9 @@ function Navbar() {
 
                                 </IconButton>
 
-                                {
-                                    (localStorage.getItem("user")) === null ? null : <span style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>Hi , {localStorage.getItem("user")}</span>
-                                }
+                                {/* {
+                                    (localStorage.getItem("user")) === null ? null : <span className="d-none" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>Hi , {localStorage.getItem("user")}</span>
+                                } */}
 
                             </Link>
                             {/* <Link className="nav-link linkDecoretionNone" to={'/Login'}><img className="nav-png" src="png/user.png" alt="" id="user_photo" />

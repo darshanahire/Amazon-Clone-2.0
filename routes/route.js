@@ -6,10 +6,6 @@ const Product = require("../models/product.model");
 const User = require("../models/user.model");
 require("../db/conn")
 
-
-
-
-
 router.post("/getallprods", async (req, res) => {
     let data = await Product.find();
     res.status(200).json(data);

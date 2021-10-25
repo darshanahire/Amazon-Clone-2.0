@@ -90,7 +90,7 @@ function SeeProd() {
                             Inclusive of all taxes</h6>
                             <Link className="Link" to={'/paygateway'}>
                         <button className="btnOrange mx-auto my-3 w-75 " >Buy Now</button></Link>
-                        <button  className="btnNocolor mx-auto my-3 w-75 " onClick={addtocart}>Add to Cart</button>
+                        <button  id={prodData._id} className="btnNocolor mx-auto my-3 w-75 " onClick={addtocart}>Add to Cart</button>
                     </div>
                     <div>
                         <h5 className="mt-5">FREE delivery On: {date}</h5>
@@ -178,7 +178,7 @@ function SeeProd() {
                         />
                         <p className="text-center mb-1 mx-2">Ayush Kakkar</p>
                     </div>
-                    <div className="text-start mx-5">
+                    <div className="text-start mx-md-5 my-3 my-0">
                         <p className="mb-1"> ⭐⭐⭐⭐ Worth buying ! So happy with the product . Design is amazing </p>
                         <p className="m-0">Reviewed in India on 24 Oct 2021</p>
                         <p className="font-12 color-brown bold-6">Verified Purchase</p>
@@ -193,7 +193,7 @@ function SeeProd() {
                         />
                         <p className="text-center mb-1 mx-2">Ayush Kakkar</p>
                     </div>
-                    <div className="text-start mx-5 mb-5">
+                    <div className="text-start mx-md-5 my-3 my-0">
                         <p className="mb-1"> ⭐⭐⭐⭐ Worth buying ! So happy with the product . Design is amazing </p>
                         <p className="m-0">Reviewed in India on 19 Oct 2021</p>
                         <p className="font-12 color-brown bold-6">Verified Purchase</p>
