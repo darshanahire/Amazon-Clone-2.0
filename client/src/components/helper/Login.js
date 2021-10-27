@@ -1,7 +1,7 @@
 import React ,{useState} from 'react'
 import { BrowserRouter as Router,Route, Link, Switch, } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
-
+import Swal from 'sweetalert2'
 import axios from 'axios'
 const Login = () => {
     let history=useHistory()
@@ -24,15 +24,18 @@ const Login = () => {
             
             if(res.status==200){
             localStorage.setItem("user",res.data)
-            // alert("user login sucess")
             history.push("/")
         }
             if(res.status==201){
-            alert(res.data)  
+            // alert(res.data)  
             }
         })}
         else{
-            alert("Plese Enter Sufficient Data")
+            Swal.fire(
+                'Warning',
+                'Plese Enter Sufficient Data',
+                'warning'
+              )
         }
     }
     return (

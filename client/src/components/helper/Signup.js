@@ -22,11 +22,11 @@ const Signup = () => {
     function sendData(){
         axios.post("/signup",userData).then(async(res)=>{
             if(res.status==200){
-            alert(res.data);
+            // alert(res.data);
             history.push("/login")
             }
             else if(res.status==201){
-            alert(res.data);  
+            // alert(res.data);  
             }
 
         })

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React,{useState} from 'react'
 import { BrowserRouter as Router, Route, Link, Switch, } from 'react-router-dom'
+import Swal from 'sweetalert2'
 const AdminComp=()=> {
 
     const initDat={
@@ -38,9 +39,17 @@ const uploadProd=()=>{
         }
         await axios.post("/add-new-prod",obj).then((data)=>{
             if(data.status==200){
-        alert("Product Uploaded")}
+                Swal.fire(
+                    'Success',
+                    'Product Uploaded',
+                    'success'
+                  )}
         else if(data.status==201){
-        alert("Product Not Uploaded")
+            Swal.fire(
+                'Error',
+                'Product Not Uploaded',
+                'error'
+              )
         }
         
         

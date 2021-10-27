@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Link, Switch, } from 'react-router-dom'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 export default function SingleItemComp(props) {
 
 const [likedItems, SetLikedItems] = useState([])
@@ -18,14 +19,20 @@ const [likeed, disLike] = useState(false);
             if(d.status==200){
             disLike(!likeed);}
             else if(d.status==201){
-                alert("Plese Login First")
-                // <Alert severity="error">Please Login First!</Alert>
+                Swal.fire(
+                    'Warning',
+                    'Please Login First',
+                    'warning'
+                  )
             }
         }
         )}
         else{
-            alert("Please Login First")
-            // <Alert severity="error">Please Login First!</Alert>
+            Swal.fire(
+                'Warning',
+                'Please Login First',
+                'warning'
+              )
         }
 }
     useEffect(() => {

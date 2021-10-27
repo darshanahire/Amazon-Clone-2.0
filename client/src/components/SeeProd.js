@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-// import Alert from '@mui/material/Alert';
 import { Avatar } from '@mui/material';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 let months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 function SeeProd() {
@@ -32,20 +32,28 @@ function SeeProd() {
             let id = e.target.id;
             axios.post('/addtocart', { id, user }).then((d) => {
                 if (d.status == 200) {
-                    alert("Item Added to Cart")
-                    // <Alert severity="success">Item Added to Cart</Alert>
+                    Swal.fire(
+                        'Success',
+                        'Item Added to Cart',
+                        'success'
+                      )
                     setProdData = d.data;
                 }
                 else if (d.status == 201) {
-                    alert("Please Login First")
-                    // <Alert severity="error">Please Login First!</Alert>
+                    Swal.fire(
+                        'Warning',
+                        'Please Login First',
+                        'warning'
+                      )
                 }
             })
         }
         else {
-            alert("Please Login First")
-            // <Alert severity="error">Please Login First!</Alert>
-        }
+            Swal.fire(
+                'Warning',
+                'Please Login First',
+                'warning'
+              )        }
     }
 
 
