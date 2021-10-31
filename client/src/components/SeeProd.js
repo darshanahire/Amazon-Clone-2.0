@@ -116,7 +116,7 @@ function SeeProd() {
                 <input type="text" className="loginInput w-50" placeholder="Type your question or keyword" />
             </div>
             <hr />
-            <div className="row px-5 mt-4 justify-content-around">
+            <div className="row px-5 mt-4 justify-content-around  mx-0">
                 <div className="col-md-5">
                     <h4 className="mb-4">Customer reviews</h4>
                     <h6>⭐⭐⭐⭐ 4 Out of 5</h6>
