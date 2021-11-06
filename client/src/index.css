@@ -37,6 +37,9 @@ code {
   border-bottom: 2px solid;
   border-color: #e47911;
 }
+.bdr-gray{
+  border: 1px solid rgba(0,0,0,.125)!important;
+}
 .border-1{
   border: 1px solid rgb(184, 184, 184) !important;
 }
@@ -452,6 +455,8 @@ background-color: #eefbfd;
 
 #progressbar #step1:before {
   content: "1";
+  font-size:15px;
+  font-weight: 600;
   color: #fff;
   width: 40px;
 text-align: center;
@@ -460,12 +465,16 @@ text-align: center;
 
 #progressbar #step2:before {
   content: "2";
+  font-size:15px;
+  font-weight: 600;
   color: #fff;
   width: 40px;
   margin:auto
 }
 #progressbar #step3:before {
   content: "3";
+  font-size:15px;
+  font-weight: 600;
   color: #fff;
   width: 40px;
   margin:auto
@@ -473,6 +482,8 @@ text-align: center;
 
 #progressbar #step4:before {
   content: "4";
+  font-size:15px;
+  font-weight: 600;
   color: #fff;
   width: 40px;
   width: 40px;
@@ -525,4 +536,12 @@ width: 50%;
 }
 .green-card{
   box-shadow: inset 0px 0px 9px 0px green;
+}
+.trackTable td{
+display: flex;
+justify-content: space-between;
+}
+.trackTable hr{
+  height: 0.8px !important;
+margin: 13px auto;
 }

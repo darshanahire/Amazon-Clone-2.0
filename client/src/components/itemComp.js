@@ -45,6 +45,10 @@ function ItemComp() {
                     <Loading/>
                     <Loading/>
                     <Loading/>
+                    <Loading/>
+                    <Loading/>
+                    <Loading/>
+                    <Loading/>
                     </>
                 }
             </div>
