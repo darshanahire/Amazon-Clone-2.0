@@ -18,10 +18,10 @@ function TrackOrder() {
                 <div class="row px-3">
                     <div class="col">
                         <ul id="progressbar">
-                            <li class="step0 active " id="step1">PLACED</li>
-                            <li class="step0 active text-center" id="step2">SHIPPED</li>
-                            <li class="step0  text-center" id="step3">SHIPPED</li>
-                            <li class="step0 text-muted text-right" id="step4">DELIVERED</li>
+                            <li class="step0 active " id="step1">Order Placed</li>
+                            <li class="step0 active text-center" id="step2">Shipped</li>
+                            <li class="step0  text-center" id="step3">Out for Delivery</li>
+                            <li class="step0 text-muted text-right" id="step4">Delivered</li>
                         </ul>
                     </div>
                     <div className="row my-5">
@@ -46,8 +46,8 @@ function TrackOrder() {
                             </span>
                         </div>
                         <div className="card-body">
-                            <table className="font-13 d-flex justify-content-around" width="100%">
-                                <td className="trackTable mx-auto mb-2" width="30%">
+                            <table className="font-13 row justify-content-around m-0" width="100%">
+                                <td className="trackTable mx-auto mb-2 col-12 col-md-4" width="30%">
                                     <td>
                                         <tr>Document No-</tr>
                                         <tr>O800000037</tr>
@@ -78,7 +78,7 @@ function TrackOrder() {
                                         <tr> 0010</tr>
                                     </td>
                                 </td>
-                                <td class="trackTable mx-auto mb-2" width="30%">
+                                <td class="trackTable mx-auto mb-2 col-12 col-md-4" width="30%">
                                     <td>
                                         <tr>Order Date-</tr>
                                         <tr>10-Nov-2021</tr>
@@ -88,7 +88,7 @@ function TrackOrder() {
                                         <tr>Document Date-</tr>
                                         <tr>10-Nov-2021</tr>
                                     </td>
-                                    <hr />                                  
+                                    <hr />
                                     <td>
                                         <tr>Payment Method-</tr>
                                         <tr>-</tr>
@@ -113,29 +113,31 @@ function TrackOrder() {
                             </table>
                         </div>
                     </div>
-                    <div className="d-flex justify-content-around bdr-gray mb-5 py-3 font-14" >
+                    <div className="bdr-gray mb-5 py-3 font-14">
+                    <div className="d-flex justify-content-around" >
 
-                            <div>
-                                <h5 className="color-cyne ">Billing Address</h5>
-                                <p className="m-0">
-                                    ABC Road,<br />
-                                    Tal-Pune,<br />
-                                    Dist-Pune,<br />
-                                    Pune-12345 <br />
-                                    Maharastra, India.
-                                </p>
-                            </div>
-                            <div>
-                                <h5 className="color-cyne ">Shipping Address</h5>
-                                <p className="m-0">
-                                    ABC Road,<br />
-                                    Tal-Pune,<br />
-                                    Dist-Pune,<br />
-                                    Pune-12345 <br />
-                                    Maharastra, India.
-                                </p>
-                            </div>
-
+                        <div>
+                            <h5 className="color-cyne ">Billing Address</h5>
+                            <p className="m-0">
+                                ABC Road,<br />
+                                Tal-Pune,<br />
+                                Dist-Pune,<br />
+                                Pune-12345 <br />
+                                Maharastra, India.
+                            </p>
+                        </div>
+                        <div>
+                            <h5 className="color-cyne ">Shipping Address</h5>
+                            <p className="m-0 text-end">
+                                ABC Road,<br />
+                                Tal-Pune,<br />
+                                Dist-Pune,<br />
+                                Pune-12345 <br />
+                                Maharastra, India.
+                            </p>
+                        </div>
+                        </div>
+                        <button className="btnOrange mx-auto">Request to Change Address</button>
                     </div>
                 </div>
             </div>
