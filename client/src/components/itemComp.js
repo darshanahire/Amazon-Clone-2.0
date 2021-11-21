@@ -1,55 +1,63 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+// import { getallprods } from "../servises/https"
+import { useSelector,useDispatch } from "react-redux"
+import {setProducts } from "../redux/actions/productsActions"
 import SingleItemComp from './singleItemComp'
 import Loading from './helper/Loading'
 function ItemComp() {
 
+    const dispatch = useDispatch()
+
     let [prodData, setProdData] = useState([]);
     let [isloading, setisloading] = useState(true);
-
-    useEffect(() => {
-        axios.post('/getallprods').then((d) => {
-            setProdData(d.data);
-            setisloading(false);
+ 
+    // these cod ewill have to return in https
+    const getallprods = async () => {
+        const res = await axios.post("http://localhost:5000/getallprods").catch((err) => {
+            console.log(err);
         })
-    }, [setProdData])
-    // console.log(prodData);
+        dispatch(setProducts(res.data));
+    }
+    useEffect(() => {
 
-    // console.log(likedItems);
-    // const getdata = () => {
-    //     axios.post('/seeprod', { id }).then((d) => {
-    //         console.log(d.data);
-    //         setProdData = d.data;
-    //     })
-    // }
+        getallprods();
+        setisloading(false)
+    }, [setProdData])
+
+    // get data froms store
+    const prods = useSelector((state) => state.allProducts.products)
+    // console.log(prods);
+    
+
     return (
         <>
             <div className="row d-flex justify-content-center mx-2 my-3">
                 {
                     !isloading ?
-                    prodData.map((val, i, arr) => {             
-                        return <>
-                            <SingleItemComp val={val} ind={i} arr={arr} />
+                    prods.map((val, i, arr) => {
+                            return <>
+                                <SingleItemComp val={val} ind={i} arr={arr} />
+                            </>
+                        }) :
+                        <>
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
                         </>
-                    }) :
-                    <>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    </>
                 }
             </div>
         </>
