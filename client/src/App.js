@@ -12,6 +12,7 @@ import adminComp from './components/helper/adminComp'
 import SeeProd from './components/SeeProd'
 import CartCom from './components/cartCom'
 import Orders from './components/Orders'
+import Chat from './components/Chat'
 import TrackOrder from './components/TrackOrder'
 import PayGateway from './components/PayGateway'
 import PlacedOrder from './components/PlacedOrder'
@@ -36,6 +37,7 @@ function App() {
       <Route exact path="/trackOrder" component={TrackOrder}/>
       <Route exact path="/paygateway" component={PayGateway}/>
       <Route exact path="/PlacedOrder" component={PlacedOrder}/>
+      <Route exact path="/Chat" component={Chat}/>
     </switch>
 
 

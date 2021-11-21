@@ -68,6 +68,12 @@ width: 40% !important;
   color: #888!important
 }
 
+.rounded-25{
+  border-radius: 25px;
+}
+.rounded-25-imp{
+  border-radius: 25px !important;
+}
 
 
 @media screen and (max-width:578px){
@@ -544,4 +550,62 @@ justify-content: space-between;
 .trackTable hr{
   height: 0.8px !important;
 margin: 13px auto;
+}
+
+
+
+
+
+.chat-window{
+  /* background-color: rgb(235, 235, 235); */
+  background-image: url("http://localhost:3000/img/chat.jpg");
+  background-size: contain;
+  /* background-color:#f5fff5 !important; */
+  width: 60%;
+  overflow-y:scroll;
+}
+.right-chat-parent{
+  display: flex;
+  justify-content: end;
+}
+.left-chat-parent{
+  display: flex;
+  justify-content: start;
+}
+.right-chat{
+  padding-left: 20px !important;
+  background-color:#ffcd91;
+  border-radius: 25px;
+  border-bottom-right-radius: 0;
+  width: 50%;
+  padding: 8px;
+  margin: 12px;
+}
+.left-chat{
+  background-color:rgb(235, 235, 235);
+  border-radius: 25px;
+  border-bottom-left-radius: 0;
+  width: 50%;
+  padding: 8px;
+  margin: 12px;
+}
+
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
 }
