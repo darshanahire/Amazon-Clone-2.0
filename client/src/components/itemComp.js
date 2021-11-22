@@ -1,45 +1,37 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
-// import { getallprods } from "../servises/https"
-import { useSelector,useDispatch } from "react-redux"
-import {setProducts } from "../redux/actions/productsActions"
-import SingleItemComp from './singleItemComp'
+import { useSelector, useDispatch } from "react-redux"
+import { setProducts } from "../redux/actions/productsActions"
+import SingleItemComp from './SingleItemComp'
 import Loading from './helper/Loading'
+import Https from "../servises/Https"
 function ItemComp() {
 
     const dispatch = useDispatch()
 
-    let [prodData, setProdData] = useState([]);
     let [isloading, setisloading] = useState(true);
- 
-    // these cod ewill have to return in https
-    const getallprods = async () => {
-        const res = await axios.post("http://localhost:5000/getallprods").catch((err) => {
-            console.log(err);
-        })
-        dispatch(setProducts(res.data));
-    }
-    useEffect(() => {
 
-        getallprods();
+    useEffect(() => {
+        //Https.getallprods();
+        Https.getAllProducts().then((res) => {
+            dispatch(setProducts(res.data))
+        })
         setisloading(false)
-    }, [setProdData])
+    }, [])
 
     // get data froms store
     const prods = useSelector((state) => state.allProducts.products)
-    // console.log(prods);
-    
 
+    const SingleItem = prods.map((val, i, arr) => {
+        return <SingleItemComp key={i} val={val} ind={i} arr={arr} />
+
+    });
     return (
         <>
             <div className="row d-flex justify-content-center mx-2 my-3">
                 {
                     !isloading ?
-                    prods.map((val, i, arr) => {
-                            return <>
-                                <SingleItemComp val={val} ind={i} arr={arr} />
-                            </>
-                        }) :
+                        <>{SingleItem}</>
+                        :
                         <>
                             <Loading />
                             <Loading />
@@ -64,7 +56,7 @@ function ItemComp() {
     )
 }
 
-export default ItemComp
+export default ItemComp;
 
 // :
 //  for(var i=0;i<20:i++)

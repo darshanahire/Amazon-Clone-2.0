@@ -2,6 +2,7 @@ import React ,{useState} from 'react'
 import { BrowserRouter as Router,Route, Link, Switch, } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import Https from "../../servises/Https"
 import axios from 'axios'
 const Login = () => {
     let history=useHistory()
@@ -19,7 +20,7 @@ const Login = () => {
     }
     function sendData(){
         if(!initdata.email && !initdata.password ){
-        axios.post("/login",userData).then(async(res)=>{
+            Https.login(userData).then((res)=>{
             console.log(res);
             
             if(res.status==200){
@@ -46,7 +47,7 @@ const Login = () => {
                 <label htmlFor="loginInputEmail" className="lable">Email or mobile phone number</label>
                 <input type="text" className="loginInput" id="loginInputEmail" name="email" value={userData.email} onChange={handleChange}/>
                 <label htmlFor="loginInputPass" className="lable">Password</label>
-                <input type="text" className="loginInput" id="loginInputPass"  name="password" value={userData.password}onChange={handleChange}/>
+                <input type="password" className="loginInput" id="loginInputPass"  name="password" value={userData.password}onChange={handleChange}/>
                 <button className="btnOrange" onClick={sendData}>Sign In</button>
                 <p style={{ "fontSize": "12px", "marginTop": "5px" }}>
                     By continuing, you agree to Amazon's Conditions of Use Privacy Notice</p>

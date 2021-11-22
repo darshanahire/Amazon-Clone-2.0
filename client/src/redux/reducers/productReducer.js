@@ -3,7 +3,7 @@ import { ActionsTypes } from "../constants/action-types";
 
 
 const initialState = {
-    products : []
+    products : [],
 };
 
 
@@ -15,3 +15,5 @@ export const productsReducer = (state = initialState, { type, payload }) => {
             return state;
     }
 }
+
+// increment decrement likes login will have to write

@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../index.css"
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp';
-import LocalMallOutlinedIcon  from '@material-ui/icons/LocalMallOutlined';
+import LocalMallOutlinedIcon from '@material-ui/icons/LocalMallOutlined';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Https from '../servises/Https';
 function Navbar() {
     const [like, disLike] = useState("png/dislike.png")
     const [toggle, setToggle] = useState(false)
-    const [notification, setNotification] = useState()
+    const [likeCount, setLikeCount] = useState()
     const [cartnotification, setcartNotification] = useState()
     const [DarkMode, setDarkMode] = useState();
     let user = localStorage.getItem("user");
     let [color, setColor] = useState("#0C0404")
-    if (user !== null) {
-        axios.post('/getuser', { user }).then(async (d) => {
-            setNotification(d.data.liked.length);
-            setcartNotification(d.data.cartdata.length);
 
+    if (user !== null) {
+        Https.getUser(user).then((res)=>{
+            setLikeCount(res.data.liked.length);
+            setcartNotification(res.data.cartdata.length);
         })
+
+
     }
     useEffect(() => {
         let mode = JSON.parse(localStorage.getItem("DarkMode"));
@@ -34,25 +36,25 @@ function Navbar() {
     return (
         <>
             <div>
-                <nav className="navbar2 fixed-top" style={DarkMode ? { 'background-color': color } : { 'background-color': 'white' }}>
+                <nav className="navbar2 fixed-top" style={DarkMode ? { 'backgroundColor': color } : { 'backgroundColor': 'white' }}>
 
                     <Link className="main_logo" to={"/"} ><img src={DarkMode ? "img/logoWhite.png" : "img/logoBlack.png"} alt="amazon" /></Link>
-                    <form className="search_form" style={{ 'justify-content': 'center' }}>
+                    <form className="search_form" style={{ 'justifyContent': 'center' }}>
                         <input className="inputSearch" type="search" placeholder="Search" aria-label="Search" style={{ "width": "275px" }} />
                         <button className="btnOrange my-0" type="submit"><img className="searchBtn" src="png/search.png" alt="" /></button>
                     </form>
                     <ul className="nav_list" id="navbar_ul">
                         <li className="nav-item" >
-                        <Link className="nav-link linkDecoretionNone cursor" to={'/orders'}>
+                            <Link className="nav-link linkDecoretionNone cursor" to={'/orders'}>
                                 <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
                                     <LocalMallOutlinedIcon />
                                 </IconButton>
-                        </Link>
+                            </Link>
                         </li>
                         <li className="nav-item" >
                             <a className="nav-link" aria-current="page" href="#" >
                                 <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
-                                    <Badge badgeContent={notification} color="secondary">
+                                    <Badge badgeContent={likeCount} color="secondary">
                                         <FavoriteBorderOutlinedIcon />
                                     </Badge>
                                 </IconButton>
@@ -79,7 +81,7 @@ function Navbar() {
                         </li>
                         <li className="nav-item ">
 
-                            <Link className="nav-link linkDecoretionNone">
+                            <Link className="nav-link linkDecoretionNone" to="/">
                                 <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
                                     <AccountCircleOutlinedIcon />
 

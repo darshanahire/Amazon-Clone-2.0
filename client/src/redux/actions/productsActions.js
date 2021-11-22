@@ -7,9 +7,16 @@ export const setProducts = (products) => {
     };
 };
 
-export const selectedPeoduct = (product) => {
+export const selectedProduct = (product) => {
     return {
         type: ActionsTypes.SELECTED_PRODUCT,
+        payload: product,
+    };
+};
+
+export const likeProduct = (product) => {
+    return {
+        type: ActionsTypes.INCRESS_LIKE,
         payload: product,
     };
 };

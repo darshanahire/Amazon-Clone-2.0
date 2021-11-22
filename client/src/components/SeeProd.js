@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Avatar } from '@mui/material';
-import axios from 'axios';
 import Swal from 'sweetalert2'
+import Https from '../servises/Https';
 let months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 function SeeProd() {
@@ -21,8 +21,8 @@ function SeeProd() {
         let d = new Date();
         let l = days[(d.getDay() + 2) % 7] + ", " + months[d.getMonth()] + " " + ((d.getDate() + 2) % 31);
         setDate(l);
-        axios.post('/seeprod', { id }).then(async (d) => {
-            setProdData(d.data)
+        Https.seeProduct(id).then((res) => {
+            setProdData(res.data)
         })
     }, [setProdData])
 
@@ -30,21 +30,21 @@ function SeeProd() {
         let user = localStorage.getItem("user")
         if (user) {
             let id = e.target.id;
-            axios.post('/addtocart', { id, user }).then((d) => {
-                if (d.status == 200) {
+            Https.addToCart(id,user).then((res) => {
+                if (res.status == 200) {
                     Swal.fire(
                         'Success',
                         'Item Added to Cart',
                         'success'
-                      )
-                    setProdData = d.data;
+                    )
+                    setProdData = res.data;
                 }
-                else if (d.status == 201) {
+                else if (res.status == 201) {
                     Swal.fire(
                         'Warning',
                         'Please Login First',
                         'warning'
-                      )
+                    )
                 }
             })
         }
@@ -53,7 +53,8 @@ function SeeProd() {
                 'Warning',
                 'Please Login First',
                 'warning'
-              )        }
+            )
+        }
     }
 
 
@@ -62,7 +63,7 @@ function SeeProd() {
 
     return (
         <>
-            <div className="prodContainer mt-5" style={{ background: "white" }} >
+            <div className="prodContainer mt-5" style={{ "backgroundColor": "white" }} >
                 <div className="SeeProdSideBar " style={{ "position": "initial" }}>
 
                     <div className="d-flex cursor" onClick={history.goBack}>
@@ -92,13 +93,13 @@ function SeeProd() {
 
                     <p className="star_para bold-6">{prodData.prodBrand}<br />  ⭐⭐⭐⭐ 4.8 (21032 reviews)</p>
                     <div className="my-3">
-                        <h6 className="text-center my-3">Price :	<span style={{ "text-decoration": "line-through", "fontSize": "16px" }}>${prodData.highPrice}</span></h6>
+                        <h6 className="text-center my-3">Price :	<span style={{ "textDecoration": "line-through", "fontSize": "16px" }}>${prodData.highPrice}</span></h6>
                         <h4 className="text-center">M.R.P. :${prodData.lowPrice}</h4>
                         <h6 className="text-center">You Save:	${prodData.highPrice - prodData.lowPrice} (12%)
                             Inclusive of all taxes</h6>
-                            <Link className="Link" to={'/paygateway'}>
-                        <button className="btnOrange mx-auto my-3 w-75 " >Buy Now</button></Link>
-                        <button  id={prodData._id} className="btnNocolor mx-auto my-3 w-75 " onClick={addtocart}>Add to Cart</button>
+                        <Link className="Link" to={'/paygateway'}>
+                            <button className="btnOrange mx-auto my-3 w-75 " >Buy Now</button></Link>
+                        <button id={prodData._id} className="btnNocolor mx-auto my-3 w-75 " onClick={addtocart}>Add to Cart</button>
                     </div>
                     <div>
                         <h5 className="mt-5">FREE delivery On: {date}</h5>
@@ -129,20 +130,20 @@ function SeeProd() {
                             <tr> <p className="mt-1"> 1 ⭐</p></tr>
                         </td>
                         <td>
-                            <div class="progress h-20 my-3">
-                                <div class="progress-bar bg-orange" role="progressbar" style={{ "width": "65%" }} aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div className="progress h-20 my-3">
+                                <div className="progress-bar bg-orange" role="progressbar" style={{ "width": "65%" }} aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <div class="progress h-20 my-3">
-                                <div class="progress-bar bg-orange" role="progressbar" style={{ "width": "55%" }} aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div className="progress h-20 my-3">
+                                <div className="progress-bar bg-orange" role="progressbar" style={{ "width": "55%" }} aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <div class="progress h-20 my-3">
-                                <div class="progress-bar bg-orange" role="progressbar" style={{ "width": "35%" }} aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div className="progress h-20 my-3">
+                                <div className="progress-bar bg-orange" role="progressbar" style={{ "width": "35%" }} aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <div class="progress h-20 my-3">
-                                <div class="progress-bar bg-orange" role="progressbar" style={{ "width": "15%" }} aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div className="progress h-20 my-3">
+                                <div className="progress-bar bg-orange" role="progressbar" style={{ "width": "15%" }} aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <div class="progress h-20 my-3">
-                                <div class="progress-bar bg-orange" role="progressbar" style={{ "width": "5%" }} aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div className="progress h-20 my-3">
+                                <div className="progress-bar bg-orange" role="progressbar" style={{ "width": "5%" }} aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </td>
                         <td className="color-cyne" style={{ "width": "10%" }}>
@@ -208,7 +209,7 @@ function SeeProd() {
                         <p className="font-14">There are a bunch of reviews on the product already. Just sharing my 1st day experience so far, I loved it. This is a major upgrade for me, I jumped from iPhone 7 to 13mini after 4 years.All the faults from iPhone 12mini are addressed in this phone. This will be a model which I can hold for at-least next three years in my opinion.</p>
                         <button className="btn border-1 p-1 btn-white px-3">Helpful</button>
                     </div>
-                    
+
                 </div>
             </div>
         </>

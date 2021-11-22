@@ -15,13 +15,13 @@ function TrackOrder() {
                         <p className="py-3"><span className="bold-6"> Your package is arrived at the courier facility</span> <span className="font-12">(Updated 0 minute(s) ago)</span></p>
                     </div>
                 </div>
-                <div class="row px-3">
-                    <div class="col">
+                <div className="row px-3">
+                    <div className="col">
                         <ul id="progressbar">
-                            <li class="step0 active " id="step1">Order Placed</li>
-                            <li class="step0 active text-center" id="step2">Shipped</li>
-                            <li class="step0  text-center" id="step3">Out for Delivery</li>
-                            <li class="step0 text-muted text-right" id="step4">Delivered</li>
+                            <li className="step0 active " id="step1">Order Placed</li>
+                            <li className="step0 active text-center" id="step2">Shipped</li>
+                            <li className="step0  text-center" id="step3">Out for Delivery</li>
+                            <li className="step0 text-muted text-right" id="step4">Delivered</li>
                         </ul>
                     </div>
                     <div className="row my-5">
@@ -40,7 +40,7 @@ function TrackOrder() {
                         </div>
                     </div>
                     <div className="card mb-4 p-0">
-                        <div className="card-title d-flex border-bottom p-2" style={{ "background-color": "rgb(243, 242, 242)" }}>
+                        <div className="card-title d-flex border-bottom p-2" style={{ "backgroundColor": "rgb(243, 242, 242)" }}>
                             <span className="col-12 col-md-4 text-center">
                                 <h5>Tracking Details:</h5>
                             </span>
@@ -78,7 +78,7 @@ function TrackOrder() {
                                         <tr> 0010</tr>
                                     </td>
                                 </td>
-                                <td class="trackTable mx-auto mb-2 col-12 col-md-4" width="30%">
+                                <td className="trackTable mx-auto mb-2 col-12 col-md-4" width="30%">
                                     <td>
                                         <tr>Order Date-</tr>
                                         <tr>10-Nov-2021</tr>

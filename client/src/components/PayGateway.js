@@ -42,7 +42,7 @@ function PayGateway() {
                                 </p>
                                 <p>
                                     <input type="radio" name="payselect" id="" className="mx-2" />Net Banking
-                                    <select class="form-select w-md-20 mx-3 my-2 py-1 mx-4" aria-label="Default select example">
+                                    <select className="form-select w-md-20 mx-3 my-2 py-1 mx-4" aria-label="Default select example">
                                         <option selected>Choose an Option</option>
                                         <option value="1">State Bank Of India</option>
                                         <option value="2">HDFC Bank</option>
