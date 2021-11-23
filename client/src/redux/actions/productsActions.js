@@ -55,3 +55,10 @@ export const decressCartCount = (counts) => {
         payload: counts,
     };
 };
+
+export const setMode = (counts) => {
+    return {
+        type: ActionsTypes.CHANGE_MODE,
+        payload: counts,
+    };
+};

@@ -1,19 +1,42 @@
 import React, { useState, useEffect } from 'react'
-import {useSelector,useDispatch} from 'react-redux'
-import { setlikeProduct, setCart,setProducts } from "../redux/actions/productsActions"
+import { useSelector, useDispatch } from 'react-redux'
+import { setlikeProduct, setCart, setProducts, setMode } from "../redux/actions/productsActions"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import "../index.css"
-// import NotificationsIcon from '@mui/icons-material/Notifications';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp';
 import LocalMallOutlinedIcon from '@material-ui/icons/LocalMallOutlined';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import SearchIcon from '@material-ui/icons/Search';
 import Https from '../servises/Https';
+
+
+import Button from '@material-ui/core/Button';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+    },
+    paper: {
+        marginRight: theme.spacing(2),
+    },
+}));
+
+
+
+
 function Navbar() {
     const [like, disLike] = useState("png/dislike.png")
     const [toggle, setToggle] = useState(false)
@@ -21,36 +44,70 @@ function Navbar() {
     const [cartnotification, setcartNotification] = useState()
     const [DarkMode, setDarkMode] = useState();
     let user = localStorage.getItem("user");
-    let [color, setColor] = useState("#0C0404")
+    let [color, setColor] = useState("rgb(50 50 50)")
 
     let [prodss, setprodss] = useState([]);
 
     const dispatch = useDispatch()
+    let history=useHistory()
 
 
-    
-    
-    
-    
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef(null);
 
-  
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
 
-    function filteredCompanies(input){
-        
-        let filteredProds = prodss;                
+    const handleClose = (event) => {
+        if (anchorRef.current && anchorRef.current.contains(event.target)) {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+    function handleListKeyDown(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpen(false);
+        }
+    }
+
+    // return focus to the button when we transitioned from !open -> open
+    const prevOpen = React.useRef(open);
+    React.useEffect(() => {
+        if (prevOpen.current === true && open === false) {
+            anchorRef.current.focus();
+        }
+
+        prevOpen.current = open;
+    }, [open]);
+
+
+const Logout =()=>{
+    localStorage.clear();
+    history.push("/login")
+}
+
+
+    function filteredCompanies(input) {
+
+        let filteredProds = prodss;
         filteredProds = input.toLowerCase()
-          ? filteredProds.filter(
-              item =>
-                item.prodName.toLowerCase().includes(input) ||
-                item.prodBrand.toLowerCase().includes(input) ||
-                item.highPrice.toLowerCase().includes(input) ||
-                item.lowPrice.toLowerCase().includes(input)
+            ? filteredProds.filter(
+                item =>
+                    item.prodName.toLowerCase().includes(input) ||
+                    item.prodBrand.toLowerCase().includes(input) ||
+                    item.highPrice.toLowerCase().includes(input) ||
+                    item.lowPrice.toLowerCase().includes(input)
             )
-          : filteredProds;  
+            : filteredProds;
         //   console.log(filteredProds);
-          
-          dispatch(setProducts(filteredProds));
-      }
+
+        dispatch(setProducts(filteredProds));
+    }
 
 
 
@@ -62,7 +119,7 @@ function Navbar() {
         let mode = JSON.parse(localStorage.getItem("DarkMode"));
         setDarkMode(mode);
         if (user !== null) {
-            Https.getUser(user).then((res)=>{
+            Https.getUser(user).then((res) => {
                 let initialLikesCount = res.data.liked.length;
                 let initialCartItemsCount = res.data.cartdata.length;
                 setLikeCount(initialLikesCount);
@@ -75,22 +132,23 @@ function Navbar() {
                 setprodss(res.data)
                 dispatch(setProducts(res.data))
             })
-    
+
         }
     }, [setDarkMode])
+    dispatch(setMode(DarkMode));
 
     const StoreLikeCount = useSelector((state) => state.likeordislike.count)
     const StoreCartCount = useSelector((state) => state.cartHanddleing.count)
     return (
         <>
             <div>
-                <nav className="navbar2 fixed-top" style={DarkMode ? { 'backgroundColor': color } : { 'backgroundColor': 'white' }}>
+                <nav className="navbar2 fixed-top" style={DarkMode ? { 'backgroundColor': color, "border": color } : { 'backgroundColor': 'white' }}>
 
                     <Link className="main_logo" to={"/"} ><img src={DarkMode ? "img/logoWhite.png" : "img/logoBlack.png"} alt="amazon" /></Link>
                     <form className="search_form" style={{ 'justifyContent': 'center' }}>
                         <input className="inputSearch" type="search" placeholder="Search" aria-label="Search" style={{ "width": "275px" }}
-                         onChange={(e)=>{filteredCompanies(e.target.value)}} />
-                        <button className="btnOrange my-0 searchBtn" type="button"><SearchIcon/></button>
+                            onChange={(e) => { filteredCompanies(e.target.value) }} />
+                        <button className="btnOrange my-0 searchBtn" type="button"><SearchIcon /></button>
                     </form>
                     <ul className="nav_list" id="navbar_ul">
                         <li className="nav-item" >
@@ -131,9 +189,34 @@ function Navbar() {
                         <li className="nav-item ">
 
                             <Link className="nav-link linkDecoretionNone" to="/">
-                                <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
-                                    <AccountCircleOutlinedIcon />
-
+                                <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }} ref={anchorRef}
+                                    aria-controls={open ? 'menu-list-grow' : undefined}
+                                    aria-haspopup="true"
+                                    onClick={handleToggle}>
+                                    <AccountCircleIcon />
+                                    <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                                        {({ TransitionProps, placement }) => (
+                                            <Grow
+                                                {...TransitionProps}
+                                                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                            >
+                                                <Paper>
+                                                    <ClickAwayListener onClickAway={handleClose}>
+                                                        <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                                        {(localStorage.getItem("user")) === null?
+                                                        <Link className="linkDecoretionNone" to={"/Login"}><MenuItem onClick={handleClose}>Login</MenuItem> </Link>:
+                                                        <>
+                                                            <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                                            <MenuItem onClick={handleClose}>My account</MenuItem>
+                                                            <MenuItem onClick={handleClose,Logout}>Logout</MenuItem>
+                                                            </>
+                                                    }
+                                                        </MenuList>
+                                                    </ClickAwayListener>
+                                                </Paper>
+                                            </Grow>
+                                        )}
+                                    </Popper>
                                 </IconButton>
 
                                 {/* {
@@ -145,13 +228,13 @@ function Navbar() {
                             </Link> */}
                         </li>
                         <li className="nav-item" onClick={() => { setDarkMode(!DarkMode); localStorage.setItem("DarkMode", !DarkMode) }} >
-                            <a className="nav-link" aria-current="page" href="#" >
+                            <p className="nav-link" aria-current="page"  >
                                 <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
                                     <Badge badgeContent={0} color="secondary">
                                         <Brightness4Icon />
                                     </Badge>
                                 </IconButton>
-                            </a>
+                            </p>
                         </li>
 
                     </ul>

@@ -1,19 +1,15 @@
-import React ,{useState,useEffect} from 'react'
-import { BrowserRouter as Router,Route, Link, Switch, } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { BrowserRouter as Router, Route, Link, Switch, } from 'react-router-dom'
 import "../index.css"
 
 
 
 function LeftSideBar() {
-    const [DarkMode,setDarkMode]=useState();
-    useEffect(() => {
-        let mode=JSON.parse(localStorage.getItem("DarkMode"));
-        console.log(typeof(mode));
-        setDarkMode(mode);
-    }, [setDarkMode])
+    const isDarkMode = useSelector((state) => state.handdleMode.color)
     return (
-        <div className="LeftSideBar" style={{ 'backgroundColor': 'white' }}>
-        {/* // <div className="LeftSideBar" style={DarkMode?{ 'backgroundColor': 'black' }:{ 'backgroundColor': 'white' }}> */}
+        // <div className="LeftSideBar" style={{ 'backgroundColor': 'white' }}>
+        <div className="LeftSideBar" style={isDarkMode ? { 'backgroundColor': 'rgb(50 50 50)','color':'white' } : { 'backgroundColor': 'white','color':'black' }}>
             <ul>
                 <li><i className="fas fa-th-large mx-2"></i>Categories</li>
                 <li><i className="fas fa-circle-notch mx-2"></i>Echo and Alexa</li>
@@ -28,7 +24,7 @@ function LeftSideBar() {
                 <li><i className="fas fa-gift mx-2"></i>Gift Cards</li>
                 <li><i className="fas fa-percentage  mx-2"></i><h6 className="my-auto">Sell On Amazon</h6></li>
                 <li><i className="far fa-question-circle mx-2"></i><h6 className="my-auto"> Help</h6></li>
-                <li className="my-2"><Link className="linkDecoretionNone" to={"/Login"}><h5><i className="fas fa-sign-in-alt mx-2"></i>Login</h5></Link></li>
+                <li className="my-2" ><Link className="linkDecoretionNone" style={isDarkMode ? {'color':'white' } : {'color':'black' }} to={"/Login"}><h5><i className="fas fa-sign-in-alt mx-2"></i>Login</h5></Link></li>
             </ul>
         </div>
     )

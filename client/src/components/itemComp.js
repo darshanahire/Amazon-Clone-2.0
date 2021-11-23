@@ -15,6 +15,7 @@ function ItemComp() {
     useEffect(() => {
         //Https.getallprods();
         Https.getAllProducts().then((res) => {
+            dispatch(setProducts(res.data))
             setisloading(false);
         })
     }, [])

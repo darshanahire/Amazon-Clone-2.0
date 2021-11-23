@@ -103,11 +103,12 @@ width: 40% !important;
 .main_logo img{
   width:120px;
   /* height: 40px; */
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 .main_logo{
   margin-top:15px ;
   align-items: center;
+  margin-left: 15px;
 }
 .navbar2{
   height: 60px;
@@ -207,10 +208,10 @@ width: 40% !important;
 .LeftSideBar{
   position: fixed;
   margin-top: 70px;
-  background-color: #fff;
+  /* background-color: #fff; */
   box-shadow: 0px 0px 13px -7px;
   width: 13rem;
-  height: 90%;
+  height: 100%;
   z-index: 100;
   /* top: 0px; */
   /* bottom: 0px;
@@ -233,12 +234,13 @@ width: 40% !important;
   align-items: center;
   height: 35px;
   border-left:7px solid transparent;
-  color: #000;
   padding-left:10px ;
 }
+
 .LeftSideBar ul li:hover{
   /* color: orange; */
   border-radius: 5px;
+  color: #000;
   border-left:7px solid orange ;
   background-color: #ffefbe;
   cursor: pointer;

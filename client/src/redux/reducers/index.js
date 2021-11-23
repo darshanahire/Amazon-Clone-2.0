@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
-import { productsReducer, handdleLike,cartHanddle } from "./productReducer";
+import { productsReducer, handdleLike, cartHanddle, changeMode } from "./productReducer";
 
 const reducers = combineReducers({
     allProducts: productsReducer,
     likeordislike: handdleLike,
-    cartHanddleing : cartHanddle
+    cartHanddleing: cartHanddle,
+    handdleMode: changeMode
 
 });
 

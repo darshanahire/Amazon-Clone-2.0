@@ -14,6 +14,9 @@ const initialCart = {
     products:[],
     count: 0,
 }
+const initialMode = {
+    color:""
+}
 
 
 export const productsReducer = (state = initialState, { type, payload }) => {
@@ -51,6 +54,15 @@ export const cartHanddle = (state = initialCart, { type, payload }) => {
         case ActionsTypes.DECRESS_CART:
             return { ...state,count: state.count - payload};
             break;
+        default:
+            return state;
+    }
+}
+
+export const changeMode = (state = initialMode, { type, payload }) => {
+    switch (type) {
+        case ActionsTypes.CHANGE_MODE:
+            return { ...state, color : payload }
         default:
             return state;
     }
