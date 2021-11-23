@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import {useDispatch} from 'react-redux'
+import { incressLikeCount,decressLikeCount } from "../redux/actions/productsActions"
+
 import { BrowserRouter as Router, Route, Link, Switch, } from 'react-router-dom'
 import Https from '../servises/Https'
 import Swal from 'sweetalert2'
@@ -10,9 +13,13 @@ export default function SingleItemComp(props) {
     let [prodData, setProdData] = useState(props.arr[props.ind]);
     const [idtopass, setidtopass] = useState(prodData._id);
 
+    const dispatch = useDispatch()
+
     const likeDislike = (e) => {
         let id = e.target.id;
         let val = likeed;
+        if(!val) dispatch(incressLikeCount(1));
+        else dispatch(decressLikeCount(1));
         let username = localStorage.getItem("user")
         if (username) {
             Https.handdleLike(id, val, username).then((res) => {

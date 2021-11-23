@@ -14,9 +14,44 @@ export const selectedProduct = (product) => {
     };
 };
 
-export const likeProduct = (product) => {
+export const setlikeProduct = (counts) => {
+    return {
+        type: ActionsTypes.SET_LIKES,
+        payload: counts,
+    };
+};
+
+export const incressLikeCount = (counts) => {
     return {
         type: ActionsTypes.INCRESS_LIKE,
-        payload: product,
+        payload: counts,
+    };
+};
+
+export const decressLikeCount = (counts) => {
+    return {
+        type: ActionsTypes.DECRESS_LIKE,
+        payload: counts,
+    };
+};
+
+export const setCart = (counts) => {
+    return {
+        type: ActionsTypes.SET_CART,
+        payload: counts,
+    };
+};
+
+export const incressCartCount = (counts) => {
+    return {
+        type: ActionsTypes.INCRESS_CART,
+        payload: counts,
+    };
+};
+
+export const decressCartCount = (counts) => {
+    return {
+        type: ActionsTypes.DECRESS_CART,
+        payload: counts,
     };
 };

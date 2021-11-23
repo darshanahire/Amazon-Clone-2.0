@@ -13,9 +13,9 @@ function ItemComp() {
     useEffect(() => {
         //Https.getallprods();
         Https.getAllProducts().then((res) => {
-            dispatch(setProducts(res.data))
+            dispatch(setProducts(res.data));
+            setisloading(false);
         })
-        setisloading(false)
     }, [])
 
     // get data froms store

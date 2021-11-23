@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import {useSelector,useDispatch} from 'react-redux'
+import { setlikeProduct, setCart } from "../redux/actions/productsActions"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../index.css"
 // import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -20,19 +22,25 @@ function Navbar() {
     let user = localStorage.getItem("user");
     let [color, setColor] = useState("#0C0404")
 
-    if (user !== null) {
-        Https.getUser(user).then((res)=>{
-            setLikeCount(res.data.liked.length);
-            setcartNotification(res.data.cartdata.length);
-        })
-
-
-    }
+    const dispatch = useDispatch()
     useEffect(() => {
         let mode = JSON.parse(localStorage.getItem("DarkMode"));
         setDarkMode(mode);
+        if (user !== null) {
+            Https.getUser(user).then((res)=>{
+                let initialLikesCount = res.data.liked.length;
+                let initialCartItemsCount = res.data.cartdata.length;
+                setLikeCount(initialLikesCount);
+                dispatch(setlikeProduct(initialLikesCount));
+                // dispatch(setCart(res.data.cartdata));
+                setcartNotification(initialCartItemsCount);
+            })
+    
+        }
     }, [setDarkMode])
 
+    const StoreLikeCount = useSelector((state) => state.likeordislike.count)
+    const StoreCartCount = useSelector((state) => state.cartHanddleing.count)
     return (
         <>
             <div>
@@ -54,7 +62,7 @@ function Navbar() {
                         <li className="nav-item" >
                             <a className="nav-link" aria-current="page" href="#" >
                                 <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
-                                    <Badge badgeContent={likeCount} color="secondary">
+                                    <Badge badgeContent={StoreLikeCount} color="secondary">
                                         <FavoriteBorderOutlinedIcon />
                                     </Badge>
                                 </IconButton>
@@ -64,7 +72,7 @@ function Navbar() {
                             <Link className="nav-link linkDecoretionNone cursor" to={'/cartCom'}>
                                 <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
 
-                                    <Badge badgeContent={cartnotification} color="secondary">
+                                    <Badge badgeContent={StoreCartCount} color="secondary">
                                         <ShoppingCartOutlinedIcon />
                                     </Badge>
                                 </IconButton>

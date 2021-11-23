@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Https from '../servises/Https'
 import { BrowserRouter as Link } from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import {setCart, decressCartCount } from "../redux/actions/productsActions"
+
 
 export default function SingleCartComp(props) {
     let [prodData, setProdData] = useState({});
 
-
+    const dispatch=useDispatch();
     useEffect(() => {
         let id = props.val;
         Https.seeProduct(id).then((res) => {
@@ -20,6 +23,8 @@ export default function SingleCartComp(props) {
             Https.removeFromCart(id, user).then((res) => {
                 if (res.status == 200) {
                     let obj = res.data;
+                    dispatch(setCart(obj))
+                    dispatch(decressCartCount(1))
                     setProdData(obj)
                 }
             })

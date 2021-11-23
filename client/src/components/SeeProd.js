@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { incressCartCount } from "../redux/actions/productsActions"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Avatar } from '@mui/material';
 import Swal from 'sweetalert2'
@@ -8,7 +10,7 @@ let months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 function SeeProd() {
 
-
+    const dispatch = useDispatch();
     let [prodData, setProdData] = useState({});
     let [date, setDate] = useState();
 
@@ -30,13 +32,14 @@ function SeeProd() {
         let user = localStorage.getItem("user")
         if (user) {
             let id = e.target.id;
-            Https.addToCart(id,user).then((res) => {
+            Https.addToCart(id, user).then((res) => {
                 if (res.status == 200) {
-                    Swal.fire(
-                        'Success',
-                        'Item Added to Cart',
-                        'success'
-                    )
+                    // Swal.fire(
+                    //     'Success',
+                    //     'Item Added to Cart',
+                    //     'success'
+                    // )
+                    dispatch(incressCartCount(1))
                     setProdData = res.data;
                 }
                 else if (res.status == 201) {
