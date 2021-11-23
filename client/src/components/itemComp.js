@@ -10,10 +10,11 @@ function ItemComp() {
 
     let [isloading, setisloading] = useState(true);
 
+
+
     useEffect(() => {
         //Https.getallprods();
         Https.getAllProducts().then((res) => {
-            dispatch(setProducts(res.data));
             setisloading(false);
         })
     }, [])
@@ -22,6 +23,7 @@ function ItemComp() {
     const prods = useSelector((state) => state.allProducts.products)
 
     const SingleItem = prods.map((val, i, arr) => {
+        // console.log("val",val)
         return <SingleItemComp key={i} val={val} ind={i} arr={arr} />
 
     });

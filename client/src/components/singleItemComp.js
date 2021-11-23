@@ -6,13 +6,12 @@ import { BrowserRouter as Router, Route, Link, Switch, } from 'react-router-dom'
 import Https from '../servises/Https'
 import Swal from 'sweetalert2'
 export default function SingleItemComp(props) {
-
     const [likedItems, SetLikedItems] = useState([])
     const [likeed, disLike] = useState(false);
-
-    let [prodData, setProdData] = useState(props.arr[props.ind]);
-    const [idtopass, setidtopass] = useState(prodData._id);
-
+    
+    // console.log("props.val",props.val);
+    const [idtopass, setidtopass] = useState(props.val._id);
+    
     const dispatch = useDispatch()
 
     const likeDislike = (e) => {
@@ -63,15 +62,17 @@ export default function SingleItemComp(props) {
         <>
             <div className="individualItem col-12 w-ml-90  my-2 col-md-2" style={{ width: "300px" }}>
                 <div className="like-div">
-                    <a className="nav-link active cursor" onClick={likeDislike} style={{ height: "20px" }}><img id={idtopass} className="like-png" src={likeed === true ? "png/like.png" : "png/dislike.png"} /></a>
+                    <a className="nav-link active cursor" onClick={likeDislike} style={{ height: "20px" }}>
+                        <img id={idtopass} className="like-png" src={likeed === true ? "png/like.png" : "png/dislike.png"} />
+                        </a>
                     <div className="item d-flex justify-content-center my-2">
-                        <img className="itemPng" src={prodData.prodImg} alt="" /></div>
+                        <img className="itemPng" src={props.val.prodImg} alt="" /></div>
                     <div>
-                        <h6 style={{ 'margin': '3px 0' }}>{prodData.prodName}</h6>
-                        <p className="star_para">{prodData.prodBrand} <br /> ⭐⭐⭐⭐ 4.8 (21032 reviews)</p>
-                        <h5>${prodData.lowPrice} <span className="star_para" style={{ "textDecoration": "line-through ", "fontWeight": "lighter" }}>${prodData.highPrice}</span></h5>
+                        <h6 style={{ 'margin': '3px 0' }}>{props.val.prodName}</h6>
+                        <p className="star_para">{props.val.prodBrand} <br /> ⭐⭐⭐⭐ 4.8 (21032 reviews)</p>
+                        <h5>${props.val.lowPrice} <span className="star_para" style={{ "textDecoration": "line-through ", "fontWeight": "lighter" }}>${props.val.highPrice}</span></h5>
                         <Link className="linkDecoretionNone" to={"/seeprod/" + idtopass}>
-                            <button id={prodData._id} className="btnOrange mx-auto my-3 w-75" >Buy Now</button>
+                            <button id={props.val._id} className="btnOrange mx-auto my-3 w-75" >Buy Now</button>
                         </Link>
                     </div>
                 </div>

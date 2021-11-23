@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {useSelector,useDispatch} from 'react-redux'
-import { setlikeProduct, setCart } from "../redux/actions/productsActions"
+import { setlikeProduct, setCart,setProducts } from "../redux/actions/productsActions"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../index.css"
 // import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -12,6 +12,7 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
+import SearchIcon from '@material-ui/icons/Search';
 import Https from '../servises/Https';
 function Navbar() {
     const [like, disLike] = useState("png/dislike.png")
@@ -22,7 +23,41 @@ function Navbar() {
     let user = localStorage.getItem("user");
     let [color, setColor] = useState("#0C0404")
 
+    let [prodss, setprodss] = useState([]);
+
     const dispatch = useDispatch()
+
+
+    
+    
+    
+    
+
+  
+
+    function filteredCompanies(input){
+        
+        let filteredProds = prodss;                
+        filteredProds = input.toLowerCase()
+          ? filteredProds.filter(
+              item =>
+                item.prodName.toLowerCase().includes(input) ||
+                item.prodBrand.toLowerCase().includes(input) ||
+                item.highPrice.toLowerCase().includes(input) ||
+                item.lowPrice.toLowerCase().includes(input)
+            )
+          : filteredProds;  
+        //   console.log(filteredProds);
+          
+          dispatch(setProducts(filteredProds));
+      }
+
+
+
+
+
+
+
     useEffect(() => {
         let mode = JSON.parse(localStorage.getItem("DarkMode"));
         setDarkMode(mode);
@@ -32,8 +67,13 @@ function Navbar() {
                 let initialCartItemsCount = res.data.cartdata.length;
                 setLikeCount(initialLikesCount);
                 dispatch(setlikeProduct(initialLikesCount));
-                // dispatch(setCart(res.data.cartdata));
+                dispatch(setCart(res.data.cartdata));
                 setcartNotification(initialCartItemsCount);
+            })
+
+            Https.getAllProducts().then((res) => {
+                setprodss(res.data)
+                dispatch(setProducts(res.data))
             })
     
         }
@@ -48,8 +88,9 @@ function Navbar() {
 
                     <Link className="main_logo" to={"/"} ><img src={DarkMode ? "img/logoWhite.png" : "img/logoBlack.png"} alt="amazon" /></Link>
                     <form className="search_form" style={{ 'justifyContent': 'center' }}>
-                        <input className="inputSearch" type="search" placeholder="Search" aria-label="Search" style={{ "width": "275px" }} />
-                        <button className="btnOrange my-0" type="submit"><img className="searchBtn" src="png/search.png" alt="" /></button>
+                        <input className="inputSearch" type="search" placeholder="Search" aria-label="Search" style={{ "width": "275px" }}
+                         onChange={(e)=>{filteredCompanies(e.target.value)}} />
+                        <button className="btnOrange my-0 searchBtn" type="button"><SearchIcon/></button>
                     </form>
                     <ul className="nav_list" id="navbar_ul">
                         <li className="nav-item" >

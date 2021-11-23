@@ -5,6 +5,7 @@ import RightContiner from './RightContiner'
 import Categires from './helper/Categires'
 import ItemComp from './ItemComp'
 import "../index.css"
+
 function Home() {
     return (<><div className="homestyle">
      <Navbar />

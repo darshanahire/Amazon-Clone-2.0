@@ -49,7 +49,7 @@ export const cartHanddle = (state = initialCart, { type, payload }) => {
             return { ...state, count: state.count + payload };
             break;
         case ActionsTypes.DECRESS_CART:
-            return { ...state, count: state.count - payload == -1 ? 0 :state.count - payload};
+            return { ...state,count: state.count - payload};
             break;
         default:
             return state;

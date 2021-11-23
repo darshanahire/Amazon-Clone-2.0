@@ -26,6 +26,7 @@ function SeeProd() {
         Https.seeProduct(id).then((res) => {
             setProdData(res.data)
         })
+        window.scrollTo(0, 0)
     }, [setProdData])
 
     const addtocart = (e) => {
