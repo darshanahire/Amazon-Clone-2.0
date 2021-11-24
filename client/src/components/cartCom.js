@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch ,useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setCart } from "../redux/actions/productsActions"
 import SingleCartComp from './SingleCartComp'
 import Https from '../servises/Https'
@@ -14,7 +14,7 @@ export default function CartCom() {
             Https.getCartItems(USER).then((res) => {
                 setCartItem(res.data);
                 dispatch(setCart(res.data));
-                
+
             })
         }
     }, [setCartItem])
