@@ -95,26 +95,49 @@ width: 40% !important;
 }
 
 
+.muibtn:first-child{
+color: red !important;
+}
 
 
+.darkMode{
+  background-color: rgba(41, 40, 40, 0.72) !important;
+  border-color: rgba(41, 40, 40, 0.72) !important;
+  color: white !important;
+}
+.lightMode{
+  background-color: rgba(255, 255, 255, 0.72) !important;
+  border-color: rgba(255, 255, 255, 0.72) !important;
+  color: black;
+}
 
-
+.mui-white:first-child{
+color:white !important
+}
+.mui-dark:first-child{
+color:black !important
+}
 
 .main_logo img{
   width:120px;
   /* height: 40px; */
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 .main_logo{
-  margin-top:15px ;
+  margin-top:12px ;
   align-items: center;
+  margin-left: 15px;
 }
 .navbar2{
   height: 60px;
-  border-bottom: 1px solid whitesmoke;
+  /* border-bottom: 1px solid rgba(255,255,255,0.72); */
   display: flex;
   flex-direction: row;
   box-shadow: 0px 0px 13px -7px;
+  /* backdrop-filter: saturate(180%) blur(20px);
+  background-color: rgba(255,255,255,0.72); */
+  backdrop-filter: saturate(250%) blur(20px) !important;
+    /* background-color: rgba(255,255,255,0.72) ; */
   /* position:fixed; */
 }
 .inputSearch,.loginInput{   
@@ -124,11 +147,23 @@ width: 40% !important;
   border-radius: 3px;
   height: 35px;
 }
+.inputSearch{
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  width: 275px;
+}
+.searchBtn{
+  margin-left: 2px;
+  /* border-left: 0 !important; */
+  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+}
 .inputSearch:focus,.loginInput:focus,.btnOrange:focus{
   border-color: #e77600;
   outline: none;
   box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
 }
+
 .search_form{
   display: flex;
   justify-content: center;
@@ -196,10 +231,12 @@ width: 40% !important;
 .LeftSideBar{
   position: fixed;
   margin-top: 70px;
-  background-color: #fff;
+  /* background-color: #fff; */
+    backdrop-filter: saturate(250%) blur(20px);
+    background-color: rgba(255,255,255,0.72);
   box-shadow: 0px 0px 13px -7px;
   width: 13rem;
-  height: 90%;
+  height: 100%;
   z-index: 100;
   /* top: 0px; */
   /* bottom: 0px;
@@ -222,12 +259,13 @@ width: 40% !important;
   align-items: center;
   height: 35px;
   border-left:7px solid transparent;
-  color: #000;
   padding-left:10px ;
 }
+
 .LeftSideBar ul li:hover{
   /* color: orange; */
   border-radius: 5px;
+  color: #000;
   border-left:7px solid orange ;
   background-color: #ffefbe;
   cursor: pointer;
@@ -252,10 +290,10 @@ width: 40% !important;
   margin-right: 0;
   /* background-color: white; */
 }
-.searchBtn{
+/* .searchBtn{
   width: 20px;
   height: 20px ;
-}
+} */
 .categiresPng{
   width: 50px;
   height: 50px;

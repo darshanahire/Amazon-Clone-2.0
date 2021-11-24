@@ -14,7 +14,7 @@ function Orders() {
                 </div>
                 <hr />
                 <div className="card mb-4">
-                    <div className="card-title d-flex border-bottom p-2 font-13 font-sm-12" style={{ "background-color": "rgb(243, 242, 242)" }}>
+                    <div className="card-title d-flex border-bottom p-2 font-13 font-sm-12" style={{ "backgroundColor": "rgb(243, 242, 242)" }}>
                         <span className="col-md-4 mx-auto">
                             <p className="my-1">ORDER PLACED</p>
                             <p className="m-0">17 October 2021</p>
@@ -50,7 +50,7 @@ function Orders() {
                     </div>
                 </div>
                 <div className="card mb-4">
-                    <div className="card-title d-flex border-bottom p-2 font-13 font-sm-12" style={{ "background-color": "rgb(243, 242, 242)" }}>
+                    <div className="card-title d-flex border-bottom p-2 font-13 font-sm-12" style={{ "backgroundColor": "rgb(243, 242, 242)" }}>
                         <span className="col-md-4 mx-auto">
                             <p className="my-1">ORDER PLACED</p>
                             <p className="m-0">17 October 2021</p>
@@ -77,7 +77,7 @@ function Orders() {
 
                                 <p className="star_para">Apple <br /> ⭐⭐⭐⭐ 4.8 (21032 reviews)</p>
                                 <div className="text-md-start text-center">
-                                <Link className="Link" to="#">
+                                <Link className="Link" >
                                 <button className="btnRed  d-inline border-1 p-1 mt-3 px-3 mx-3">Order Failed</button></Link>
                                 <button className="btn border-1 btn-white p-1 mb-1 px-3">Buy Again</button>
                             </div>

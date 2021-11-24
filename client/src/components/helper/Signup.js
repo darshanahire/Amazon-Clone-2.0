@@ -2,7 +2,8 @@ import React ,{useState} from 'react'
 import { BrowserRouter as Router,Route, Link, Switch, } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
 
-import axios from 'axios'
+
+import Https from '../../servises/Https';
 const Signup = () => {
     let history=useHistory()
     let initdata={
@@ -20,7 +21,7 @@ const Signup = () => {
         })
     }
     function sendData(){
-        axios.post("/signup",userData).then(async(res)=>{
+        Https.signup(userData).then(async(res)=>{
             if(res.status==200){
             // alert(res.data);
             history.push("/login")
@@ -42,7 +43,7 @@ const Signup = () => {
                 <label htmlFor="loginInputEmail" className="lable">Email</label>
                 <input type="text" className="loginInput" id="loginInputEmail" name="email" value={userData.email} onChange={handleChange}/>
                 <label htmlFor="loginInputPass" className="lable">Password</label>
-                <input type="text" className="loginInput" id="loginInputPass" name="password" value={userData.password} onChange={handleChange}/>
+                <input type="password" className="loginInput" id="loginInputPass" name="password" value={userData.password} onChange={handleChange}/>
                 <button className="btnOrange" onClick={sendData}>Create Account</button>
                 <p style={{ "fontSize": "12px", "marginTop": "5px" }}>
                     We will send you a text to verify your phone.

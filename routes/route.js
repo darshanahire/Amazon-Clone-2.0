@@ -61,8 +61,9 @@ router.post("/remove-from-cart", async (req, res) => {
     const username = req.body.user;
     const id = req.body.id;
     try{
-    await User.findOneAndUpdate({ username: username },{$pull:{cartdata:id}}).then((data)=>{
-    res.status(200).json(data.cartdata)});}
+    const data = await User.findOneAndUpdate({ username: username },{$pull:{cartdata:id}},{ new: true })
+    res.status(200).json(data.cartdata);    
+}
     catch(err){
         console.log(err);
         res.status(201).json("Plese Login First");
@@ -72,7 +73,7 @@ router.post("/handlelike", async (req, res) => {
     const username = req.body.username;
     const id = req.body.id;
     const val=req.body.val;
-    console.log(username,id,val);
+    // console.log(username,id,val);
     if(!val){
     try{
      await User.findOneAndUpdate({ username: username },{$push:{liked:id}}).then((data)=>{

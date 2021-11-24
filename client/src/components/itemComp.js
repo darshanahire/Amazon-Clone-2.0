@@ -1,62 +1,65 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
-import SingleItemComp from './singleItemComp'
+import { useSelector, useDispatch } from "react-redux"
+import { setProducts } from "../redux/actions/productsActions"
+import SingleItemComp from './SingleItemComp'
 import Loading from './helper/Loading'
+import Https from "../servises/Https"
 function ItemComp() {
 
-    let [prodData, setProdData] = useState([]);
+    const dispatch = useDispatch()
+
     let [isloading, setisloading] = useState(true);
 
+
+
     useEffect(() => {
-        axios.post('/getallprods').then((d) => {
-            setProdData(d.data);
+        //Https.getallprods();
+        Https.getAllProducts().then((res) => {
+            dispatch(setProducts(res.data))
             setisloading(false);
         })
-    }, [setProdData])
-    // console.log(prodData);
+    }, [])
 
-    // console.log(likedItems);
-    // const getdata = () => {
-    //     axios.post('/seeprod', { id }).then((d) => {
-    //         console.log(d.data);
-    //         setProdData = d.data;
-    //     })
-    // }
+    // get data froms store
+    const prods = useSelector((state) => state.allProducts.products)
+
+    const SingleItem = prods.map((val, i, arr) => {
+        // console.log("val",val)
+        return <SingleItemComp key={i} val={val} ind={i} arr={arr} />
+
+    });
     return (
         <>
             <div className="row d-flex justify-content-center mx-2 my-3">
                 {
                     !isloading ?
-                    prodData.map((val, i, arr) => {             
-                        return <>
-                            <SingleItemComp val={val} ind={i} arr={arr} />
+                        <>{SingleItem}</>
+                        :
+                        <>
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
+                            <Loading />
                         </>
-                    }) :
-                    <>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                    </>
                 }
             </div>
         </>
     )
 }
 
-export default ItemComp
+export default ItemComp;
 
 // :
 //  for(var i=0;i<20:i++)

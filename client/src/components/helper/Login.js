@@ -2,8 +2,12 @@ import React ,{useState} from 'react'
 import { BrowserRouter as Router,Route, Link, Switch, } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import Https from "../../servises/Https"
+import { useSelector, useDispatch } from 'react-redux'
+import {UserName,setlikeProduct,setCart} from "../../redux/actions/productsActions"
 import axios from 'axios'
 const Login = () => {
+    const dispatch = useDispatch()
     let history=useHistory()
     let initdata={
         email:"",
@@ -19,11 +23,17 @@ const Login = () => {
     }
     function sendData(){
         if(!initdata.email && !initdata.password ){
-        axios.post("/login",userData).then(async(res)=>{
+            Https.login(userData).then((res)=>{
             console.log(res);
             
             if(res.status==200){
             localStorage.setItem("user",res.data)
+            dispatch(UserName(res.data));
+            Https.getUser(res.data).then((res) => {
+                let initialLikesCount = res.data.liked.length;
+                dispatch(setlikeProduct(initialLikesCount));
+                dispatch(setCart(res.data.cartdata));
+            })
             history.push("/")
         }
             if(res.status==201){
@@ -46,7 +56,7 @@ const Login = () => {
                 <label htmlFor="loginInputEmail" className="lable">Email or mobile phone number</label>
                 <input type="text" className="loginInput" id="loginInputEmail" name="email" value={userData.email} onChange={handleChange}/>
                 <label htmlFor="loginInputPass" className="lable">Password</label>
-                <input type="text" className="loginInput" id="loginInputPass"  name="password" value={userData.password}onChange={handleChange}/>
+                <input type="password" className="loginInput" id="loginInputPass"  name="password" value={userData.password}onChange={handleChange}/>
                 <button className="btnOrange" onClick={sendData}>Sign In</button>
                 <p style={{ "fontSize": "12px", "marginTop": "5px" }}>
                     By continuing, you agree to Amazon's Conditions of Use Privacy Notice</p>

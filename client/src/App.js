@@ -8,9 +8,9 @@ import Home from './components/Home'
 // import ItemComp from './components/itemComp'
 import Login from './components/helper/Login'
 import Signup from './components/helper/Signup'
-import adminComp from './components/helper/adminComp'
+import AdminComp from './components/helper/AdminComp'
 import SeeProd from './components/SeeProd'
-import CartCom from './components/cartCom'
+import CartCom from './components/CartCom'
 import Orders from './components/Orders'
 import Chat from './components/Chat'
 import TrackOrder from './components/TrackOrder'
@@ -20,22 +20,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <Router>
-    <div>
-     {/* <Navbar /> */}
-    </div>
 
     <switch>
 
       <Route path="/" component={Navbar} />
       <Route exact path="/" component={Home} />
-      <Route exact path="/login" component={Login}/>
-      <Route exact path="/signUp" component={Signup}/>
-      <Route exact path="/seeprod/:id" component={SeeProd}/>
-      <Route exact path="/admin" component={adminComp}/>
-      <Route exact path="/cartCom" component={CartCom}/>
-      <Route exact path="/orders" component={Orders}/>
-      <Route exact path="/trackOrder" component={TrackOrder}/>
-      <Route exact path="/paygateway" component={PayGateway}/>
+      <Route exact path="/Login" component={Login}/>
+      <Route exact path="/SignUp" component={Signup}/>
+      <Route exact path="/Seeprod/:id" component={SeeProd}/>
+      <Route exact path="/Admin" component={AdminComp}/>
+      <Route exact path="/CartCom" component={CartCom}/>
+      <Route exact path="/Orders" component={Orders}/>
+      <Route exact path="/TrackOrder" component={TrackOrder}/>
+      <Route exact path="/Paygateway" component={PayGateway}/>
       <Route exact path="/PlacedOrder" component={PlacedOrder}/>
       <Route exact path="/Chat" component={Chat}/>
     </switch>
