@@ -35,6 +35,12 @@ export const decressLikeCount = (counts) => {
     };
 };
 
+export const setAllDataToCart = (counts) => {
+    return {
+        type: ActionsTypes.SET_ALL_CART_DATA,
+        payload: counts,
+    };
+};
 export const setCart = (counts) => {
     return {
         type: ActionsTypes.SET_CART,
@@ -59,6 +65,13 @@ export const decressCartCount = (counts) => {
 export const setMode = (counts) => {
     return {
         type: ActionsTypes.CHANGE_MODE,
+        payload: counts,
+    };
+};
+
+export const UserName = (counts) => {
+    return {
+        type: ActionsTypes.USER,
         payload: counts,
     };
 };

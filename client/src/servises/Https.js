@@ -21,6 +21,8 @@ export default {
     async seeProduct(id) {
         const res = await axios.post(this.baseURL + "seeprod", { id });
         return res;
+        // const res = await axios.post(this.baseURL + "seeprod", { id });
+        // return res;
     },
 
     async addToCart(id, user) {
@@ -51,6 +53,10 @@ export default {
     async signup(userData) {
         const res = await axios.post(this.baseURL + "signup",userData);
         return res;
+    },
+
+    async logout() {
+        localStorage.removeItem('user')
     },
 
 }

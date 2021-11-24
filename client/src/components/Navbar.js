@@ -1,60 +1,49 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setlikeProduct, setCart, setProducts, setMode } from "../redux/actions/productsActions"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useHistory } from 'react-router-dom';
-import "../index.css"
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp';
-import LocalMallOutlinedIcon from '@material-ui/icons/LocalMallOutlined';
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import SearchIcon from '@material-ui/icons/Search';
+import { useHistory } from 'react-router';
+import { setlikeProduct, setCart, setProducts, setMode,UserName } from "../redux/actions/productsActions"
 import Https from '../servises/Https';
 
-
-import Button from '@material-ui/core/Button';
+import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp';
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import LocalMallOutlinedIcon from '@material-ui/icons/LocalMallOutlined';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 import MenuList from '@material-ui/core/MenuList';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-    },
-    paper: {
-        marginRight: theme.spacing(2),
-    },
-}));
-
-
-
+import MenuItem from '@material-ui/core/MenuItem';
+import Popper from '@material-ui/core/Popper';
+import Paper from '@material-ui/core/Paper';
+import Badge from '@material-ui/core/Badge';
+import Grow from '@material-ui/core/Grow';
 
 function Navbar() {
-    const [like, disLike] = useState("png/dislike.png")
-    const [toggle, setToggle] = useState(false)
-    const [likeCount, setLikeCount] = useState()
-    const [cartnotification, setcartNotification] = useState()
-    const [DarkMode, setDarkMode] = useState();
-    let user = localStorage.getItem("user");
-    let [color, setColor] = useState("rgb(50 50 50)")
+    
+    const StoreLikeCount = useSelector((state) => state.likeordislike.count);
+    const StoreCartCount = useSelector((state) => state.cartHanddleing.count);
+    const isDarkMode = useSelector((state) => state.handdleMode.color);
+    const USER = useSelector((state) => state.UserName.username);
 
-    let [prodss, setprodss] = useState([]);
 
     const dispatch = useDispatch()
     let history=useHistory()
 
+    let user = localStorage.getItem("user");
 
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const anchorRef = React.useRef(null);
+    const [DarkMode, setDarkMode] = useState();
+    const [prodss, setprodss] = useState([]);
+    const [likeCount, setlikeCount] = useState();
+    const [cartCount, setcartCount] = useState();
+    const [open, setOpen] = useState(false);
+
+
+
+    const anchorRef = useRef(null);
+    const prevOpen = useRef(open);
 
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
@@ -75,24 +64,12 @@ function Navbar() {
         }
     }
 
-    // return focus to the button when we transitioned from !open -> open
-    const prevOpen = React.useRef(open);
-    React.useEffect(() => {
-        if (prevOpen.current === true && open === false) {
-            anchorRef.current.focus();
-        }
+    function logout(){
+        Https.logout();
+        history.push("/login")
+    }
 
-        prevOpen.current = open;
-    }, [open]);
-
-
-const Logout =()=>{
-    localStorage.clear();
-    history.push("/login")
-}
-
-
-    function filteredCompanies(input) {
+    function filteredProducts(input) {
 
         let filteredProds = prodss;
         filteredProds = input.toLowerCase()
@@ -104,28 +81,21 @@ const Logout =()=>{
                     item.lowPrice.toLowerCase().includes(input)
             )
             : filteredProds;
-        //   console.log(filteredProds);
-
         dispatch(setProducts(filteredProds));
     }
-
-
-
-
-
-
 
     useEffect(() => {
         let mode = JSON.parse(localStorage.getItem("DarkMode"));
         setDarkMode(mode);
+        dispatch(UserName(user));
+
         if (user !== null) {
             Https.getUser(user).then((res) => {
                 let initialLikesCount = res.data.liked.length;
-                let initialCartItemsCount = res.data.cartdata.length;
-                setLikeCount(initialLikesCount);
+                setlikeCount(initialLikesCount);
                 dispatch(setlikeProduct(initialLikesCount));
+                setcartCount(res.data.cartdata.length)
                 dispatch(setCart(res.data.cartdata));
-                setcartNotification(initialCartItemsCount);
             })
 
             Https.getAllProducts().then((res) => {
@@ -134,33 +104,41 @@ const Logout =()=>{
             })
 
         }
-    }, [setDarkMode])
+
+        if (prevOpen.current === true && open === false) {
+            anchorRef.current.focus();
+        }
+
+        prevOpen.current = open;
+    }, [setDarkMode, open])
     dispatch(setMode(DarkMode));
 
-    const StoreLikeCount = useSelector((state) => state.likeordislike.count)
-    const StoreCartCount = useSelector((state) => state.cartHanddleing.count)
+    
+    const muibtn = [isDarkMode ? "mui-white" : "mui-dark"];
+
+
     return (
         <>
             <div>
-                <nav className="navbar2 fixed-top" style={DarkMode ? { 'backgroundColor': color, "border": color } : { 'backgroundColor': 'white' }}>
+                <nav className={DarkMode ? 'navbar2 fixed-top darkMode' : 'navbar2 fixed-top lightMode'} >
 
                     <Link className="main_logo" to={"/"} ><img src={DarkMode ? "img/logoWhite.png" : "img/logoBlack.png"} alt="amazon" /></Link>
-                    <form className="search_form" style={{ 'justifyContent': 'center' }}>
-                        <input className="inputSearch" type="search" placeholder="Search" aria-label="Search" style={{ "width": "275px" }}
-                            onChange={(e) => { filteredCompanies(e.target.value) }} />
+                    <form className="search_form justify-content-center">
+                        <input className="inputSearch" type="search" placeholder="Search" aria-label="Search"
+                            onChange={(e) => { filteredProducts(e.target.value) }} />
                         <button className="btnOrange my-0 searchBtn" type="button"><SearchIcon /></button>
                     </form>
                     <ul className="nav_list" id="navbar_ul">
                         <li className="nav-item" >
-                            <Link className="nav-link linkDecoretionNone cursor" to={'/orders'}>
-                                <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
+                            <Link className={"nav-link linkDecoretionNone cursor " + muibtn[0]} to={'/orders'}>
+                                <IconButton aria-label=" new notifications" color="inherit" >
                                     <LocalMallOutlinedIcon />
                                 </IconButton>
                             </Link>
                         </li>
                         <li className="nav-item" >
-                            <a className="nav-link" aria-current="page" href="#" >
-                                <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
+                            <a className={"nav-link " + muibtn[0]} aria-current="page" href="#" >
+                                <IconButton aria-label=" new notifications" color="inherit" >
                                     <Badge badgeContent={StoreLikeCount} color="secondary">
                                         <FavoriteBorderOutlinedIcon />
                                     </Badge>
@@ -168,9 +146,8 @@ const Logout =()=>{
                             </a>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link linkDecoretionNone cursor" to={'/cartCom'}>
-                                <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
-
+                            <Link className={"nav-link linkDecoretionNone cursor " + muibtn[0]} to={'/cartCom'}>
+                                <IconButton aria-label=" new notifications" color="inherit">
                                     <Badge badgeContent={StoreCartCount} color="secondary">
                                         <ShoppingCartOutlinedIcon />
                                     </Badge>
@@ -178,8 +155,8 @@ const Logout =()=>{
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link linkDecoretionNone" href="#">
-                                <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
+                            <a className={"nav-link linkDecoretionNone cursor " + muibtn[0]} href="#">
+                                <IconButton aria-label=" new notifications" color="inherit">
                                     <Badge badgeContent={0} color="secondary">
                                         <NotificationsNoneSharpIcon />
                                     </Badge>
@@ -188,8 +165,8 @@ const Logout =()=>{
                         </li>
                         <li className="nav-item ">
 
-                            <Link className="nav-link linkDecoretionNone" to="/">
-                                <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }} ref={anchorRef}
+                            <Link className={"nav-link linkDecoretionNone cursor " + muibtn[0]} to="#">
+                                <IconButton aria-label=" new notifications" color="inherit" ref={anchorRef}
                                     aria-controls={open ? 'menu-list-grow' : undefined}
                                     aria-haspopup="true"
                                     onClick={handleToggle}>
@@ -203,14 +180,14 @@ const Logout =()=>{
                                                 <Paper>
                                                     <ClickAwayListener onClickAway={handleClose}>
                                                         <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                                        {(localStorage.getItem("user")) === null?
-                                                        <Link className="linkDecoretionNone" to={"/Login"}><MenuItem onClick={handleClose}>Login</MenuItem> </Link>:
-                                                        <>
-                                                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                                            <MenuItem onClick={handleClose}>My account</MenuItem>
-                                                            <MenuItem onClick={handleClose,Logout}>Logout</MenuItem>
-                                                            </>
-                                                    }
+                                                            {(USER === null) ?
+                                                                <Link className="linkDecoretionNone" to={"/Login"}><MenuItem onClick={handleClose}>Login</MenuItem> </Link> :
+                                                                <>
+                                                                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                                                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                                                                    <MenuItem onClick={handleClose, logout }>Logout</MenuItem>
+                                                                </>
+                                                            }
                                                         </MenuList>
                                                     </ClickAwayListener>
                                                 </Paper>
@@ -219,17 +196,14 @@ const Logout =()=>{
                                     </Popper>
                                 </IconButton>
 
-                                {/* {
-                                    (localStorage.getItem("user")) === null ? null : <span className="d-none" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>Hi , {localStorage.getItem("user")}</span>
-                                } */}
-
                             </Link>
-                            {/* <Link className="nav-link linkDecoretionNone" to={'/Login'}><img className="nav-png" src="png/user.png" alt="" id="user_photo" />
-                            </Link> */}
                         </li>
-                        <li className="nav-item" onClick={() => { setDarkMode(!DarkMode); localStorage.setItem("DarkMode", !DarkMode) }} >
-                            <p className="nav-link" aria-current="page"  >
-                                <IconButton aria-label=" new notifications" color="inherit" style={DarkMode ? { "color": 'white' } : { "color": 'Black' }}>
+                        <li className="nav-item" onClick={() => {
+                            setDarkMode(!DarkMode);
+                            localStorage.setItem("DarkMode", !DarkMode);
+                        }} >
+                            <p className={"nav-link " + muibtn[0]} aria-current="page"  >
+                                <IconButton aria-label=" new notifications" color="inherit">
                                     <Badge badgeContent={0} color="secondary">
                                         <Brightness4Icon />
                                     </Badge>

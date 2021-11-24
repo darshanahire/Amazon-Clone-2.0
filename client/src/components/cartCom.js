@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch ,useSelector} from 'react-redux'
 import { setCart } from "../redux/actions/productsActions"
 import SingleCartComp from './SingleCartComp'
-import Navbar from './Navbar'
 import Https from '../servises/Https'
 
 export default function CartCom() {
@@ -11,19 +10,19 @@ export default function CartCom() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        let user = localStorage.getItem("user");
-        if (user) {
-            Https.getCartItems(user).then((res) => {
+        if (USER) {
+            Https.getCartItems(USER).then((res) => {
                 setCartItem(res.data);
                 dispatch(setCart(res.data));
                 
             })
         }
     }, [setCartItem])
-    const CurrStoreCart = useSelector((state) => state.cartHanddleing.products)
+    const CurrStoreCart = useSelector((state) => state.cartHanddleing.products);
+    const USER = useSelector((state) => state.UserName.username)
     return (
         <>
-            <Navbar />
+
 
             <div className="row d-flex justify-content-center mx-2 row" style={{ "margin-top": "60px", "backgroundColor": "rgb(243, 242, 242)" }}>
                 <h3 className="text-center my-4">Your Cart Items</h3>

@@ -3,8 +3,11 @@ import { BrowserRouter as Router,Route, Link, Switch, } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import Https from "../../servises/Https"
+import { useSelector, useDispatch } from 'react-redux'
+import {UserName,setlikeProduct,setCart} from "../../redux/actions/productsActions"
 import axios from 'axios'
 const Login = () => {
+    const dispatch = useDispatch()
     let history=useHistory()
     let initdata={
         email:"",
@@ -25,6 +28,12 @@ const Login = () => {
             
             if(res.status==200){
             localStorage.setItem("user",res.data)
+            dispatch(UserName(res.data));
+            Https.getUser(res.data).then((res) => {
+                let initialLikesCount = res.data.liked.length;
+                dispatch(setlikeProduct(initialLikesCount));
+                dispatch(setCart(res.data.cartdata));
+            })
             history.push("/")
         }
             if(res.status==201){

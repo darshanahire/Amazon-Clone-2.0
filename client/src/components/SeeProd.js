@@ -17,7 +17,7 @@ function SeeProd() {
     let history = useHistory()
 
     let { id } = useParams();
-    console.log(id);
+    // console.log(id);
 
     useEffect(() => {
         let d = new Date();
@@ -30,10 +30,9 @@ function SeeProd() {
     }, [setProdData])
 
     const addtocart = (e) => {
-        let user = localStorage.getItem("user")
-        if (user) {
+        if (USER) {
             let id = e.target.id;
-            Https.addToCart(id, user).then((res) => {
+            Https.addToCart(id, USER).then((res) => {
                 if (res.status == 200) {
                     // Swal.fire(
                     //     'Success',
@@ -61,7 +60,7 @@ function SeeProd() {
         }
     }
 
-
+    const USER = useSelector((state) => state.UserName.username)
     // require('@/img' + "seeprod1.png" + '')
 
 
@@ -118,7 +117,10 @@ function SeeProd() {
             <div className="my-2 px-5 mb-4">
                 <h4>Have a question?</h4>
                 <p className="font-14">Find answers in product info, Q&As, reviews</p>
-                <input type="text" className="loginInput w-50" placeholder="Type your question or keyword" />
+                <div className="row">
+
+                <input type="text" className="loginInput col-12 col-md-5 " placeholder="Type your question or keyword" />
+                </div>
             </div>
             <hr />
             <div className="row px-5 mt-4 justify-content-around  mx-0">

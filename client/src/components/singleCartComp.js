@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import Https from '../servises/Https'
 import { BrowserRouter as Link } from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
 import {setCart, decressCartCount } from "../redux/actions/productsActions"
 
 
 export default function SingleCartComp(props) {
     let [prodData, setProdData] = useState({});
-
+    const USER = useSelector((state) => state.UserName.username)
+    
     const dispatch=useDispatch();
     useEffect(() => {
         let id = props.val;
+       
         Https.seeProduct(id).then((res) => {
             let obj = res.data;
             setProdData(obj)
         })
     }, [setProdData])
     function removeFromCart(e) {
-        let user = localStorage.getItem("user")
-        if (user) {
+        if (USER) {
             let id = e.target.id;
-            Https.removeFromCart(id, user).then((res) => {
+            Https.removeFromCart(id, USER).then((res) => {
                 if (res.status == 200) {
                     let obj = res.data;
                     dispatch(setCart(obj))

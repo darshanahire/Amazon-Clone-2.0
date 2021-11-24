@@ -9,7 +9,7 @@ function LeftSideBar() {
     const isDarkMode = useSelector((state) => state.handdleMode.color)
     return (
         // <div className="LeftSideBar" style={{ 'backgroundColor': 'white' }}>
-        <div className="LeftSideBar" style={isDarkMode ? { 'backgroundColor': 'rgb(50 50 50)','color':'white' } : { 'backgroundColor': 'white','color':'black' }}>
+        <div className={isDarkMode ? "LeftSideBar darkMode" :"LeftSideBar lightMode"} >
             <ul>
                 <li><i className="fas fa-th-large mx-2"></i>Categories</li>
                 <li><i className="fas fa-circle-notch mx-2"></i>Echo and Alexa</li>
