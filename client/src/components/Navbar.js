@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useHistory } from 'react-router';
-import { setlikeProduct, setCart, setProducts, setMode,UserName } from "../redux/actions/productsActions"
+import { setlikeProduct, setCart, setProducts, setMode,UserName,setAllDataToCart } from "../redux/actions/productsActions"
 import Https from '../servises/Https';
 
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp';
@@ -72,7 +72,8 @@ function Navbar() {
     function filteredProducts(input) {
 
         let filteredProds = prodss;
-        filteredProds = input.toLowerCase()
+        input = input.toLowerCase()
+        filteredProds = input
             ? filteredProds.filter(
                 item =>
                     item.prodName.toLowerCase().includes(input) ||
@@ -95,7 +96,7 @@ function Navbar() {
                 setlikeCount(initialLikesCount);
                 dispatch(setlikeProduct(initialLikesCount));
                 setcartCount(res.data.cartdata.length)
-                dispatch(setCart(res.data.cartdata));
+                dispatch(setAllDataToCart(res.data.cartdata));
             })
 
             Https.getAllProducts().then((res) => {
@@ -155,13 +156,13 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a className={"nav-link linkDecoretionNone cursor " + muibtn[0]} href="#">
+                            <Link className={"nav-link linkDecoretionNone cursor " + muibtn[0]} to={'/Notifications'}>
                                 <IconButton aria-label=" new notifications" color="inherit">
                                     <Badge badgeContent={0} color="secondary">
                                         <NotificationsNoneSharpIcon />
                                     </Badge>
                                 </IconButton>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item ">
 

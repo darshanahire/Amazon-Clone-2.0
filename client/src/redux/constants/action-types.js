@@ -11,6 +11,7 @@ export const ActionsTypes = {
     SET_CART:"SET_CART",
     INCRESS_CART:"INCRESS_CART",
     DECRESS_CART:"DECRESS_CART",
+    SUBTOTAL:"SUBTOTAL",
 
     CHANGE_MODE:"CHANGE_MODE",
 

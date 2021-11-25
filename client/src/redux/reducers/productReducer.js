@@ -14,10 +14,12 @@ const initialCart = {
     products:[],
     productsAllData:[],
     count: 0,
+    subtotal:0
 }
 const initialMode = {
     color:""
 }
+
 const username = {
     username:""
 }
@@ -50,16 +52,19 @@ export const handdleLike = (state = initialLikes, { type, payload }) => {
 export const cartHanddle = (state = initialCart, { type, payload }) => {
     switch (type) {
         case ActionsTypes.SET_ALL_CART_DATA:
-            return { ...state, productsAllData : payload };
+            return { ...state, productsAllData: payload,count: payload.length};
             break;
         case ActionsTypes.SET_CART:
             return { ...state, products: payload , count: payload.length };
             break;
         case ActionsTypes.INCRESS_CART:
-            return { ...state, count: state.count + payload };
+            return { ...state, count: state.productsAllData.length };
             break;
         case ActionsTypes.DECRESS_CART:
-            return { ...state,count: state.count - payload};
+            return { ...state,count: state.productsAllData.length};
+            break;
+        case ActionsTypes.SUBTOTAL:
+            return { ...state,subtotal: payload};
             break;
         default:
             return state;

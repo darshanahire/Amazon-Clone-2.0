@@ -46,10 +46,15 @@ router.post("/getuser", async (req, res) => {
 })
 router.post("/addtocart", async (req, res) => {
     const username = req.body.user;
-    const id = req.body.id;   
+    const id = req.body.id._id;   
+    const d=req.body.id;
+    // console.log("d",d);
+    
     try {
-    await User.findOneAndUpdate({ username: username },{$push:{cartdata:id}}).then((data)=>{    
+    await User.findOneAndUpdate({ username: username },{$push:{cartdata:d}},{ new: true }).then((data)=>{    
+        // console.log(data.cartdata);
     res.status(200).json(data.cartdata)});
+    
 }
     catch(err){
     console.log(err);
@@ -60,9 +65,13 @@ router.post("/addtocart", async (req, res) => {
 router.post("/remove-from-cart", async (req, res) => {
     const username = req.body.user;
     const id = req.body.id;
+    // console.log(id);
+    
     try{
     const data = await User.findOneAndUpdate({ username: username },{$pull:{cartdata:id}},{ new: true })
-    res.status(200).json(data.cartdata);    
+    res.status(200).json(data.cartdata); 
+    // console.log(data.cartdata);
+       
 }
     catch(err){
         console.log(err);

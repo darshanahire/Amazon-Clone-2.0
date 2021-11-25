@@ -2,29 +2,30 @@ import React, { useState, useEffect } from 'react'
 import Https from '../servises/Https'
 import { BrowserRouter as Link } from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
-import {setCart, decressCartCount } from "../redux/actions/productsActions"
+import {setCart, decressCartCount,setAllDataToCart } from "../redux/actions/productsActions"
 
 
 export default function SingleCartComp(props) {
     let [prodData, setProdData] = useState({});
     const USER = useSelector((state) => state.UserName.username)
+    console.log("Props",props);
     
     const dispatch=useDispatch();
-    useEffect(() => {
-        let id = props.val;
+    // useEffect(() => {
+    //     let id = props.val;
        
-        Https.seeProduct(id).then((res) => {
-            let obj = res.data;
-            setProdData(obj)
-        })
-    }, [setProdData])
+    //     Https.seeProduct(id).then((res) => {
+    //         let obj = res.data;
+    //         setProdData(obj)
+    //     })
+    // }, [setProdData])
     function removeFromCart(e) {
         if (USER) {
-            let id = e.target.id;
+            let id = props.val;
             Https.removeFromCart(id, USER).then((res) => {
                 if (res.status == 200) {
                     let obj = res.data;
-                    dispatch(setCart(obj))
+                    dispatch(setAllDataToCart(obj))
                     dispatch(decressCartCount(1))
                     setProdData(obj)
                 }
@@ -33,7 +34,60 @@ export default function SingleCartComp(props) {
     }
     return (
         <>
-            <div className="individualItem col  my-2 col-md-8 mx-auto" style={{ "border": "1px solid rgb(197, 197, 197)" }}>
+         <hr className="mt-1" />
+                                <div className="card-body">
+                                    <div className="row">
+                                        <div className="col-12 col-md-10 d-block d-md-flex justify-content-between">
+                                            <div className="col-12 col-md-2 d-flex align-items-center justify-content-center">
+                                                <div class="form-check mx-3">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"  />
+                                                </div>
+                                                <img className="my-3 my-md-0" src={props.val.prodImg} alt="" width="110px" />
+                                            </div>
+                                            <div className="col-12 col-md-8 mx-md-4" >
+                                                <h5>{props.val.prodName} (Atlantic Blue, 6GB RAM, 128GB Storage) - 108MP Quad Camera | Snapdragon 750G Processor</h5>
+                                                <h6>Brand: {props.val.prodBrand}
+                                                </h6>
+
+                                                <p className="star_para">Apple <br /> ⭐⭐⭐⭐ 4.8 (21032 reviews)</p>
+                                                <div className="text-md-start text-center">
+                                                    <div className=" d-flex flex-row align-items-center mt-3">
+
+                                                    
+                                                     <span> Qty : </span>
+                                                    <select class=" mx-1 mx-md-3 inputSearch btn-white form-select shadow-none border-1" aria-label="Default select example" style={{'width':"70px"}}>
+                                                        <option selected>1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                    </select>
+                                                    {/* <button className="btn border-1 btnRed mt-0 text-white shadow-none">Remove From Cart</button> */}
+                                                    <div className="vr my-auto d-none d-md-flex"> </div>
+                                                    <p className="color-cyne my-auto font-13 mx-2 mx-md-3 cursor" id={props.val._id} onClick={removeFromCart}>Delete</p>
+                                                    <div className="vr my-auto"> </div>
+                                                    <p className="color-cyne my-auto font-13 mx-2 mx-md-3 cursor">Save to later</p>
+                                                    <span className="d-none d-md-flex">
+                                                    <div className="vr my-auto "> </div>
+                                                    <p className="color-cyne my-auto font-13 mx-3 cursor">See more like this</p>
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-md-2 text-center d-flex align-items-center my-3">
+                                            <p className="h6 m-0 col-6 col-md-12">
+                                                <p className="my-auto"> 
+                                                <span className="d-inline d-md-none">Price : </span>
+                                                ${props.val.lowPrice}
+                                                </p>
+                                            </p>
+                                            <button className="btnOrange col-6 my-auto d-inline d-md-none">Buy Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+            {/* <div className="individualItem col  my-2 col-md-8 mx-auto" style={{ "border": "1px solid rgb(197, 197, 197)" }}>
                 <div className="like-div d-flex flex-row">
                     <div className="item d-flex justify-content-center my-2">
                         <img className="itemPng cursor" src={prodData.prodImg} alt="" /></div>
@@ -49,7 +103,7 @@ export default function SingleCartComp(props) {
                         </Link>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { incressCartCount } from "../redux/actions/productsActions"
+import { incressCartCount,setSubtotal ,setAllDataToCart} from "../redux/actions/productsActions"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Avatar } from '@mui/material';
 import Swal from 'sweetalert2'
@@ -29,10 +29,12 @@ function SeeProd() {
         window.scrollTo(0, 0)
     }, [setProdData])
 
-    const addtocart = (e) => {
+    const addtocart = async(e) => {
         if (USER) {
             let id = e.target.id;
-            Https.addToCart(id, USER).then((res) => {
+            let res= await Https.seeProduct(id)
+                const allData=res.data
+            Https.addToCart(allData, USER).then(async(res) => {
                 if (res.status == 200) {
                     // Swal.fire(
                     //     'Success',
@@ -40,6 +42,9 @@ function SeeProd() {
                     //     'success'
                     // )
                     dispatch(incressCartCount(1))
+                    dispatch(setAllDataToCart(res.data))
+                    
+                    // dispatch(setSubtotal(allData.lowPrice));
                     setProdData = res.data;
                 }
                 else if (res.status == 201) {
@@ -61,6 +66,7 @@ function SeeProd() {
     }
 
     const USER = useSelector((state) => state.UserName.username)
+   
     // require('@/img' + "seeprod1.png" + '')
 
 

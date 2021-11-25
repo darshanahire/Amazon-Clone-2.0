@@ -1,7 +1,10 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function PayGateway() {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     return (
         <div style={{ "margin-top": "80px" }}>
             <div className="container">

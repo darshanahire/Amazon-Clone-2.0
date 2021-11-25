@@ -114,7 +114,7 @@ function TrackOrder() {
                         </div>
                     </div>
                     <div className="bdr-gray mb-5 py-3 font-14">
-                    <div className="d-flex justify-content-around" >
+                    <div className="d-flex justify-content-md-around justify-content-between" >
 
                         <div>
                             <h5 className="color-cyne ">Billing Address</h5>

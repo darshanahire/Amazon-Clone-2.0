@@ -24,16 +24,20 @@ function ItemComp() {
     const prods = useSelector((state) => state.allProducts.products)
 
     const SingleItem = prods.map((val, i, arr) => {
-        // console.log("val",val)
+        
         return <SingleItemComp key={i} val={val} ind={i} arr={arr} />
 
     });
     return (
         <>
+        {SingleItem.length == 0 && !isloading ? <div className="text-center w-100 mb-5">
+            <h3 className="pb-0">Opps! Items Not Found</h3>
+            <img src="img/notfound2.png" width="400" />
+            </div> :
             <div className="row d-flex justify-content-center mx-2 my-3">
                 {
                     !isloading ?
-                        <>{SingleItem}</>
+                        <>{SingleItem }</>
                         :
                         <>
                             <Loading />
@@ -55,6 +59,7 @@ function ItemComp() {
                         </>
                 }
             </div>
+}
         </>
     )
 }

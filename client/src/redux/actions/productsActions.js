@@ -62,6 +62,13 @@ export const decressCartCount = (counts) => {
     };
 };
 
+export const setSubtotal = (counts) => {
+    return {
+        type: ActionsTypes.SUBTOTAL,
+        payload: counts,
+    };
+};
+
 export const setMode = (counts) => {
     return {
         type: ActionsTypes.CHANGE_MODE,
