@@ -49,7 +49,7 @@ export default function CartCom() {
                                 </div>
                                 {MYCART.length === 0 ? <><hr className="m-1"></hr><div className="text-center w-100 my-3">
                                     <h3 className="pb-0">Opps! Your Cart is Empty</h3>
-                                    <img className="pngImg" src="img/emptycart.png" width="500" />
+                                    <img className="pngImg" src="img/notfound2.png" width="500" />
                                 </div> </> :
 
                                     MYCART.map((val, i, arr) => {
