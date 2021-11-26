@@ -10,6 +10,7 @@ import Login from './components/helper/Login'
 import Signup from './components/helper/Signup'
 import AdminComp from './components/helper/AdminComp'
 import Notifications from './components/helper/Notifications'
+import Loader from './components/helper/Loader'
 import SeeProd from './components/SeeProd'
 import CartCom from './components/CartCom'
 import Orders from './components/Orders'
@@ -37,6 +38,7 @@ function App() {
       <Route exact path="/PlacedOrder" component={PlacedOrder}/>
       <Route exact path="/Chat" component={Chat}/>
       <Route exact path="/Notifications" component={Notifications}/>
+      <Route exact path="/Loader" component={Loader}/>
     </switch>
 
 

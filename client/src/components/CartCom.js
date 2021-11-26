@@ -31,10 +31,10 @@ export default function CartCom() {
 
     return (
         <>
-            <div style={{ "margin-top": "60px", "backgroundColor": "rgb(243, 242, 242)", "height": "100vh" }}>
+            <div style={{ "margin-top": "60px", "backgroundColor": "rgb(243, 242, 242)", "min-height": "100vh" ,height:"100%" }}>
                 <div className="container-fluid">
                     <div className="row py-4">
-                        <div className="col-12 col-md-9 order-2">
+                        <div className="col-12 col-md-7 col-lg-9 order-2">
                             <div className="card">
 
                                 <div className="mx-3 mt-3">
@@ -61,7 +61,7 @@ export default function CartCom() {
                                 }
                             </div>
                         </div>
-                        <div className="col-12 col-md-3 fixed-right order-1 mb-2">
+                        <div className="col-12 col-md-5 col-lg-3 fixed-right order-1 mb-2">
                             <div className="card mb-2">
                                 <img src="img/purprot.png" alt="" className="w-100" />
                             </div>

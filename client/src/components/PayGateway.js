@@ -1,11 +1,20 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Loader from './helper/Loader';
+
 
 function PayGateway() {
+
+    let [loader, setLoder] = useState(true);
+    function LoaderTime(){ setTimeout(() => {setLoder(false)}, 3000)}
+    useEffect(() => {LoaderTime()}, [])
+
+    
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
     return (
+        <>{loader ? <Loader />: <>
         <div style={{ "margin-top": "80px" }}>
             <div className="container">
                 <div className="row justify-content-between">
@@ -45,7 +54,7 @@ function PayGateway() {
                                 </p>
                                 <p>
                                     <input type="radio" name="payselect" id="" className="mx-2" />Net Banking
-                                    <select className="form-select w-md-20 mx-3 my-2 py-1 mx-4" aria-label="Default select example">
+                                    <select className="form-select w-75 mx-3 my-2 py-1 mx-4 shadow-none border-1" aria-label="Default select example">
                                         <option selected>Choose an Option</option>
                                         <option value="1">State Bank Of India</option>
                                         <option value="2">HDFC Bank</option>
@@ -101,7 +110,7 @@ function PayGateway() {
                     <hr />
                 </div>
             </div>
-        </div>
+        </div> </>}</>
     )
 }
 

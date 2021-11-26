@@ -9,13 +9,8 @@ import Https from '../servises/Https'
 import Swal from 'sweetalert2'
 
 
-import { red } from '@mui/material/colors';
-
-const colored = red[500];
-
-
 export default function SingleItemComp(props) {
-    const [likedItems, SetLikedItems] = useState([])
+    const USER = useSelector((state) => state.UserName.username)
     const [likeed, disLike] = useState(false);
 
     // console.log("props.val",props.val);
@@ -62,7 +57,6 @@ export default function SingleItemComp(props) {
             Https.getLikedArr(USER).then((res) => {
                 if (res.status == 200) {
                     let arr = res.data
-                    SetLikedItems(arr);
                     let TOF = arr.find((elem) => {
                         return props.arr[props.ind]._id === elem;
                     })
@@ -70,8 +64,8 @@ export default function SingleItemComp(props) {
                 }
             })
         }
-    }, [disLike])
-    const USER = useSelector((state) => state.UserName.username)
+    }, [disLike, USER])
+ 
     return (
         <>
             <div className="individualItem col-12 w-ml-90  my-2 col-md-2" style={{ width: "300px" }}>

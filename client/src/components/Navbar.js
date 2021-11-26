@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useHistory } from 'react-router';
-import { setlikeProduct, setCart, setProducts, setMode,UserName,setAllDataToCart } from "../redux/actions/productsActions"
+import { setlikeProduct, setCart, setProducts, setMode, UserName, setAllDataToCart } from "../redux/actions/productsActions"
 import Https from '../servises/Https';
 
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp';
@@ -10,6 +10,7 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import LocalMallOutlinedIcon from '@material-ui/icons/LocalMallOutlined';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import IconButton from '@material-ui/core/IconButton';
@@ -22,7 +23,7 @@ import Badge from '@material-ui/core/Badge';
 import Grow from '@material-ui/core/Grow';
 
 function Navbar() {
-    
+
     const StoreLikeCount = useSelector((state) => state.likeordislike.count);
     const StoreCartCount = useSelector((state) => state.cartHanddleing.count);
     const isDarkMode = useSelector((state) => state.handdleMode.color);
@@ -30,7 +31,7 @@ function Navbar() {
 
 
     const dispatch = useDispatch()
-    let history=useHistory()
+    let history = useHistory()
 
     let user = localStorage.getItem("user");
 
@@ -64,9 +65,11 @@ function Navbar() {
         }
     }
 
-    function logout(){
+    function logout() {
         Https.logout();
         history.push("/login")
+        dispatch(setlikeProduct(0));
+        dispatch(setAllDataToCart([]));
     }
 
     function filteredProducts(input) {
@@ -114,7 +117,7 @@ function Navbar() {
     }, [setDarkMode, open])
     dispatch(setMode(DarkMode));
 
-    
+
     const muibtn = [isDarkMode ? "mui-white" : "mui-dark"];
 
 
@@ -140,7 +143,7 @@ function Navbar() {
                         <li className="nav-item" >
                             <a className={"nav-link " + muibtn[0]} aria-current="page" href="#" >
                                 <IconButton aria-label=" new notifications" color="inherit" >
-                                    <Badge badgeContent={StoreLikeCount} color="secondary">
+                                    <Badge badgeContent={StoreLikeCount} color="error">
                                         <FavoriteBorderOutlinedIcon />
                                     </Badge>
                                 </IconButton>
@@ -149,16 +152,16 @@ function Navbar() {
                         <li className="nav-item">
                             <Link className={"nav-link linkDecoretionNone cursor " + muibtn[0]} to={'/cartCom'}>
                                 <IconButton aria-label=" new notifications" color="inherit">
-                                    <Badge badgeContent={StoreCartCount} color="secondary">
+                                    <Badge badgeContent={StoreCartCount} color="error">
                                         <ShoppingCartOutlinedIcon />
                                     </Badge>
                                 </IconButton>
                             </Link>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item d-none d-sm-block">
                             <Link className={"nav-link linkDecoretionNone cursor " + muibtn[0]} to={'/Notifications'}>
                                 <IconButton aria-label=" new notifications" color="inherit">
-                                    <Badge badgeContent={0} color="secondary">
+                                    <Badge badgeContent={0} color="error">
                                         <NotificationsNoneSharpIcon />
                                     </Badge>
                                 </IconButton>
@@ -184,9 +187,20 @@ function Navbar() {
                                                             {(USER === null) ?
                                                                 <Link className="linkDecoretionNone" to={"/Login"}><MenuItem onClick={handleClose}>Login</MenuItem> </Link> :
                                                                 <>
-                                                                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                                                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                                                                    <MenuItem onClick={handleClose, logout }>Logout</MenuItem>
+                                                                    <MenuItem onClick={handleClose}><AccountCircleIcon /> <span className="mx-2"> Profile </span></MenuItem>
+                                                                    <MenuItem onClick={handleClose} >
+                                                                        <Link className="cursor linkDecoretionNone" to={'/cartCom'}> <ShoppingCartOutlinedIcon /> My Cart </Link>
+                                                                    </MenuItem>
+                                                                    {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
+                                                                    <MenuItem onClick={handleClose} >
+                                                                        <Link className="cursor linkDecoretionNone" to={'/Notifications'}><NotificationsNoneSharpIcon /> Notifications </Link>
+                                                                    </MenuItem>
+                                                                    <MenuItem onClick={handleClose, logout}><ExitToAppIcon/> <span className="mx-2"> Logout </span></MenuItem>
+                                                                    {/* <li className="nav-item">
+                                                                        <Link className={"nav-link linkDecoretionNone cursor " + muibtn[0]} to={'/Notifications'}>
+                                                                                    Notifications
+                                                                        </Link>
+                                                                    </li> */}
                                                                 </>
                                                             }
                                                         </MenuList>
@@ -205,7 +219,7 @@ function Navbar() {
                         }} >
                             <p className={"nav-link " + muibtn[0]} aria-current="page"  >
                                 <IconButton aria-label=" new notifications" color="inherit">
-                                    <Badge badgeContent={0} color="secondary">
+                                    <Badge badgeContent={0} color="error">
                                         <Brightness4Icon />
                                     </Badge>
                                 </IconButton>

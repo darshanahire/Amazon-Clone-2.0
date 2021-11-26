@@ -126,7 +126,7 @@ color:black !important
   /* margin-left: 10px; */
 }
 .main_logo{
-  margin-top:12px ;
+  margin-top:15px ;
   align-items: center;
   margin-left: 15px;
 }
@@ -280,7 +280,7 @@ color:black !important
 }
 .banner{
   border-radius: 15px;
-  width: 81rem;
+  width: 98%;
   height: 14rem;
   margin: auto;
 }
@@ -371,7 +371,6 @@ margin: 2px;
 .seeFullItem{
   display: flex;
   margin: 15% auto;
-  margin-bottom: 15%;
   width: 15rem;
 }
 .allDetails{
@@ -408,9 +407,7 @@ margin: 2px;
     width: 98%;
     height: 11rem;
   }
-  .search_form{
-    display: none;
-  }
+
   #navbar_ul{
     margin-top: auto!important;
   }
@@ -431,6 +428,9 @@ margin: 2px;
   .prodContainer{
     flex-direction: column !important;
   }
+  .seeFullItem{
+    margin: 10% auto;
+  }
   .allDetails{
     padding: 1rem;
   }
@@ -440,20 +440,25 @@ margin: 2px;
     width: 90%;
   }
 }
+@media screen and (max-width:978px){
+  .search_form{
+    display: none;
+  }
+}
 @media screen and (max-width:768px){
   .fixed-right{
     position: static !important;
   } 
+  
   .pngImg{
     width :350px !important;
   }
- }
+}
 .like-div{
   width: 100%;
 }
 .SeeProdSideBar{
   width: 100% !important;
-  margin-top: 30px;
   background-color: #fff;
   width: 50%;
 }
@@ -463,6 +468,7 @@ margin: 2px;
   flex-direction: row;
   width: 100%;
   height: auto;
+  margin-top: 70px !important;
   background-color: rgb(243, 242, 242);
 }
 .Link{
@@ -691,4 +697,17 @@ margin: 13px auto;
 .fixed-right{
   position: fixed;
   right: 0;
+}
+
+.swal2-confirm{
+  background-color: #28a745 !important;
+  box-shadow: none !important;
+}
+
+.sweet-loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  width: 100vw;
 }

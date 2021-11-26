@@ -37,8 +37,8 @@ export default function SingleCartComp(props) {
          <hr className="mt-1" />
                                 <div className="card-body">
                                     <div className="row">
-                                        <div className="col-12 col-md-10 d-block d-md-flex justify-content-between">
-                                            <div className="col-12 col-md-2 d-flex align-items-center justify-content-center">
+                                        <div className="col-12 col-lg-10 d-block d-lg-flex justify-content-between">
+                                            <div className="col-12 col-lg-2 d-flex align-items-center justify-content-center my-md-3">
                                                 <div class="form-check mx-3">
                                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"  />
                                                 </div>
@@ -76,7 +76,7 @@ export default function SingleCartComp(props) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-md-2 text-center d-flex align-items-center my-3">
+                                        <div className="col-12 col-lg-2 text-center d-flex align-items-center my-3">
                                             <p className="h6 m-0 col-6 col-md-12">
                                                 <p className="my-auto"> 
                                                 <span className="d-inline d-md-none">Price : </span>
