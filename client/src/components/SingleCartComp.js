@@ -8,7 +8,6 @@ import {setCart, decressCartCount,setAllDataToCart } from "../redux/actions/prod
 export default function SingleCartComp(props) {
     let [prodData, setProdData] = useState({});
     const USER = useSelector((state) => state.UserName.username)
-    console.log("Props",props);
     
     const dispatch=useDispatch();
     // useEffect(() => {

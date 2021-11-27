@@ -59,5 +59,13 @@ export default {
         localStorage.removeItem('user')
     },
 
+    async userverification(user) {        
+       await axios.post(this.baseURL + "verification",{user}).then(async(res)=>{
+           return res;
+       }).catch((e)=>{
+           this.logout();
+       })
+    },
+
 }
 

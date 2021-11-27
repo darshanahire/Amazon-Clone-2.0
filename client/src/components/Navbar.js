@@ -33,7 +33,6 @@ function Navbar() {
     const dispatch = useDispatch()
     let history = useHistory()
 
-    let user = localStorage.getItem("user");
 
     const [DarkMode, setDarkMode] = useState();
     const [prodss, setprodss] = useState([]);
@@ -91,8 +90,14 @@ function Navbar() {
     useEffect(() => {
         let mode = JSON.parse(localStorage.getItem("DarkMode"));
         setDarkMode(mode);
-        dispatch(UserName(user));
-
+        let user = localStorage.getItem("user");
+        dispatch(UserName(user))
+        // if (user) {
+        //     Https.userverification(user).then(async (res) => {
+        //         res == undefined ? dispatch(UserName(null)) :
+        //             dispatch(UserName(user))
+        //     })
+        // }
         if (user !== null) {
             Https.getUser(user).then((res) => {
                 let initialLikesCount = res.data.liked.length;
@@ -185,17 +190,17 @@ function Navbar() {
                                                     <ClickAwayListener onClickAway={handleClose}>
                                                         <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                                             {(USER === null) ?
-                                                                <Link className="linkDecoretionNone" to={"/Login"}><MenuItem onClick={handleClose}>Login</MenuItem> </Link> :
+                                                                <Link className="linkDecoretionNone" to={"/Login"}><MenuItem onClick={handleClose}><ExitToAppIcon/> <span className="mx-2"> Sign In </span></MenuItem> </Link> :
                                                                 <>
-                                                                    <MenuItem onClick={handleClose}><AccountCircleIcon /> <span className="mx-2"> Profile </span></MenuItem>
-                                                                    <MenuItem onClick={handleClose} >
+                                                                    <MenuItem className="my-1" onClick={handleClose}><AccountCircleIcon /> <span className="mx-2"> Profile </span></MenuItem>
+                                                                    <MenuItem className="my-1" onClick={handleClose} >
                                                                         <Link className="cursor linkDecoretionNone" to={'/cartCom'}> <ShoppingCartOutlinedIcon /> My Cart </Link>
                                                                     </MenuItem>
                                                                     {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
-                                                                    <MenuItem onClick={handleClose} >
+                                                                    <MenuItem className="my-1" onClick={handleClose} >
                                                                         <Link className="cursor linkDecoretionNone" to={'/Notifications'}><NotificationsNoneSharpIcon /> Notifications </Link>
                                                                     </MenuItem>
-                                                                    <MenuItem onClick={handleClose, logout}><ExitToAppIcon/> <span className="mx-2"> Logout </span></MenuItem>
+                                                                    <MenuItem className="my-1" onClick={handleClose, logout}><ExitToAppIcon/> <span className="mx-2"> Logout </span></MenuItem>
                                                                     {/* <li className="nav-item">
                                                                         <Link className={"nav-link linkDecoretionNone cursor " + muibtn[0]} to={'/Notifications'}>
                                                                                     Notifications

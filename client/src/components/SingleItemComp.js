@@ -62,6 +62,14 @@ export default function SingleItemComp(props) {
                     })
                     disLike(TOF === undefined ? false : true);
                 }
+                else{
+                    console.log(res.status);
+                    
+                }
+            }).catch((e)=>{
+                localStorage.removeItem('user');
+                console.log('localStorage cleared , use not found in db');
+                
             })
         }
     }, [disLike, USER])
