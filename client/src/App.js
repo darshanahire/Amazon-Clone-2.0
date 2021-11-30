@@ -40,7 +40,7 @@ function App() {
       <Route exact path="/Chat" component={Chat}/>
       <Route exact path="/Notifications" component={Notifications}/>
       <Route exact path="/Loader" component={Loader}/>
-      {/* <Route component={NotFound}/> */}
+      <Route exact path="/NotFound"component={NotFound}/>
     </switch>
 
 
