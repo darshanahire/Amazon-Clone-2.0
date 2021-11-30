@@ -6,7 +6,7 @@ import Loader from './helper/Loader';
 function PayGateway() {
 
     let [loader, setLoder] = useState(true);
-    function LoaderTime(){ setTimeout(() => {setLoder(false)}, 3000)}
+    function LoaderTime(){ setTimeout(() => {setLoder(false)},4000)}
     useEffect(() => {LoaderTime()}, [])
 
     
@@ -14,7 +14,7 @@ function PayGateway() {
         window.scrollTo(0, 0)
     }, [])
     return (
-        <>{loader ? <Loader />: <>
+        <>{loader ? <Loader loaderNum={1} bg={'#eeeeee'}/>: <>
         <div style={{ "margin-top": "80px" }}>
             <div className="container">
                 <div className="row justify-content-between">

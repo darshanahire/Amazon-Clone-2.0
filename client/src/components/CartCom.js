@@ -4,12 +4,16 @@ import { setCart, setSubtotal } from "../redux/actions/productsActions"
 import SingleCartComp from './SingleCartComp'
 import Https from '../servises/Https'
 import Accordion from 'react-bootstrap/Accordion';
+import Loader from './helper/Loader';
 
 export default function CartCom() {
     const MYCART = useSelector((state) => state.cartHanddleing.productsAllData)
     let [cartItem, setCartItem] = useState([])
-
     const dispatch = useDispatch()
+
+    let [loader, setLoder] = useState(true);
+    function LoaderTime(){ setTimeout(() => {setLoder(false)},3000)}
+    useEffect(() => {LoaderTime()}, [])
 
     const subtotal = () => {
         let total = 0
@@ -31,6 +35,7 @@ export default function CartCom() {
 
     return (
         <>
+             <>{loader ? <Loader loaderNum={1} bg={'#eeeeee'}/>:
             <div style={{ "margin-top": "60px", "backgroundColor": "rgb(243, 242, 242)", "min-height": "100vh" ,height:"100%" }}>
                 <div className="container-fluid">
                     <div className="row py-4">
@@ -108,6 +113,7 @@ export default function CartCom() {
                     </div>
                 </div>
             </div>
+}</>
         </>
     )
 }

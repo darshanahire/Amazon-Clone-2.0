@@ -1,8 +1,13 @@
-import React from 'react'
+import React ,{useState,useEffect} from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Loader from './helper/Loader';
 
 function Orders() {
+    let [loader, setLoder] = useState(true);
+    function LoaderTime(){ setTimeout(() => {setLoder(false)},3000)}
+    useEffect(() => {LoaderTime()}, [])
     return (
+        <>{loader ? <Loader loaderNum={1} bg={'#eeeeee'}/>:
         <div style={{ "margin-top": "60px" }}>
             <div className="container">
                 <h3 className="py-3">Your Orders</h3>
@@ -88,6 +93,7 @@ function Orders() {
               
             </div>
         </div>
+}</>
     )
 }
 

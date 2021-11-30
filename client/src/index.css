@@ -454,6 +454,13 @@ margin: 2px;
     width :350px !important;
     overflow: hidden;
   }
+  .truckLoader{
+    width:100%;
+    height: 200px !important;
+  }
+  .MainLoader{
+    width:100% !important;
+  }
 }
 .like-div{
   width: 100%;
@@ -703,3 +710,11 @@ body {
   height: 90vh;
   width: 100vw;
 }
+
+.truckLoader{
+  width: 80%;
+  height:250px;}
+
+  .MainLoader{
+    width:600px;
+  }

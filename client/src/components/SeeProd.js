@@ -76,7 +76,7 @@ function SeeProd() {
     return (
         <>
 
-            {loader ? <Loader /> :
+            {loader ? <Loader loaderNum={1} bg={'#eeeeee'}/> :
                 <>
                     <div className="prodContainer" style={{ "backgroundColor": "white" }} >
                         <div className="SeeProdSideBar  " style={{ "position": "initial" }}>

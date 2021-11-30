@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export default {
-    baseURL: "/",
+    baseURL: "http://localhost:5000/",
 
     async getAllProducts() {
         const res = await axios.post(this.baseURL + "getallprods");

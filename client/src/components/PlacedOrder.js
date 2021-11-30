@@ -4,13 +4,13 @@ import Loader from './helper/Loader';
 function PlacedOrder() {
 
     let [loader, setLoder] = useState(true);
-    function LoaderTime(){ setTimeout(() => {setLoder(false)}, 3000)}
+    function LoaderTime(){ setTimeout(() => {setLoder(false)}, 7000)}
     useEffect(() => {LoaderTime()}, [])
     
     return (
         <>
-            {loader ? <Loader />: <>
-                <div style={{ "margin-top": "90px" }}>
+            {loader ? <Loader loaderNum={2} bg={'rgb(242 242 242)'}/>: <>
+                <div style={{ "margin-top": "150px" }}>
                     <div className="container">
                         <div className="card green-card p-5">
                             <div className="d-flex justify-content-center">

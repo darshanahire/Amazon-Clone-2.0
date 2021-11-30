@@ -10,6 +10,7 @@ import Login from './components/helper/Login'
 import Signup from './components/helper/Signup'
 import AdminComp from './components/helper/AdminComp'
 import Notifications from './components/helper/Notifications'
+import NotFound from './components/helper/NotFound'
 import Loader from './components/helper/Loader'
 import SeeProd from './components/SeeProd'
 import CartCom from './components/CartCom'
@@ -27,7 +28,7 @@ function App() {
 
       <Route path="/" component={Navbar} />
       <Route exact path="/" component={Home} />
-      <Route exact path="/Login" component={Login}/>
+      <Route  path="/Login" component={Login}/>
       <Route exact path="/SignUp" component={Signup}/>
       <Route exact path="/Seeprod/:id" component={SeeProd}/>
       <Route exact path="/Admin" component={AdminComp}/>
@@ -39,6 +40,7 @@ function App() {
       <Route exact path="/Chat" component={Chat}/>
       <Route exact path="/Notifications" component={Notifications}/>
       <Route exact path="/Loader" component={Loader}/>
+      {/* <Route component={NotFound}/> */}
     </switch>
 
 

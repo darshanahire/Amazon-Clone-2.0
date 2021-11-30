@@ -1,7 +1,12 @@
-import React from 'react'
+import React ,{useState,useEffect} from 'react'
+import Loader from './helper/Loader';
 
 function TrackOrder() {
+    let [loader, setLoder] = useState(true);
+    function LoaderTime(){ setTimeout(() => {setLoder(false)},5000)}
+    useEffect(() => {LoaderTime()}, [])
     return (
+        <>{loader ? <Loader loaderNum={1} bg={'#eeeeee'}/>:
         <div style={{ "margin-top": "60px" }}>
             <div className="container">
                 <h3 className="py-3">Order Tracking</h3>
@@ -142,6 +147,7 @@ function TrackOrder() {
                 </div>
             </div>
         </div>
+        } </>
     )
 }
 
