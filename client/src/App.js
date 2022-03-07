@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router,Route } from 'react-router-dom'
+import { BrowserRouter as Router,Route ,Switch} from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 // import LeftSideBar from './components/LeftSideBar'
@@ -24,11 +24,10 @@ function App() {
   return (
     <Router>
 
-    <switch>
-
       <Route path="/" component={Navbar} />
+    <Switch>
       <Route exact path="/" component={Home} />
-      <Route  path="/Login" component={Login}/>
+      <Route exact path="/Login"  component={Login}/>
       <Route exact path="/SignUp" component={Signup}/>
       <Route exact path="/Seeprod/:id" component={SeeProd}/>
       <Route exact path="/Admin" component={AdminComp}/>
@@ -40,8 +39,8 @@ function App() {
       <Route exact path="/Chat" component={Chat}/>
       <Route exact path="/Notifications" component={Notifications}/>
       <Route exact path="/Loader" component={Loader}/>
-      <Route exact path="/NotFound"component={NotFound}/>
-    </switch>
+      <Route path="*" component={NotFound}/>
+    </Switch>
 
 
     </Router>

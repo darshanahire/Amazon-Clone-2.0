@@ -13,7 +13,7 @@ function TrackOrder() {
                 <hr />
                 <div className="row">
                     <div className="col-md-6 col-12">
-                        <h4 className="py-2 color-brown">In Transit : On shedule</h4>
+                        <h4 className="py-2 color-brown text-sm-center text-md-start">In Transit : On shedule</h4>
                         <h5>Expected delivery: <span className="text-success">Monday Nov 20, 2021, by 10 Am</span></h5>
                     </div>
                     <div className="col-md-6 col-12 text-end">
@@ -52,7 +52,7 @@ function TrackOrder() {
                         </div>
                         <div className="card-body">
                             <table className="font-13 row justify-content-around m-0" width="100%">
-                                <td className="trackTable mx-auto mb-2 col-12 col-md-4" width="30%">
+                                <td className="trackTable mx-auto mb-0 col-12 col-md-4" width="30%">
                                     <td>
                                         <tr>Document No-</tr>
                                         <tr>O800000037</tr>
@@ -82,6 +82,7 @@ function TrackOrder() {
                                         <tr>location Code-</tr>
                                         <tr> 0010</tr>
                                     </td>
+                                <hr className='d-md-none'/>
                                 </td>
                                 <td className="trackTable mx-auto mb-2 col-12 col-md-4" width="30%">
                                     <td>

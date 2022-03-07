@@ -318,7 +318,7 @@ color:black !important
 .itemPng{
   /* width: 200px; */
   margin-top: 10px;
-  height: 120px;
+  height: 140px;
   
 }
 .individualItem{
@@ -432,7 +432,11 @@ margin: 2px;
     margin: 10% auto;
   }
   .allDetails{
+    text-align: center;
     padding: 1rem;
+  }
+  .shopCartProdImg{
+    width: 180px!important;
   }
 }
 @media screen and (max-width:400px){

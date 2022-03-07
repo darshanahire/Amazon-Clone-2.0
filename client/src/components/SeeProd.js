@@ -88,16 +88,16 @@ function SeeProd() {
                             <img className="seeFullItem" src={prodData.prodImg} alt="" />
                             <div className="row mx-4 my-3">
                                 <div className="col text-center">
-                                    <img src={window.location.origin + '/img/seeprod1.png'} alt="" width="60px" /><p className="font-12 bold-6"> Pay on delivary</p>
+                                    <img src={window.location.origin + '/img/seeprod1.png'} alt="" width="50px" /><p className="font-12 bold-6"> Pay on delivary</p>
                                 </div>
                                 <div className="col text-center">
-                                    <img src={window.location.origin + '/img/seeprod2.png'} alt="" width="60px" /><p className="font-12 bold-6"> 7 Days Replacement</p>
+                                    <img src={window.location.origin + '/img/seeprod2.png'} alt="" width="50px" /><p className="font-12 bold-6"> 7 Days Replacement</p>
                                 </div>
                                 <div className="col text-center">
-                                    <img src={window.location.origin + '/img/seeprod3.png'} alt="" width="60px" /><p className="font-12 bold-6"> Amazon Delivered</p>
+                                    <img src={window.location.origin + '/img/seeprod3.png'} alt="" width="50px" /><p className="font-12 bold-6"> Amazon Delivered</p>
                                 </div>
                                 <div className="col text-center">
-                                    <img src={window.location.origin + '/img/seeprod4.png'} alt="" width="60px" /><p className="font-12 bold-6"> 1 Year Warranty</p>
+                                    <img src={window.location.origin + '/img/seeprod4.png'} alt="" width="50px" /><p className="font-12 bold-6"> 1 Year Warranty</p>
                                 </div>
                             </div></div>
 
@@ -129,13 +129,12 @@ function SeeProd() {
                     <div className="my-2 px-5 mb-4">
                         <h4>Have a question?</h4>
                         <p className="font-14">Find answers in product info, Q&As, reviews</p>
-                        <div className="row">
-
-                            <input type="text" className="loginInput col-12 col-md-5 " placeholder="Type your question or keyword" />
-                        </div>
+                        {/* <div className="row"> */}
+                            <input type="text" className="loginInput col-12 col-md-5 " placeholder="Type your question or keyword" />         
+                        {/* </div> */}
                     </div>
-                    <hr />
-                    <div className="row px-5 mt-4 justify-content-around  mx-0">
+                    <hr className='mx-4'/>
+                    <div className="row px-3 mt-4 justify-content-around  mx-0">
                         <div className="col-md-5">
                             <h4 className="mb-4">Customer reviews</h4>
                             <h6>⭐⭐⭐⭐ 4 Out of 5</h6>
@@ -194,7 +193,7 @@ function SeeProd() {
                             <div className="mb-5">
                                 <button className="btn border-1 p-1 btn-white px-3">Submit</button>
                             </div>
-                            <hr />
+                            <hr className='d-md-none'/>
                         </div>
                         <div className="col-md-5 text-center">
                             <h4>Top reviews from India</h4>
