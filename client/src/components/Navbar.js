@@ -200,7 +200,7 @@ function Navbar() {
                                                                     <MenuItem className="my-1" onClick={handleClose} >
                                                                         <Link className="cursor linkDecoretionNone" to={'/Notifications'}><NotificationsNoneSharpIcon /> Notifications </Link>
                                                                     </MenuItem>
-                                                                    <MenuItem className="my-1" onClick={handleClose, logout}><ExitToAppIcon/> <span className="mx-2"> Logout </span></MenuItem>
+                                                                    <MenuItem className="my-1" onClick={handleClose , logout}><ExitToAppIcon/> <span className="mx-2"> Logout </span></MenuItem>
                                                                     {/* <li className="nav-item">
                                                                         <Link className={"nav-link linkDecoretionNone cursor " + muibtn[0]} to={'/Notifications'}>
                                                                                     Notifications
@@ -219,7 +219,7 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className="nav-item" onClick={() => {
-                            setDarkMode(!DarkMode);
+                            setDarkMode(() => !DarkMode);
                             localStorage.setItem("DarkMode", !DarkMode);
                         }} >
                             <p className={"nav-link " + muibtn[0]} aria-current="page"  >

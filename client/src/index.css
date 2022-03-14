@@ -18,7 +18,6 @@ code {
 .font-12{
   font-size: 12px;
 }
-
 .font-13{
   font-size: 13px;
 }
@@ -30,10 +29,6 @@ code {
 }
 .bold-7{
   font-weight: 700;
-}
-.color-cyne{
-  color: #007185;
-  /* color: #007eb9; */
 }
 .bdr-b-org{
   border-bottom: 2px solid;
@@ -59,16 +54,22 @@ width: 20% !important;
 .w-40{
 width: 40% !important;
 }
+
+
 .color-brown{
   color: #c45500!important;  
 }
-
+.color-cyne{
+  color: #007185;
+}
 .color-gray{
   color: rgb(190, 190, 190);
 }
 .color-darkgray{
   color: #888!important
 }
+
+
 
 .rounded-25{
   border-radius: 25px;
@@ -98,7 +99,7 @@ width: 40% !important;
 
 
 .muibtn:first-child{
-color: red !important;
+  color: red !important;
 }
 
 
@@ -122,8 +123,6 @@ color:black !important
 
 .main_logo img{
   width:120px;
-  /* height: 40px; */
-  /* margin-left: 10px; */
 }
 .main_logo{
   margin-top:15px ;
@@ -132,15 +131,10 @@ color:black !important
 }
 .navbar2{
   height: 60px;
-  /* border-bottom: 1px solid rgba(255,255,255,0.72); */
   display: flex;
   flex-direction: row;
   box-shadow: 0px 0px 13px -7px;
-  /* backdrop-filter: saturate(180%) blur(20px);
-  background-color: rgba(255,255,255,0.72); */
   backdrop-filter: saturate(250%) blur(20px) !important;
-    /* background-color: rgba(255,255,255,0.72) ; */
-  /* position:fixed; */
 }
 .inputSearch,.loginInput{   
   background-color: white; 
@@ -156,7 +150,6 @@ color:black !important
 }
 .searchBtn{
   margin-left: 2px;
-  /* border-left: 0 !important; */
   border-bottom-left-radius: 0 !important;
   border-top-left-radius: 0 !important;
 }
@@ -208,7 +201,9 @@ color:black !important
 }
 
 .btnNocolor{
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid;
   margin-top: 5px;
   height: 35px;
@@ -345,7 +340,7 @@ color:black !important
     width: 23rem;
     margin: 4rem auto;
   }
-  .loginForm{
+.loginForm{
     display: flex;
     border: 1px solid rgb(197, 197, 197);
     flex-direction: column;
@@ -424,6 +419,11 @@ margin: 2px;
     justify-content: right !important;
     margin-right: 1rem !important;
     width: 100%;
+  }
+  .centerContainer{
+    display: flex;
+    justify-content: center;
+    height: 70vh;
   }
   .prodContainer{
     flex-direction: column !important;
@@ -722,3 +722,4 @@ body {
   .MainLoader{
     width:600px;
   }
+

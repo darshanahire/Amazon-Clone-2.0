@@ -50,7 +50,7 @@ const Signup = () => {
                     Message and Data rates may apply.</p>
                     </div>
             <div className="newToAmazon">
-                <hr /><p style={{ "fontSize": "12px", "margin": 0 }}>Already have an account?</p><hr />
+                <hr /><p style={{ "fontSize": "12px", "margin": "0 2px" }}> Already have an account ? </p><hr />
                 </div>
             <Link className="btnNocolor linkDecoretionNone" to={"/Login"} >Sign In</Link>
         </div>

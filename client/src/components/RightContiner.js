@@ -12,9 +12,9 @@ function RightContiner() {
     <div className="carousel-parent">
       <Carousel indicators={false}>
         {
-          Imgarr.map((Element) => {
+          Imgarr.map((Element,i) => {
             return (
-              <Carousel.Item interval={4000}>
+              <Carousel.Item interval={4000} key={i}>
                 <img
                   className="d-block banner"
                   src={Element}

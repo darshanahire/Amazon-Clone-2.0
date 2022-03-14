@@ -15,7 +15,6 @@ import Loader from './components/helper/Loader'
 import SeeProd from './components/SeeProd'
 import CartCom from './components/CartCom'
 import Orders from './components/Orders'
-import Chat from './components/Chat'
 import TrackOrder from './components/TrackOrder'
 import PayGateway from './components/PayGateway'
 import PlacedOrder from './components/PlacedOrder'
@@ -36,7 +35,6 @@ function App() {
       <Route exact path="/TrackOrder" component={TrackOrder}/>
       <Route exact path="/Paygateway" component={PayGateway}/>
       <Route exact path="/PlacedOrder" component={PlacedOrder}/>
-      <Route exact path="/Chat" component={Chat}/>
       <Route exact path="/Notifications" component={Notifications}/>
       <Route exact path="/Loader" component={Loader}/>
       <Route path="*" component={NotFound}/>

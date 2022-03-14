@@ -12,8 +12,17 @@ router.post("/getallprods", async (req, res) => {
 })
 router.post("/seeprod", async (req, res) => {
     const ProdId = req.body.id;
-    let data = await Product.findOne({ _id: ProdId });
-    res.status(200).json(data);
+    Product.findOne({ _id: ProdId }).then((data)=>{
+        if (data) {
+            res.status(200).json(data);
+        }
+        else {
+            console.log('Product not found');
+            res.status(404);
+        }
+    }).catch((e)=>{
+        res.status(500).json(e);
+    })
 
 })
 router.post("/get-cart-items", async (req, res) => {

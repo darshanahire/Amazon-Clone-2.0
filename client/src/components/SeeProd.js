@@ -28,6 +28,8 @@ function SeeProd() {
         Https.seeProduct(id).then((res) => {
             setProdData(res.data)
             setLoder(false)
+        }).catch((e)=>{
+            history.push("/notFound")
         })
         window.scrollTo(0, 0)
     }, [setProdData])

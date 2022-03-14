@@ -62,7 +62,7 @@ const Login = () => {
                     By continuing, you agree to Amazon's Conditions of Use Privacy Notice</p>
             </div>
             <div className="newToAmazon">
-                <hr /><p style={{ "fontSize": "12px", "margin": 0 }}>New to Amazon?</p><hr />
+                <hr /><p style={{ "fontSize": "12px", "margin": "0 5px" }}> New to Amazon ? </p><hr />
             </div>
             <Link rel="stylesheet" className="linkDecoretionNone btnNocolor" to={"/signUp"} > Create your Amazon account</Link>
             
