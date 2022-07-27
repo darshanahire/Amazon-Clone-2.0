@@ -722,4 +722,6 @@ body {
   .MainLoader{
     width:600px;
   }
-
+.ml-4{
+  margin-left: 30px ;
+}

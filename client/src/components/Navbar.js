@@ -138,7 +138,7 @@ function Navbar() {
             <div>
                 <nav className={DarkMode ? 'navbar2 fixed-top darkMode' : 'navbar2 fixed-top lightMode'} >
 
-                    <Link className="main_logo" to={"/"} ><img src={DarkMode ? "img/logoWhite.png" : "img/logoBlack.png"} alt="amazon" /></Link>
+                    <Link className="main_logo" to={"/"} ><img src={DarkMode ? "/img/logoWhite.png" : "/img/logoBlack.png"} alt="amazon" /></Link>
                     <form className="search_form justify-content-center">
                         <input className="inputSearch" type="search" placeholder="Search Items" aria-label="Search"
                             onChange={(e) => { filteredProducts(e.target.value) }} />

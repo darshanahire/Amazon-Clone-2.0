@@ -5,6 +5,7 @@ const showProd = require("./showProd.route")
 const Product = require("../models/product.model");
 const Orders = require("../models/orders.model");
 const User = require("../models/user.model");
+// const CartItems = require("../models/cart.model");
 require("../db/conn")
 
 router.post("/getallprods", async (req, res) => {
@@ -24,17 +25,6 @@ router.post("/seeprod", async (req, res) => {
     }).catch((e)=>{
         res.status(500).json(e);
     })
-
-})
-router.post("/get-cart-items", async (req, res) => {
-    const user = req.body.user;
-    try {
-        let data = await User.findOne({ username: user });
-        res.status(200).json(data.cartdata);
-    }
-    catch (err) {
-        res.status(201).json("Something went Wrong")
-    }
 
 })
 router.post("/getLikedArr", async (req, res) => {
@@ -259,4 +249,118 @@ router.post("/add-new-prod", async (req, res) => {
     }
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.post("/get-cart-items", async (req, res) => {
+    const user = req.body.user;
+    try {
+        let data = await User.findOne({ username: user });
+        res.status(200).json(data.cartdata);
+    }
+    catch (err) {
+        res.status(201).json("Something went Wrong")
+    }
+
+})
+router.post("/addtocart", async (req, res) => {
+    const username = req.body.user;
+    const id = req.body.id._id;
+    const prod = req.body.id;
+    // console.log("d",prod);
+
+    try {
+        await CartItems.create({prod}).then(async (newcart) => {
+            await User.findOneAndUpdate({ username: username }, { $push: { cartdata: newcart._id } }, { new: true }).then((data) => {
+                res.status(200).json(data.cartdata)
+            });
+    })
+    }
+    catch (err) {
+        console.log(err);
+        res.status(201).json("Item Not added to Cart")
+    }
+
+})
+router.post("/remove-from-cart", async (req, res) => {
+    const username = req.body.user;
+    const id = req.body.id;
+    // console.log(id);
+
+    try {
+        await CartItems.findOneAndUpdate({ _id: id }, { $pull: { _id: id } });
+        try { await User.findOneAndUpdate({ username }, { $pull: { cartdata : new mongodb.ObjectId(id) } }, { new: true }).then((data) => {
+                res.status(200).json(data.cartdata);
+                
+            })
+        } catch(err){
+            res.status(201).json("Order Id Not Added in User Schema");
+        }
+
+        // const data = await User.findOneAndUpdate({ username: username }, { $pull: { cartdata: id } }, { new: true })
+        // res.status(200).json(data.cartdata);
+        // // console.log(data.cartdata);
+
+    }
+    catch (err) {
+        console.log(err);
+        res.status(201).json("Plese Login First");
+    }
+})
+
+router.post("/getSingleCartData",async(req,res)=>{
+    const id = res.body.id;
+    // console.log(id);
+    try {
+        await CartItems.findOne({ _id: new mongodb.ObjectId(id) }).then(async (data) => {
+                // console.log(data);
+            res.status(200).json(data.data);
+        })
+    }
+    catch (err) {
+        console.log(err);
+        res.status(201).json("Cart Item Not Found");
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;

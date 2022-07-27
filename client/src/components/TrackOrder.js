@@ -126,18 +126,6 @@ function TrackOrder() {
                                     </td>
                                     <hr />
                                     <td>
-                                        <tr>Shipment Date-</tr>
-                                        <tr>{orderData.shipDate}</tr>
-                                    </td>
-                                    <hr />
-                                    <td>
-                                        <tr>location Code-</tr>
-                                        <tr> 0010</tr>
-                                    </td>
-                                <hr className='d-md-none'/>
-                                </tr>
-                                <tr className="trackTable mx-auto mb-2 col-12 col-md-4" width="30%">
-                                    <td>
                                         <tr>Order Date-</tr>
                                         <tr>{orderData.orderDate}</tr>
                                     </td>
@@ -145,6 +133,18 @@ function TrackOrder() {
                                     <td>
                                         <tr>Order Time-</tr>
                                         <tr>{orderData.orderTime}</tr>
+                                    </td>
+                                <hr className='d-md-none'/>
+                                </tr>
+                                <tr className="trackTable mx-auto mb-2 col-12 col-md-4" width="30%">
+                                <td>
+                                        <tr>Shipment Date-</tr>
+                                        <tr>{orderData.shipDate}</tr>
+                                    </td>
+                                    <hr />
+                                    <td>
+                                        <tr>location Code-</tr>
+                                        <tr> 0010</tr>
                                     </td>
                                     <hr />
                                     <td>
@@ -175,24 +175,24 @@ function TrackOrder() {
                     <div className="d-flex justify-content-md-around justify-content-between" >
 
                         <div>
-                            <h5 className="color-cyne ">Billing Address</h5>
+                        <h5 className="color-cyne ">Fulfillment Address</h5>
                             <p className="m-0">
-                                ABC Road,<br />
-                                Tal-Pune,<br />
-                                Dist-Pune,<br />
-                                Pune-12345 <br />
-                                Maharastra, India.
+                            D-4112, <br />
+                            MIDC Industrial Area,<br />
+                            Sanpada, <br />
+                            Navi Mumbai- 400705,<br />
+                            Maharashtra, India
                             </p>
                         </div>
                         <div>
-                            <h5 className="color-cyne ">Shipping Address</h5>
-                            <p className="m-0 text-end">
-                                ABC Road,<br />
-                                Tal-Pune,<br />
-                                Dist-Pune,<br />
-                                Pune-12345 <br />
-                                Maharastra, India.
-                            </p>
+                        <h5 className="color-cyne ">Billing Address</h5>
+                        <p className="m-0 text-end">
+                            A-2189,<br />
+                            Main Road,<br />
+                            Shivajinagar,<br />
+                            Pune- 411003 <br />
+                            Maharastra, India.
+                        </p>
                         </div>
                         </div>
                         <button className="btnOrange mx-auto">Request to Change Address</button>

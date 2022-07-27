@@ -30,6 +30,11 @@ export default {
         return res;
     },
 
+    async getSingleCartData(id, user) {
+        const res = await axios.post(this.baseURL + "getSingleCartData", { id, user });
+        return res;
+    },
+
     async removeFromCart(id,user) {
         const res = await axios.post(this.baseURL + "remove-from-cart",{id,user});
         return res;

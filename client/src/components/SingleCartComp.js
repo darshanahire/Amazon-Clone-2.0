@@ -79,7 +79,7 @@ export default function SingleCartComp(props) {
                                 ${props.val.lowPrice}
                             </p>
                         </p>
-                        <button className="btnOrange col-6 my-auto d-inline d-md-none">Buy Now</button>
+                        {/* <button className="btnOrange col-6 my-auto d-inline d-md-none">Buy Now</button> */}
                     </div>
                 </div>
             </div>

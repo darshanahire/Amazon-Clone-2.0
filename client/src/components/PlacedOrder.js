@@ -12,8 +12,8 @@ function PlacedOrder() {
     function LoaderTime(){ setTimeout(() => {setLoder(false)}, 3000)}
     useEffect(() => {LoaderTime()}, [])
     useEffect(()=>{
-        Https.getorderdetails(id).then((res) => {
-            setOrderData(res.data)
+        Https.getorderdetails(id).then(async(res) => {
+            await setOrderData(res.data)
             // console.log(res.data.prod[0].prodName);
             
         }).catch((e)=>{
@@ -28,7 +28,7 @@ function PlacedOrder() {
                     <div className="container">
                         <div className="card green-card p-5">
                             <div className="d-flex justify-content-center">
-                                <img src="img/success.gif" alt="" width="50px" />
+                                <img src="/img/success.gif" alt="" width="50px" />
                                 <h3 className="text-success mx-3 my-auto">Thank you, your order has been placed.</h3>
                             </div>
                             <p className="font-14 mx-auto my-4">Thank you for shopping with us. You ordered <span className="color-cyne">{orderData.prod[0].prodName}</span>. An email confirmation has been sent to you.</p>
