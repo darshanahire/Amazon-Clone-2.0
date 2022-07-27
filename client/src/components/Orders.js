@@ -44,7 +44,12 @@ function Orders() {
                         return <>
                             <SingleOrder key={val} val={val} ind={i} arr={arr} />
                         </>
-                    }) : <>Please Reload Page</>}
+                    }) : <><div className="d-flex align-items-center">
+                    <div className="text-center w-100">
+                        <h3 className="pb-0 mb-2">You Dont have any Orders..!!!</h3>
+                        <img className="pngImg" src="img/emptyCart.png" width="500" />
+                    </div>
+                    </div></>}
         </div>
         }</>
     )

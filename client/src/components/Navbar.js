@@ -69,6 +69,8 @@ function Navbar() {
         history.push("/login")
         dispatch(setlikeProduct(0));
         dispatch(setAllDataToCart([]));
+        dispatch(setAllDataToCart([]));
+        dispatch(setOrders(undefined));
     }
 
     function filteredProducts(input) {

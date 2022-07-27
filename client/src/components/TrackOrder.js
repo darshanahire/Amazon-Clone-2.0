@@ -24,6 +24,8 @@ function TrackOrder() {
     useEffect(() => {LoaderTime()}, [])
 
     useEffect(()=>{
+        if(!USER){ history.push('/login')}
+
         Https.getorderdetails(id).then((res) => {
             setOrderData(res.data)
             // console.log(res.data);
@@ -76,6 +78,7 @@ function TrackOrder() {
                             <li className="step0 text-muted text-right" id="step4">Delivered</li>
                         </ul>
                     </div>
+                    <div className='card mb-3'>
                     <div className="row my-5">
                         <div className="col-12 col-md-2 d-flex justify-content-center">
                             <img className="my-3 my-md-0" src={orderData.prod[0].prodImg} alt="" width="150px" />
@@ -95,6 +98,7 @@ function TrackOrder() {
                             </Link>
                             </div>
                         </div>
+                    </div>
                     </div>
                     <div className="card mb-4 p-0">
                         <div className="card-title d-flex border-bottom p-2" style={{ "backgroundColor": "rgb(243, 242, 242)" }}>

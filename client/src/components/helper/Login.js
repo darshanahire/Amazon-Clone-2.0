@@ -1,4 +1,4 @@
-import React ,{useState} from 'react'
+import React ,{useEffect, useState} from 'react'
 import { BrowserRouter as Router,Route, Link, Switch, } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2'
@@ -7,11 +7,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import {UserName,setlikeProduct,setAllDataToCart,setOrders} from "../../redux/actions/productsActions"
 import axios from 'axios'
 const Login = () => {
+    const USER = useSelector((state) => state.UserName.username);
     const dispatch = useDispatch()
     let history=useHistory()
     let initdata={
-        email:"",
-        password:""
+        email:"manager@gmail.com",
+        password:"Manager@123"
     }
     const [userData,setUserData] =useState(initdata)
     function handleChange(e){
@@ -22,7 +23,7 @@ const Login = () => {
         })
     }
     function sendData(){
-        if(!initdata.email && !initdata.password ){
+        if(1){
             Https.login(userData).then((res)=>{
             console.log(res);
             
@@ -35,7 +36,7 @@ const Login = () => {
                 dispatch(setAllDataToCart(res.data.cartdata));
                 dispatch(setOrders(res.data.orders));
             })
-            history.push("/")
+            history.goBack();
         }
             if(res.status==201){
             // alert(res.data)  
@@ -49,6 +50,9 @@ const Login = () => {
               )
         }
     }
+    useEffect(()=>{
+        if(USER) history.push("/")
+    },[])
     return (
         <div className="centerContainer">
             <Link className="navbar-brand my-3 mx-auto  main_logo" to={"/"} ><img src="img/logoBlack.png" alt="amazon" /></Link>

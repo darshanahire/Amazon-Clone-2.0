@@ -5,12 +5,15 @@ import IconButton from '@material-ui/core/IconButton';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { BrowserRouter as Router, Route, Link, Switch, } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+
 import Https from '../servises/Https'
 import Swal from 'sweetalert2'
 
 
 export default function SingleItemComp(props) {
-    const USER = useSelector((state) => state.UserName.username)
+    let history=useHistory()
+    const USER = useSelector((state) => state.UserName.username);
     const [likeed, disLike] = useState(false);
 
     // console.log("props.val",props.val);
@@ -35,23 +38,34 @@ export default function SingleItemComp(props) {
                     disLike(!likeed);
                 }
                 else if (res.status == 201) {
-                    Swal.fire(
-                        'Warning',
-                        'Please Login First',
-                        'warning'
-                    )
+                    Authorization()
                 }
             }
             )
         }
         else {
-            Swal.fire(
-                'Warning',
-                'Please Login First',
-                'warning'
-            )
+            Authorization();
         }
     }
+
+    function Authorization(){
+        if(!USER){
+            Swal.fire({
+                title: 'You are Not Login..!',
+                text: "Please Login to Proceed",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Go to Login Page'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    history.push('/login')
+                }
+              })
+        }
+    }
+
     useEffect(() => {
         if (USER) {
             Https.getLikedArr(USER).then((res) => {
@@ -92,7 +106,7 @@ export default function SingleItemComp(props) {
                         <p className="star_para">{props.val.prodBrand} <br /> ⭐⭐⭐⭐ 4.8 (21032 reviews)</p>
                         <h5>${props.val.lowPrice} <span className="star_para" style={{ "textDecoration": "line-through ", "fontWeight": "lighter" }}>${props.val.highPrice}</span></h5>
                         <Link className="linkDecoretionNone" to={"/seeprod/" + idtopass}>
-                            <button id={props.val._id} className="btnOrange mx-auto my-3 w-75" >Buy Now</button>
+                            <button id={props.val._id} className="btnOrange mx-auto my-3 w-75" >View Item</button>
                         </Link>
                     </div>
                 </div>

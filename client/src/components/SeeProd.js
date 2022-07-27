@@ -62,14 +62,29 @@ function SeeProd() {
             })
         }
         else {
-            Swal.fire(
-                'Warning',
-                'Please Login First',
-                'warning'
-            )
+            Authorization();
         }
     }
-
+    function Authorization(){
+        if(USER){
+            history.push('/paygateway/' + prodData._id)
+        }
+        else{
+            Swal.fire({
+                title: 'You are Not Login..!',
+                text: "Please Login to Proceed",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Go to Login Page'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    history.push('/login')
+                }
+              })
+        }
+    }
     const USER = useSelector((state) => state.UserName.username)
 
     // require('@/img' + "seeprod1.png" + '')
@@ -114,7 +129,7 @@ function SeeProd() {
                                 <h4 className="text-center">M.R.P. :${prodData.lowPrice}</h4>
                                 <h6 className="text-center">You Save:	${prodData.highPrice - prodData.lowPrice} (12%)
                                     Inclusive of all taxes</h6>
-                                <Link className="Link" to={'/paygateway/' + prodData._id}>
+                                <Link className="Link" onClick={Authorization}>
                                     <button className="btnOrange mx-auto my-3 w-75 " >Buy Now</button>
                                 </Link>
                                 <button id={prodData._id} className="btnNocolor mx-auto my-3 w-75 " onClick={addtocart}>Add to Cart</button>

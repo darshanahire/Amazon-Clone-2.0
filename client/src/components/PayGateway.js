@@ -59,6 +59,7 @@ function PayGateway(props) {
 
     useEffect(() => {LoaderTime()}, [setlodernum])
     useEffect(async() => {
+        if(!USER){ history.push('/login')}
         if(USER){
         let prod = await Https.seeProduct(id);        
         setprodData(prod.data);
