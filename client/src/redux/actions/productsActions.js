@@ -35,12 +35,20 @@ export const decressLikeCount = (counts) => {
     };
 };
 
+export const setOrders = (allorders) => {
+    return {
+        type: ActionsTypes.SET_ORDERS,
+        payload: allorders,
+    };
+};
+
 export const setAllDataToCart = (counts) => {
     return {
         type: ActionsTypes.SET_ALL_CART_DATA,
         payload: counts,
     };
 };
+
 export const setCart = (counts) => {
     return {
         type: ActionsTypes.SET_CART,

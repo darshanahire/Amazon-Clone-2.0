@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useHistory } from 'react-router';
-import { setlikeProduct, setCart, setProducts, setMode, UserName, setAllDataToCart } from "../redux/actions/productsActions"
+import { setlikeProduct, setCart, setProducts, setMode, UserName, setAllDataToCart,setOrders } from "../redux/actions/productsActions"
 import Https from '../servises/Https';
 
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp';
@@ -105,6 +105,7 @@ function Navbar() {
                 dispatch(setlikeProduct(initialLikesCount));
                 setcartCount(res.data.cartdata.length)
                 dispatch(setAllDataToCart(res.data.cartdata));
+                dispatch(setOrders(res.data.orders));
             })
 
             Https.getAllProducts().then((res) => {
@@ -139,7 +140,7 @@ function Navbar() {
 
                     <Link className="main_logo" to={"/"} ><img src={DarkMode ? "img/logoWhite.png" : "img/logoBlack.png"} alt="amazon" /></Link>
                     <form className="search_form justify-content-center">
-                        <input className="inputSearch" type="search" placeholder="Search" aria-label="Search"
+                        <input className="inputSearch" type="search" placeholder="Search Items" aria-label="Search"
                             onChange={(e) => { filteredProducts(e.target.value) }} />
                         <button className="btnOrange my-0 searchBtn" type="button"><SearchIcon /></button>
                     </form>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Https from '../servises/Https'
-import { BrowserRouter as Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { setCart, decressCartCount, setAllDataToCart } from "../redux/actions/productsActions"
 
@@ -51,8 +51,9 @@ export default function SingleCartComp(props) {
                             <p className="star_para">Apple <br /> ⭐⭐⭐⭐ 4.8 (21032 reviews)</p>
                             <div className="text-md-start text-center">
                                 <div className=" d-flex flex-row align-items-center mt-3">
-
-
+                                <Link className="Link" to={'/paygateway/' + props.val._id}>
+                                    <button className="btnOrange  d-inline border-1 p-1 my-auto px-3 mx-3" onClick={removeFromCart} >Order Now</button>
+                                </Link>
                                     <span> Qty : </span>
                                     <select class=" mx-1 mx-md-3 inputSearch btn-white form-select shadow-none border-1" aria-label="Default select example" style={{ 'width': "70px" }}>
                                         <option selected>1</option>
@@ -64,13 +65,9 @@ export default function SingleCartComp(props) {
                                     </select>
                                     {/* <button className="btn border-1 btnRed mt-0 text-white shadow-none">Remove From Cart</button> */}
                                     <div className="vr my-auto d-none d-md-flex"> </div>
-                                    <p className="color-cyne my-auto font-13 mx-2 mx-md-3 cursor" id={props.val._id} onClick={removeFromCart}>Delete</p>
+                                    <p className="color-cyne my-auto font-13 mx-2 mx-md-3 cursor" id={props.val._id} onClick={removeFromCart} >Delete</p>
                                     <div className="vr my-auto"> </div>
                                     <p className="color-cyne my-auto font-13 mx-2 mx-md-3 cursor">Save to later</p>
-                                    <span className="d-none d-md-flex">
-                                        <div className="vr my-auto "> </div>
-                                        <p className="color-cyne my-auto font-13 mx-3 cursor">See more like this</p>
-                                    </span>
                                 </div>
                             </div>
                         </div>

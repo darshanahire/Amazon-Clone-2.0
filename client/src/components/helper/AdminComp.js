@@ -17,6 +17,7 @@ const AdminComp = () => {
     function handleChanges(e) {
         const { name, value } = e.target;
         setAllData({
+            // spread operator
             ...allData,
             [name]: value,
         })

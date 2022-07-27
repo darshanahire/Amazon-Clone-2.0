@@ -24,7 +24,10 @@ const UserSchema = new Schema({
     },
     liked:{
         type:Array
-    }
+    },
+    orders:{
+        type:Array
+    },
 })
 
 const User = mongoose.model("users", UserSchema);

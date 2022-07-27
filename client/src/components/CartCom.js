@@ -12,7 +12,7 @@ export default function CartCom() {
     const dispatch = useDispatch()
 
     let [loader, setLoder] = useState(true);
-    function LoaderTime(){ setTimeout(() => {setLoder(false)},3000)}
+    function LoaderTime(){ setTimeout(() => {setLoder(false)},1000)}
     useEffect(() => {LoaderTime()}, [])
 
     const subtotal = () => {
@@ -36,7 +36,7 @@ export default function CartCom() {
     return (
         <>
              <>{loader ? <Loader loaderNum={1} bg={'#eeeeee'}/>:
-            <div style={{ "margin-top": "60px", "backgroundColor": "rgb(243, 242, 242)", "min-height": "100vh" ,height:"100%" }}>
+            <div style={{ "marginTop": "60px", "backgroundColor": "rgb(243, 242, 242)", "min-height": "100vh" ,height:"100%" }}>
                 <div className="container-fluid">
                     <div className="row py-4">
                         <div className="col-12 col-md-7 col-lg-9 order-2">
@@ -59,7 +59,7 @@ export default function CartCom() {
 
                                     MYCART.map((val, i, arr) => {
                                         return <>
-                                            <SingleCartComp val={val} ind={i} arr={arr} />
+                                            <SingleCartComp key ={i} val={val} ind={i} arr={arr} />
                                         </>
                                     })
 

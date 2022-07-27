@@ -3,7 +3,7 @@ import SendRoundedIcon from '@material-ui/icons/SendRounded';
 function Chat() {
     return (
         
-        <div style={{ "margin-top": "80px" }}>
+        <div style={{ "marginTop": "80px" }}>
             <div className="container flex-column" style={{ "height": "500px" }}>
                 <div>
                     

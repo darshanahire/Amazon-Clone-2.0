@@ -1,8 +1,9 @@
 const { Router } = require("express");
-
+const mongodb = require('mongodb');
 const router = Router();
 const showProd = require("./showProd.route")
 const Product = require("../models/product.model");
+const Orders = require("../models/orders.model");
 const User = require("../models/user.model");
 require("../db/conn")
 
@@ -82,6 +83,63 @@ router.post("/getuser", async (req, res) => {
     })
 
 })
+
+router.post("/order", async (req, res) => {
+    const {username, obj} = req.body;
+    try {
+        const newOrder = await Orders.create(obj);
+        try { await User.findOneAndUpdate({ username: username }, { $push: { orders: newOrder._id, $position: 0 } }, { new: true }).then((data) => {
+                // console.log(newOrder);
+                res.status(200).json(newOrder);
+                
+            })
+        } catch(err){
+            res.status(201).json("Order Id Not Added in User Schema");
+        }
+    } catch (err) {        
+        console.log(err);
+        res.status(201).json("OrderFail");
+    }
+
+})
+
+router.post("/cancelorder", async (req, res) => {
+    const {id,USER} = req.body.obj;
+    // console.log(req.body.obj);
+    
+    try {
+        const remainingorders = await User.findOneAndUpdate({ _id: id }, { $pull: { _id: id } }, { new: true });
+        try { await User.findOneAndUpdate({ username: USER }, { $pull: { orders : new mongodb.ObjectId(id) } }, { new: true }).then((data) => {
+                // console.log(data.orders);
+                res.status(200).json(data.orders);
+                
+            })
+        } catch(err){
+            res.status(201).json("Order Id Not Added in User Schema");
+        }
+    } catch (err) {        
+        console.log(err);
+        res.status(201).json("OrderFail");
+    }
+
+})
+
+router.post("/getorder", async (req, res) => {
+    const {orderId} = req.body; 
+    // console.log(orderId);
+    try {
+        await Orders.findOne({ _id: new mongodb.ObjectId(orderId) }).then(async (data) => {
+                // console.log(data);
+            res.status(200).json(data);
+        })
+    }
+    catch (err) {
+        console.log(err);
+        res.status(201).json("Order Not Found");
+    }
+
+})
+
 router.post("/addtocart", async (req, res) => {
     const username = req.body.user;
     const id = req.body.id._id;

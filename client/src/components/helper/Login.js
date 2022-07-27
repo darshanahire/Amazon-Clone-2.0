@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import Https from "../../servises/Https"
 import { useSelector, useDispatch } from 'react-redux'
-import {UserName,setlikeProduct,setAllDataToCart} from "../../redux/actions/productsActions"
+import {UserName,setlikeProduct,setAllDataToCart,setOrders} from "../../redux/actions/productsActions"
 import axios from 'axios'
 const Login = () => {
     const dispatch = useDispatch()
@@ -33,6 +33,7 @@ const Login = () => {
                 let initialLikesCount = res.data.liked.length;
                 dispatch(setlikeProduct(initialLikesCount));
                 dispatch(setAllDataToCart(res.data.cartdata));
+                dispatch(setOrders(res.data.orders));
             })
             history.push("/")
         }

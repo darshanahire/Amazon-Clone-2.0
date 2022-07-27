@@ -35,6 +35,23 @@ export default {
         return res;
     },
 
+    async order(USER, OrderData) {
+        const res = await axios.post(this.baseURL + "order",{username:USER, obj:OrderData});
+        return res;
+    },
+
+    async cancelorder(obj) {        
+        const res = await axios.post(this.baseURL + "cancelorder",{obj});
+        return res;
+    },
+
+    async getorderdetails(id) {        
+        const res = await axios.post(this.baseURL + "getorder",{orderId:id});
+        // console.log(res);
+        
+        return res;
+    },
+
     async handdleLike(id, val, username) {
         const res = await axios.post(this.baseURL + "handlelike",{id,val,username});
         return res;

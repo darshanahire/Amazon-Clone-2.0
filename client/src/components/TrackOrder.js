@@ -1,20 +1,67 @@
 import React ,{useState,useEffect} from 'react'
+import { useParams, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Swal from 'sweetalert2'
+
+
+import { useDispatch, useSelector } from 'react-redux'
+import{setOrders } from "../redux/actions/productsActions"
+
+import Https from '../servises/Https';
+
 import Loader from './helper/Loader';
 
 function TrackOrder() {
+    let history = useHistory()
+
     let [loader, setLoder] = useState(true);
-    function LoaderTime(){ setTimeout(() => {setLoder(false)},5000)}
+    let [orderData,setOrderData] = useState();
+    const dispatch = useDispatch();
+    const USER = useSelector((state) => state.UserName.username);
+
+    let { id } = useParams();    
+    function LoaderTime(){ setTimeout(() => {setLoder(false)},1000)}
     useEffect(() => {LoaderTime()}, [])
+
+    useEffect(()=>{
+        Https.getorderdetails(id).then((res) => {
+            setOrderData(res.data)
+            // console.log(res.data);
+            
+        }).catch((e)=>{
+            console.log(e);
+            // history.push("/notFound")
+        })
+    },[])
+
+    function cancelOrder(e){
+        Https.cancelorder({id,USER}).then((res) => {
+            // console.log(res.data);
+            setOrderData(undefined)
+            dispatch(setOrders(res.data));
+            // console.log(res.data.prod[0].prodName);
+            Swal.fire(
+                'Success',
+                'Order Cancel Successful',
+                'success'
+            )
+             history.push("/")
+            
+        }).catch((e)=>{
+            console.log(e);
+            // history.push("/notFound")
+        })
+    }
     return (
-        <>{loader ? <Loader loaderNum={1} bg={'#eeeeee'}/>:
-        <div style={{ "margin-top": "60px" }}>
+        <>{loader || orderData === undefined? <Loader loaderNum={1} bg={'#eeeeee'}/>:
+        <div style={{ "marginTop": "60px" }}>
             <div className="container">
                 <h3 className="py-3">Order Tracking</h3>
                 <hr />
                 <div className="row">
                     <div className="col-md-6 col-12">
                         <h4 className="py-2 color-brown text-sm-center text-md-start">In Transit : On shedule</h4>
-                        <h5>Expected delivery: <span className="text-success">Monday Nov 20, 2021, by 10 Am</span></h5>
+                        <h5>Expected delivery: <span className="text-success">{orderData.shipDate}, by 9 PM</span></h5>
                     </div>
                     <div className="col-md-6 col-12 text-end">
                         <p className="py-3"><span className="bold-6"> Your package is arrived at the courier facility</span> <span className="font-12">(Updated 0 minute(s) ago)</span></p>
@@ -31,16 +78,21 @@ function TrackOrder() {
                     </div>
                     <div className="row my-5">
                         <div className="col-12 col-md-2 d-flex justify-content-center">
-                            <img className="my-3 my-md-0" src="img/iphone.jpg" alt="" width="150px" />
+                            <img className="my-3 my-md-0" src={orderData.prod[0].prodImg} alt="" width="150px" />
                         </div>
                         <div className="col-12 col-md-7" >
-                            <h5>Mi 10i 5G (Atlantic Blue, 6GB RAM, 128GB Storage) - 108MP Quad Camera | Snapdragon 750G Processor</h5>
-                            <h6>Brand: MI
+                            <h5>{orderData.prod[0].prodName}(Atlantic Blue, 6GB RAM, 128GB Storage) - 108MP Quad Camera | Snapdragon 750G Processor</h5>
+                            <h6>Brand: {orderData.prod[0].prodBrand}
                             </h6>
 
-                            <p className="star_para">Apple <br /> ⭐⭐⭐⭐ 4.8 (21032 reviews)</p>
+                            <p className="star_para">{orderData.prod[0].prodBrand} <br /> ⭐⭐⭐⭐ 4.8 (21032 reviews)</p>
                             <div className="text-md-start text-center">
-                                <button className="btnRed  d-inline border-1 p-1 mt-3 px-3 mx-3">Request to cancel order</button>
+                            <Link className="Link" to={'/orders'}>
+                                <button className="btnOrange  d-inline border-1 p-1 mt-3 px-3 mx-3" >View All Orders</button>
+                                </Link>
+                                <Link className="Link">
+                                <button className="btnRed  d-inline border-1 p-1 mt-3 px-3 mx-3" onClick={cancelOrder}>Request to cancel order</button>
+                            </Link>
                             </div>
                         </div>
                     </div>
@@ -52,30 +104,30 @@ function TrackOrder() {
                         </div>
                         <div className="card-body">
                             <table className="font-13 row justify-content-around m-0" width="100%">
-                                <td className="trackTable mx-auto mb-0 col-12 col-md-4" width="30%">
+                                <tr className="trackTable mx-auto mb-0 col-12 col-md-4" width="30%">
                                     <td>
                                         <tr>Document No-</tr>
-                                        <tr>O800000037</tr>
+                                        <tr>O{orderData.orderNo}</tr>
                                     </td>
                                     <hr />
                                     <td>
                                         <tr>Order No-</tr>
-                                        <tr>O000001239</tr>
+                                        <tr>O{orderData.orderNo}</tr>
                                     </td>
                                     <hr />
                                     <td>
                                         <tr>Track and Trace Number-</tr>
-                                        <tr className="text-primary cursor">T800000037</tr>
+                                        <tr className="text-primary cursor">T{orderData.TrackNo}</tr>
                                     </td>
                                     <hr />
                                     <td>
                                         <tr>Order Status-</tr>
-                                        <tr className="text-success">Initiated</tr>
+                                        <tr className="text-success">{orderData.status}</tr>
                                     </td>
                                     <hr />
                                     <td>
                                         <tr>Shipment Date-</tr>
-                                        <tr>20-Nov-2021</tr>
+                                        <tr>{orderData.shipDate}</tr>
                                     </td>
                                     <hr />
                                     <td>
@@ -83,39 +135,39 @@ function TrackOrder() {
                                         <tr> 0010</tr>
                                     </td>
                                 <hr className='d-md-none'/>
-                                </td>
-                                <td className="trackTable mx-auto mb-2 col-12 col-md-4" width="30%">
+                                </tr>
+                                <tr className="trackTable mx-auto mb-2 col-12 col-md-4" width="30%">
                                     <td>
                                         <tr>Order Date-</tr>
-                                        <tr>10-Nov-2021</tr>
+                                        <tr>{orderData.orderDate}</tr>
                                     </td>
                                     <hr />
                                     <td>
-                                        <tr>Document Date-</tr>
-                                        <tr>10-Nov-2021</tr>
+                                        <tr>Order Time-</tr>
+                                        <tr>{orderData.orderTime}</tr>
                                     </td>
                                     <hr />
                                     <td>
                                         <tr>Payment Method-</tr>
-                                        <tr>-</tr>
+                                        <tr>{orderData.paymentMethod}</tr>
                                     </td>
                                     <hr />
                                     <td>
-                                        <tr>Due Date-</tr>
-                                        <tr>-</tr>
+                                        <tr>Expected Delivery Date-</tr>
+                                        <tr>{orderData.shipDate}</tr>
                                     </td>
                                     <hr />
                                     <td>
                                         <tr>Payment Discount-</tr>
-                                        <tr>00</tr>
+                                        <tr>{orderData.discount}</tr>
                                     </td>
                                     <hr />
                                     <td>
-                                        <tr>Ammount To Pay-</tr>
-                                        <tr>$524</tr>
+                                        <tr>Paid Ammount-</tr>
+                                        <tr>${orderData.prod[0].lowPrice}</tr>
                                     </td>
                                     <td>
-                                    </td>                                </td>
+                                    </td>                                </tr>
                             </table>
                         </div>
                     </div>

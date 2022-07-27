@@ -1,21 +1,66 @@
 import React,{useEffect,useState} from 'react'
+import { useParams, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Loader from './helper/Loader';
+import Swal from 'sweetalert2'
+
+import Https from '../servises/Https';
 
 
-function PayGateway() {
+function PayGateway(props) {
 
-    let [loader, setLoder] = useState(true);
-    function LoaderTime(){ setTimeout(() => {setLoder(false)},4000)}
-    useEffect(() => {LoaderTime()}, [])
+    let [loader, setLoder] = useState(false);
+    let [lodernum, setlodernum] = useState(1);
+    function LoaderTime(){ setTimeout(() => {setLoder(false)},1000)}
+    const USER = useSelector((state) => state.UserName.username);
+    let history = useHistory()
+    let { id } = useParams();
 
-    
+    const makePayment = async (e)=>{
+        if(USER){
+        let prod = await Https.seeProduct(id);
+        let d = new Date();
+        let d3 = new Date()
+        d3.setDate(d.getDate()+3);
+            let OrderData ={
+                prod :prod.data,
+                orderNo : Math.floor((Math.random() * 1000000000)),
+                TrackNo : Math.floor((Math.random() * 1000000000)),
+                status : "Initiated",
+                orderDate : d.toLocaleDateString("en-us",{ day:"numeric",year:"numeric", month:"short"}),
+                orderTime : d.toLocaleTimeString("en-us",{hour:"numeric",minute:"numeric"}),
+                shipDate : d3.toLocaleDateString("en-us",{ day:"numeric",year:"numeric", month:"short"}),
+                paymentMethod : "Online",
+                discount :"0",
+                payedAmt : prod.lowPrice,
+                deliveryAdd : "ABC",
+                ShipAdd : "XYZ"
+            }
+            Https.order(USER,OrderData).then(async (res) => {
+                if (res.status == 200) {
+                    let OID = res.data._id;
+                    // console.log(OID);
+                    history.push("/placedOrder/"+OID)
+                }
+                else if (res.status == 201) {
+                    Swal.fire(
+                        'Error',
+                        'Order Failed',
+                        'Error'
+                    )
+                }
+            })
+        }
+    }
+
+    useEffect(() => {LoaderTime()}, [setlodernum])
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
     return (
-        <>{loader ? <Loader loaderNum={1} bg={'#eeeeee'}/>: <>
-        <div style={{ "margin-top": "80px" }}>
+        <>{loader ? <Loader loaderNum={lodernum} bg={'#eeeeee'}/>: <>
+        <div style={{ "marginTop": "80px" }}>
             <div className="container">
                 <div className="row justify-content-between">
                     <div className="col-12 col-lg-9">
@@ -74,7 +119,7 @@ function PayGateway() {
                                     <p className="font-12 mx-4 my-1">Due to high demand and to ensure social distancing, Pay on Delivery is not available</p>
                                 </p>
                                 <div className="card d-flex d-md-none">
-                        <Link className="Link" to={'/placedOrder'}>
+                        <Link className="Link" onClick={makePayment}>
                             <button className="btnOrange w-75 mx-auto mt-3" >Continue</button>
                             </Link>
                             <p className="font-14 text-center my-3">You can review this order before it's final.</p>
@@ -95,13 +140,13 @@ function PayGateway() {
 
                     <div className="col-12 col-lg-3 my-lg-5">
                         <div className="card my-lg-5 border-lg-auto border-none">
-                        <Link className="Link" to={'/placedOrder'}>
-                            <button className="btnOrange w-75 mx-auto mt-3" >Continue</button>
-                            </Link>
+                        {/* <Link className="Link" to={'/placedOrder'}> */}
+                            <button className="btnOrange w-75 mx-auto mt-3" onClick={makePayment}>Continue</button>
+                            {/* </Link> */}
                             <p className="font-14 text-center my-3">You can review this order before it's final.</p>
                         </div>
-                        <div className="card d-none d-md-flex" style={{"margin-top":"195%"}}>
-                        <Link className="Link" to={'/placedOrder'}>
+                        <div className="card d-none d-md-flex" style={{"marginTop":"195%"}}>
+                        <Link className="Link" onClick={makePayment}>
                             <button className="btnOrange w-75 mx-auto mt-3" >Continue</button>
                             </Link>
                             <p className="font-14 text-center my-3">You can review this order before it's final.</p>

@@ -6,6 +6,10 @@ const initialState = {
     products: [],
 };
 
+const initialOrders = {
+    allorders: [],
+};
+
 const initialLikes = {
     count: 0,
 }
@@ -29,6 +33,15 @@ export const productsReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case ActionsTypes.SET_PRODUCTS:
             return { ...state, products: payload };
+        default:
+            return state;
+    }
+}
+
+export const orders = (state = initialState, { type, payload }) => {
+    switch (type) {
+        case ActionsTypes.SET_ORDERS:
+            return {...state,allorders: payload };
         default:
             return state;
     }

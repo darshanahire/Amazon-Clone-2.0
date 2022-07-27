@@ -15,6 +15,7 @@ import Loader from './components/helper/Loader'
 import SeeProd from './components/SeeProd'
 import CartCom from './components/CartCom'
 import Orders from './components/Orders'
+import SingleOrder from './components/SingleOrder'
 import TrackOrder from './components/TrackOrder'
 import PayGateway from './components/PayGateway'
 import PlacedOrder from './components/PlacedOrder'
@@ -32,9 +33,10 @@ function App() {
       <Route exact path="/Admin" component={AdminComp}/>
       <Route exact path="/CartCom" component={CartCom}/>
       <Route exact path="/Orders" component={Orders}/>
-      <Route exact path="/TrackOrder" component={TrackOrder}/>
-      <Route exact path="/Paygateway" component={PayGateway}/>
-      <Route exact path="/PlacedOrder" component={PlacedOrder}/>
+      <Route exact path="/SingleOrder" component={SingleOrder}/>
+      <Route exact path="/TrackOrder/:id" component={TrackOrder}/>
+      <Route exact path="/Paygateway/:id" component={PayGateway}/>
+      <Route exact path="/PlacedOrder/:id" component={PlacedOrder}/>
       <Route exact path="/Notifications" component={Notifications}/>
       <Route exact path="/Loader" component={Loader}/>
       <Route path="*" component={NotFound}/>
