@@ -10,7 +10,7 @@ A full-stack E-Commerce web application created using MERN Stack.
 
 
 
-## Features App
+## Features of App
 Following are the important fetures of App : 
 <ul>
 <li>Add Item to Cart</li>
