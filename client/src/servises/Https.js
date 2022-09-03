@@ -1,6 +1,7 @@
 import axios from "axios"
 
-export default {
+const exportedObject = {
+
     baseURL: "/",
 
     async getAllProducts() {
@@ -88,6 +89,8 @@ export default {
            this.logout();
        })
     },
+ 
+};
 
-}
+export default exportedObject;
 
