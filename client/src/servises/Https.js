@@ -2,6 +2,7 @@ import axios from "axios"
 
 const exportedObject = {
 
+    // baseURL: "http://localhost:5000/",
     baseURL: "/",
 
     async getAllProducts() {
