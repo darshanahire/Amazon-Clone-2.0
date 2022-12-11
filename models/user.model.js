@@ -28,6 +28,9 @@ const UserSchema = new Schema({
     orders:{
         type:Array
     },
+    deliveredItems:{
+        type:Array
+    },
 })
 
 const User = mongoose.model("users", UserSchema);

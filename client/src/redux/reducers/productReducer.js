@@ -10,6 +10,10 @@ const initialOrders = {
     allorders: [],
 };
 
+const initialDelivered = {
+    alldelivered: [],
+};
+
 const initialLikes = {
     count: 0,
 }
@@ -42,6 +46,15 @@ export const orders = (state = initialState, { type, payload }) => {
     switch (type) {
         case ActionsTypes.SET_ORDERS:
             return {...state,allorders: payload };
+        default:
+            return state;
+    }
+}
+
+export const delivered = (state = initialState, { type, payload }) => {
+    switch (type) {
+        case ActionsTypes.SET_DELIVERED:
+            return {...state,alldelivered: payload };
         default:
             return state;
     }

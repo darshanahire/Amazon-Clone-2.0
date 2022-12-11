@@ -16,6 +16,7 @@ function TrackOrder() {
 
     let [loader, setLoder] = useState(true);
     let [orderData,setOrderData] = useState();
+    let [orderType,setOrderType] = useState();
     const dispatch = useDispatch();
     const USER = useSelector((state) => state.UserName.username);
 
@@ -28,6 +29,7 @@ function TrackOrder() {
 
         Https.getorderdetails(id).then((res) => {
             setOrderData(res.data)
+            setOrderType(res.data.status);
             // console.log(res.data);
             
         }).catch((e)=>{
@@ -41,7 +43,7 @@ function TrackOrder() {
             // console.log(res.data);
             setOrderData(undefined)
             dispatch(setOrders(res.data));
-            // console.log(res.data.prod[0].prodName);
+
             Swal.fire(
                 'Success',
                 'Order Cancel Successful',
@@ -62,8 +64,16 @@ function TrackOrder() {
                 <hr />
                 <div className="row">
                     <div className="col-md-6 col-12">
-                        <h4 className="py-2 color-brown text-sm-center text-md-start">In Transit : On shedule</h4>
-                        <h5>Expected delivery: <span className="text-success">{orderData.shipDate}, by 9 PM</span></h5>
+                        {orderType == 'Initiated' ? 
+                        <>
+                            <h4 className="py-2 color-brown text-sm-center text-md-start">In Transit : On shedule</h4>
+                            <h5>Expected delivery: <span className="text-success">{orderData.shipDate}, by 9 PM</span></h5> 
+                        </> :
+                        <>
+                            <h4 className="py-2 color-brown text-sm-center text-md-start">Item successfully delivared </h4>
+                            <h5>Delivared on : <span className="text-success">{orderData.shipDate} </span></h5>
+                        </>
+                        }
                     </div>
                     <div className="col-md-6 col-12 text-end">
                         <p className="py-3"><span className="bold-6"> Your package is arrived at the courier facility</span> <span className="font-12">(Updated 0 minute(s) ago)</span></p>
@@ -74,8 +84,8 @@ function TrackOrder() {
                         <ul id="progressbar">
                             <li className="step0 active " id="step1">Order Placed</li>
                             <li className="step0 active text-center" id="step2">Shipped</li>
-                            <li className="step0  text-center" id="step3">Out for Delivery</li>
-                            <li className="step0 text-muted text-right" id="step4">Delivered</li>
+                            <li className={`step0 text-center ${orderType == 'Initiated' ? "" : "active"}`} id="step3">Out for Delivery</li>
+                            <li className={`step0 text-muted text-right ${orderType == 'Initiated' ? "" : "active"}`} id="step4">Delivered</li>
                         </ul>
                     </div>
                     <div className='card mb-3'>
@@ -94,7 +104,9 @@ function TrackOrder() {
                                 <button className="btnOrange  d-inline border-1 p-1 mt-3 px-3 mx-3" >View All Orders</button>
                                 </Link>
                                 <Link className="Link">
-                                <button className="btnRed  d-inline border-1 p-1 mt-3 px-3 mx-3" onClick={cancelOrder}>Request to cancel order</button>
+                                {orderType == 'Initiated' ?
+                                <button className="btnRed  d-inline border-1 p-1 mt-3 px-3 mx-3" onClick={cancelOrder}>Request to cancel order</button> :
+                                <button className="btn border-1 btn-white p-1 mb-1 px-3" >Share Feedback</button> }
                             </Link>
                             </div>
                         </div>
@@ -157,7 +169,7 @@ function TrackOrder() {
                                     </td>
                                     <hr />
                                     <td>
-                                        <tr>Expected Delivery Date-</tr>
+                                        <tr>{orderType == 'Initiated' ? "Expected" :""} Delivery Date-</tr>
                                         <tr>{orderData.shipDate}</tr>
                                     </td>
                                     <hr />
@@ -199,7 +211,7 @@ function TrackOrder() {
                         </p>
                         </div>
                         </div>
-                        <button className="btnOrange mx-auto">Request to Change Address</button>
+                        {orderType == 'Initiated' ? <button className="btnOrange mx-auto">Request to Change Address</button> :<></>}
                     </div>
                 </div>
             </div>

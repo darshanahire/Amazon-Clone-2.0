@@ -130,6 +130,22 @@ router.post("/getorder", async (req, res) => {
 
 })
 
+router.post("/getdelivered", async (req, res) => {
+    const {orderId} = req.body; 
+    // console.log(orderId);
+    try {
+        await Orders.findOne({ _id: new mongodb.ObjectId(orderId) }).then(async (data) => {
+                // console.log(data);
+            res.status(200).json(data);
+        })
+    }
+    catch (err) {
+        console.log(err);
+        res.status(201).json("Order Not Found");
+    }
+
+})
+
 router.post("/addtocart", async (req, res) => {
     const username = req.body.user;
     const id = req.body.id._id;

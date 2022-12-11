@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { productsReducer, handdleLike, cartHanddle, changeMode ,User, orders} from "./productReducer";
+import { productsReducer, handdleLike, cartHanddle, changeMode ,User, orders,delivered} from "./productReducer";
 
 const reducers = combineReducers({
     allProducts: productsReducer,
@@ -7,6 +7,7 @@ const reducers = combineReducers({
     cartHanddleing: cartHanddle,
     handdleMode: changeMode,
     Orders : orders,
+    Delivered : delivered,
     UserName: User,
 
 });

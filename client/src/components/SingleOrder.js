@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import Https from '../servises/Https'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import{setOrders } from "../redux/actions/productsActions"
+import{setOrders,setDelivered} from "../redux/actions/productsActions"
 
 import Https from '../servises/Https';
 
@@ -25,7 +25,9 @@ function SingleOrder(props) {
         Https.cancelorder({id:orderId,USER}).then((res) => {
             // console.log(res.data);
             setOrderData(undefined)
-            dispatch(setOrders(res.data));
+
+            dispatch(setOrders(res.data.orders));
+            dispatch(setDelivered(res.data.deliveredItems));
             // console.log(res.data.prod[0].prodName);
             
         }).catch((e)=>{
@@ -67,8 +69,8 @@ function SingleOrder(props) {
                        <button className="btnOrange  d-inline border-1 p-1 mt-3 px-3 mx-3" >Track this Order</button></Link>
                        <Link to={'/paygateway/' + orderData.prod[0]._id}>
                        <button className="btn border-1 btn-white p-1 mb-1 px-3">Buy Again</button></Link>
-                       <Link className="Link" onClick={cancelOrder}>
-                       <button className="btnRed d-inline border-1 p-1 mt-3 px-3 mx-3">Request To Cancel Order</button></Link>
+                       { orderData.status == 'Initiated' ? <Link className="Link" onClick={cancelOrder}>
+                       <button className="btnRed d-inline border-1 p-1 mt-3 px-3 mx-3">Request To Cancel Order</button></Link> :<></>}
                    </div>
                    </div>
                </div>

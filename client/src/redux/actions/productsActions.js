@@ -42,6 +42,13 @@ export const setOrders = (allorders) => {
     };
 };
 
+export const setDelivered = (alldelivered) => {
+    return {
+        type: ActionsTypes.SET_DELIVERED,
+        payload: alldelivered,
+    };
+};
+
 export const setAllDataToCart = (counts) => {
     return {
         type: ActionsTypes.SET_ALL_CART_DATA,

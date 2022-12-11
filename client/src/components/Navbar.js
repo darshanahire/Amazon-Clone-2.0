@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useHistory } from 'react-router';
-import { setlikeProduct, setCart, setProducts, setMode, UserName, setAllDataToCart,setOrders } from "../redux/actions/productsActions"
+import { setlikeProduct, setCart, setProducts, setMode, UserName, setAllDataToCart,setOrders,setDelivered } from "../redux/actions/productsActions"
 import Https from '../servises/Https';
 
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp';
@@ -71,6 +71,7 @@ function Navbar() {
         dispatch(setAllDataToCart([]));
         dispatch(setAllDataToCart([]));
         dispatch(setOrders(undefined));
+        dispatch(setDelivered(undefined));
     }
 
     function filteredProducts(input) {
@@ -107,7 +108,22 @@ function Navbar() {
                 dispatch(setlikeProduct(initialLikesCount));
                 setcartCount(res.data.cartdata.length)
                 dispatch(setAllDataToCart(res.data.cartdata));
+
+                // seperate initiated and delivered Items
+                // let initiated = [];
+                // let delivered = [];
+                // res.data.orders.forEach(element => {
+                //     console.log(element);
+                    
+                //     // if(element.status === "delivered"){
+                //     //     delivered.push(element);
+                //     // }
+                //     // else{
+                //     //     initiated.push(element);
+                //     // }
+                // });
                 dispatch(setOrders(res.data.orders));
+                dispatch(setDelivered(res.data.deliveredItems));
             })
 
             Https.getAllProducts().then((res) => {
