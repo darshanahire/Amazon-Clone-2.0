@@ -18,11 +18,30 @@
     <link rel="icon" href="/favicon.png">
    
     <title>Amazon Clone by Darshan</title>
+    <script>
+      document.onreadystatechange = function() {
+          if (document.readyState !== "complete") {
+              document.querySelector("root").style.visibility = "hidden";
+              document.getElementById("loader").style.visibility = "visible";
+          } else {
+              document.getElementById("loader").style.display = "none";
+              document.querySelector("body").style.visibility = "visible";
+          }
+      };
+  </script>
+
     <!-- <title>Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in</title> -->
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <!-- <div id = "loader"> -->
+      <!-- <div class="d-flex align-items-center flex-column" style="height: 100vh; width:100vw; background-color: #eeeeee;">          
+          <img src="./img/loading.gif" alt="amazon" style="width: 500px; margin-top: 150px;"> -->
+          <!-- </div> -->
+          <!-- </div> -->
+          <div id="root"></div>
+          <p id = "loader">Please Wait Website is Loading... I appriciate your time - Darshan</p>
   
   </body>
+  
 </html>
