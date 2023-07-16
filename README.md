@@ -59,8 +59,8 @@ Following are the important fetures of App :
 
 
 ## Hosted Website URL 
-<h3 > https://amazon-clone-by-darshan.herokuapp.com/</h3>
+<h3 > https://amazon-clone-by-darshan.onrender.com/</h3>
 
 
 <br><br>
-© 2022 Darshan Ahire
+© 2023 Darshan Ahire
