@@ -36,31 +36,31 @@ Following are the important fetures of App :
 
 
 ## Screenshots
- <div align="center">
- <img  style="margin: 10px" width="40%" height="auto" src="https://res.cloudinary.com/darshanscloud/image/upload/v1646669161/eqhmb2xcwacdc2taszsh.png" />
+ <div align="center" style="margin: 20px">
+ <img  style="margin: 10px" width="100%" height="auto" src="https://res.cloudinary.com/darshanscloud/image/upload/v1646669161/eqhmb2xcwacdc2taszsh.png" />
  </div>
  <br><br>
-  <div align="center">
-   <img width="40%" height="auto" src="https://res.cloudinary.com/darshanscloud/image/upload/v1659535228/eanlqzuzny1wppxir3w0.png" />
+  <div align="center" style="margin: 20px">
+   <img width="100%" height="auto" src="https://res.cloudinary.com/darshanscloud/image/upload/v1659535228/eanlqzuzny1wppxir3w0.png" />
     </div>
     <br><br>
-    <div align="center">
-     <img width="40%" height="auto" src="https://res.cloudinary.com/darshanscloud/image/upload/v1659535190/xbietrwhonaemegnnlkg.png" />
+    <div align="center" style="margin: 20px">
+     <img width="100%" height="auto" src="https://res.cloudinary.com/darshanscloud/image/upload/v1659535190/xbietrwhonaemegnnlkg.png" />
       </div>
       <br><br>
-      <div align="center">
-    <img width="40%" height="auto" src="https://res.cloudinary.com/darshanscloud/image/upload/v1659535282/ahu63gvvurbvcglxzdjy.png" />
+      <div align="center" style="margin: 20px">
+    <img width="100%" height="auto" src="https://res.cloudinary.com/darshanscloud/image/upload/v1659535282/ahu63gvvurbvcglxzdjy.png" />
     </div>
           <br><br>
-      <div align="center">
-    <img width="40%" height="auto" src="https://res.cloudinary.com/darshanscloud/image/upload/v1659535513/a28vq8cil5fqsvckfzll.png" />
+      <div align="center" style="margin: 20px">
+    <img width="100%" height="auto" src="https://res.cloudinary.com/darshanscloud/image/upload/v1659535513/a28vq8cil5fqsvckfzll.png" />
     </div>
 </p>
 
 
 ## Hosted Website URL 
-<h3 > https://amazon-clone-by-darshan.herokuapp.com/</h3>
+<h3 > https://amazon-clone-by-darshan.onrender.com/</h3>
 
 
 <br><br>
-© 2022 Darshan Ahire
+© 2023 Darshan Ahire
