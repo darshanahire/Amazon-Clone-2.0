@@ -2,8 +2,8 @@ import axios from "axios"
 
 const exportedObject = {
 
-    baseURL: "http://localhost:5000/",
-    // baseURL: "/",
+    // baseURL: "http://localhost:5000/",
+    baseURL: "/",
 
     async getAllProducts() {
         const res = await axios.post(this.baseURL + "getallprods");
