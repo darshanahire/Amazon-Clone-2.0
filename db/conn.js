@@ -3,7 +3,8 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const uri =process.env.Mongo_URI ;
+// const uri =process.env.Mongo_URI ;
+const uri ='mongodb+srv://jwtuser:pass%4011@cluster0.vzhly.mongodb.net/amazon-clone' ;
 // const uri ='mongodb://localhost:27017/amazon-products' ;
 
 mongoose.connect(uri, {
