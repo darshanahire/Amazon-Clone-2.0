@@ -59,7 +59,7 @@ Following are the important fetures of App :
 
 
 ## Hosted Website URL 
-<h3 > https://amazon-clone-by-darshan.onrender.com/</h3>
+<h3 > https://amazon-clone-by-darshan.vercel.app/</h3>
 
 
 <br><br>
