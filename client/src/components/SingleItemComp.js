@@ -14,8 +14,9 @@ import Swal from 'sweetalert2'
 export default function SingleItemComp(props) {
     let history=useHistory()
     const USER = useSelector((state) => state.UserName.username);
-    const [likeed, disLike] = useState(false);
-
+    const [liked, disLike] = useState(props.liked);
+    //console.log(props.liked);
+    
     // console.log("props.val",props.val);
     const [idtopass, setidtopass] = useState(props.val._id);
 
@@ -24,7 +25,7 @@ export default function SingleItemComp(props) {
     const likeDislike = (e) => {
         let id = props.val._id;
         
-        let val = likeed;
+        let val = liked;
         const username =USER
         
         if (username) {
@@ -34,10 +35,10 @@ export default function SingleItemComp(props) {
             Https.handdleLike(id, val, username).then((res) => {
 
                 
-                if (res.status == 200) {
-                    disLike(!likeed);
+                if (res.status === 200) {
+                    disLike(!liked);
                 }
-                else if (res.status == 201) {
+                else if (res.status === 201) {
                     Authorization()
                 }
             }
@@ -66,27 +67,29 @@ export default function SingleItemComp(props) {
         }
     }
 
-    useEffect(() => {
-        if (USER) {
-            Https.getLikedArr(USER).then((res) => {
-                if (res.status == 200) {
-                    let arr = res.data
-                    let TOF = arr.find((elem) => {
-                        return props.arr[props.ind]._id === elem;
-                    })
-                    disLike(TOF === undefined ? false : true);
-                }
-                else{
-                    console.log(res.status);
-                    
-                }
-            }).catch((e)=>{
-                localStorage.removeItem('user');
-                console.log('localStorage cleared , use not found in db');
+    // useEffect(() => {
+    //     if (USER) {
+    //         disLike(false);
+    //         // commenting as it is sending api call every time
+    //         // Https.getLikedArr(USER).then((res) => {
+    //         // if (res.status == 200) {
+    //         //     let arr = res.data
+    //         //     let TOF = arr.find((elem) => {
+    //         //         return props.arr[props.ind]._id === elem;
+    //         //     })
+    //         //     disLike(TOF === undefined ? false : true);
+    //         // }
+    //         // else{
+    //         //     console.log(res.status);
                 
-            })
-        }
-    }, [disLike, USER])
+    //         // }
+    //         // }).catch((e)=>{
+    //         //     localStorage.removeItem('user');
+    //         //     console.log('localStorage cleared , use not found in db');
+                
+    //         // })
+    //     }
+    // }, [disLike, USER])
  
     return (
         <>
@@ -95,7 +98,7 @@ export default function SingleItemComp(props) {
                     <a className="nav-link active cursor d-flex justify-content-end p-0" onClick={likeDislike} >
                         <div>
                             <IconButton color="inherit">
-                                {likeed === true ? <FavoriteIcon color="error" id={idtopass} /> : <FavoriteBorderOutlinedIcon id={idtopass} />}
+                                {liked === true ? <FavoriteIcon color="error" id={idtopass} /> : <FavoriteBorderOutlinedIcon id={idtopass} />}
                             </IconButton>
                         </div>
                     </a>

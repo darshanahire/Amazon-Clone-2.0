@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Loader from './helper/Loader';
 import SingleItemComp from './SingleItemComp'
 
@@ -41,12 +41,12 @@ function PayGateway(props) {
                 ShipAdd : "XYZ"
             }
             Https.order(USER,OrderData).then(async (res) => {
-                if (res.status == 200) {
+                if (res.status === 200) {
                     let OID = res.data._id;
                     // console.log(OID);
                     history.push("/placedOrder/"+OID)
                 }
-                else if (res.status == 201) {
+                else if (res.status === 201) {
                     Swal.fire(
                         'Error',
                         'Order Failed',
@@ -59,7 +59,14 @@ function PayGateway(props) {
 
     useEffect(() => {LoaderTime()}, [setlodernum])
     useEffect(async() => {
-        if(!USER){ history.push('/login')}
+        if(!USER){ 
+            Swal.fire(
+                'Error',
+                'Order Failed',
+                'Error'
+            )
+           // history.push('/login')
+        }
         if(USER){
         let prod = await Https.seeProduct(id);        
         setprodData(prod.data);
@@ -67,7 +74,7 @@ function PayGateway(props) {
         }
     }, [])
     return (
-        <>{loader ||prodData===undefined ? <Loader loaderNum={lodernum} bg={'#eeeeee'}/>: <>
+        <>{loader || prodData===undefined ? <Loader loaderNum={lodernum} bg={'#eeeeee'}/>: <>
         <div style={{ "marginTop": "80px" }}>
             <div className="container">
                 <div className="row justify-content-between">
@@ -132,7 +139,7 @@ function PayGateway(props) {
                                     <p className="font-12 mx-4 my-1">Due to high demand and to ensure social distancing, Pay on Delivery is not available</p>
                                 </p>
                                 <div className="card d-flex d-none">
-                        <Link className="Link" onClick={makePayment}>
+                        <Link className="Link" to="#" onClick={makePayment}>
                             <button className="btnOrange w-75 mx-auto mt-3" >Continue</button>
                             </Link>
                             <p className="font-14 text-center my-3">You can review this order before it's final.</p>
@@ -171,8 +178,8 @@ function PayGateway(props) {
             </div>
                         </div>
                         <div className="card d-md-flex mt-2">
-                        <Link className="Link" onClick={makePayment}>
-                            <button className="btnOrange w-75 mx-auto mt-3" >Procced to Buy</button>
+                        <Link className="Link" to="#" onClick={makePayment}>
+                            <button className="btnOrange w-75 mx-auto mt-3" >Proceed to Buy</button>
                         </Link>
                             <p className="font-14 text-center my-3">You can review this order before it's final.</p>
                         </div>

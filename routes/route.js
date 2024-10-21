@@ -12,6 +12,7 @@ router.post("/getallprods", async (req, res) => {
     let data = await Product.find();
     res.status(200).json(data);
 })
+
 router.post("/seeprod", async (req, res) => {
     const ProdId = req.body.id;
     Product.findOne({ _id: ProdId }).then((data)=>{
@@ -31,7 +32,7 @@ router.post("/getLikedArr", async (req, res) => {
     const user = req.body.user;
     try {
         await User.findOne({ username: user }).then((data) => {
-            if (data == null) res.status(404);
+            if (data === null) res.status(404);
             else {
                 res.status(200).json(data.liked);
             }
@@ -101,7 +102,7 @@ router.post("/cancelorder", async (req, res) => {
         const remainingorders = await User.findOneAndUpdate({ _id: id }, { $pull: { _id: id } }, { new: true });
         try { await User.findOneAndUpdate({ username: USER }, { $pull: { orders : new mongodb.ObjectId(id) } }, { new: true }).then((data) => {
                 // console.log(data.orders);
-                res.status(200).json(data.orders);
+                res.status(200).json(data);
                 
             })
         } catch(err){
@@ -266,6 +267,35 @@ router.post("/add-new-prod", async (req, res) => {
 
 })
 
+router.get("/search",async (req,res) =>{
+    const query = req.query.query;
+    //console.log(query);
+    
+    if(!query){
+        res.status(400).json("Search query is required");
+    }
+    let lowerInput = query.toLowerCase();
+    try{
+        let data = await Product.find({
+            $or: [
+                {prodName: { $regex: lowerInput, $options: "i" }},
+                {prodBrand: { $regex: lowerInput, $options: "i" }}
+            ]
+        });
+
+        if(data.length > 0){
+            res.status(200).json(data);
+        }
+        else{
+            res.status(404).json("No matching products found");
+        }
+
+    } catch(err){
+        console.log(err);
+        res.status(500).json("Error occurs in search");
+    }
+
+})
 
 
 

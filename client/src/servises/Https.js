@@ -2,13 +2,21 @@ import axios from "axios"
 
 const exportedObject = {
 
-    // baseURL: "http://localhost:5000/",
-    baseURL: "/",
+    baseURL: "http://localhost:5000/",
+    //baseURL: "/",
 
     async getAllProducts() {
         const res = await axios.post(this.baseURL + "getallprods");
         return res;
     },
+
+    async searchProducts(query) {
+        const res = await axios.get(this.baseURL + "search", {
+            params: { query } 
+        });
+        return res;
+    },
+
 
     async getCartItems(user) {
         const res = await axios.post(this.baseURL + "get-cart-items", { user });

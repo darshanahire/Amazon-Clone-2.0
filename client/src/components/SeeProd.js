@@ -40,7 +40,7 @@ function SeeProd() {
             let res = await Https.seeProduct(id)
             const allData = res.data
             Https.addToCart(allData, USER).then(async (res) => {
-                if (res.status == 200) {
+                if (res.status === 200) {
                     Swal.fire(
                         'Success',
                         'Item Added to Cart',
@@ -52,7 +52,7 @@ function SeeProd() {
                     // dispatch(setSubtotal(allData.lowPrice));
                     setProdData = res.data;
                 }
-                else if (res.status == 201) {
+                else if (res.status === 201) {
                     Swal.fire(
                         'Warning',
                         'Please Login First',
@@ -66,10 +66,6 @@ function SeeProd() {
         }
     }
     function Authorization(){
-        if(USER){
-            history.push('/paygateway/' + prodData._id)
-        }
-        else{
             Swal.fire({
                 title: 'You are Not Login..!',
                 text: "Please Login to Proceed",
@@ -83,7 +79,6 @@ function SeeProd() {
                     history.push('/login')
                 }
               })
-        }
     }
     const USER = useSelector((state) => state.UserName.username)
 
@@ -129,7 +124,8 @@ function SeeProd() {
                                 <h4 className="text-center">M.R.P. :${prodData.lowPrice}</h4>
                                 <h6 className="text-center">You Save:	${prodData.highPrice - prodData.lowPrice} (12%)
                                     Inclusive of all taxes</h6>
-                                <Link className="Link" onClick={Authorization}>
+                                {/* <Link className="Link" onClick={Authorization}> */}
+                                <Link className="Link" to={'/paygateway/' + prodData._id}>
                                     <button className="btnOrange mx-auto my-3 w-75 " >Buy Now</button>
                                 </Link>
                                 <button id={prodData._id} className="btnNocolor mx-auto my-3 w-75 " onClick={addtocart}>Add to Cart</button>

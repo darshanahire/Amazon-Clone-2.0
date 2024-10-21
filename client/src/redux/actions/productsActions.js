@@ -97,3 +97,11 @@ export const UserName = (counts) => {
         payload: counts,
     };
 };
+
+export const infiniteScroll = (val) => {
+    return {
+        type: ActionsTypes.SWITCH_INFI_SCROLL,
+        payload: val,
+    };
+};
+

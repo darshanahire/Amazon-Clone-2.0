@@ -18,5 +18,6 @@ export const ActionsTypes = {
 
     CHANGE_MODE:"CHANGE_MODE",
 
-    USER:"USER"
+    USER:"USER",
+    SWITCH_INFI_SCROLL:'SWITCH_INFI_SCROLL'
 }

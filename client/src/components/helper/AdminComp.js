@@ -39,14 +39,14 @@ const AdminComp = () => {
                 prodImg: res.data.secure_url,
             }
             await axios.post("/add-new-prod", obj).then((data) => {
-                if (data.status == 200) {
+                if (data.status === 200) {
                     Swal.fire(
                         'Success',
                         'Product Uploaded',
                         'success'
                     )
                 }
-                else if (data.status == 201) {
+                else if (data.status === 201) {
                     Swal.fire(
                         'Error',
                         'Product Not Uploaded',

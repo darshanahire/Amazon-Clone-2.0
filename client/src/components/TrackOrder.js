@@ -49,7 +49,7 @@ function TrackOrder() {
                 'Order Cancel Successful',
                 'success'
             )
-             history.push("/")
+             history.push("/orders")
             
         }).catch((e)=>{
             console.log(e);
@@ -64,7 +64,7 @@ function TrackOrder() {
                 <hr />
                 <div className="row">
                     <div className="col-md-6 col-12">
-                        {orderType == 'Initiated' ? 
+                        {orderType === 'Initiated' ? 
                         <>
                             <h4 className="py-2 color-brown text-sm-center text-md-start">In Transit : On shedule</h4>
                             <h5>Expected delivery: <span className="text-success">{orderData.shipDate}, by 9 PM</span></h5> 
@@ -103,8 +103,8 @@ function TrackOrder() {
                             <Link className="Link" to={'/orders'}>
                                 <button className="btnOrange  d-inline border-1 p-1 mt-3 px-3 mx-3" >View All Orders</button>
                                 </Link>
-                                <Link className="Link">
-                                {orderType == 'Initiated' ?
+                                <Link className="Link" to="#">
+                                {orderType === 'Initiated' ?
                                 <button className="btnRed  d-inline border-1 p-1 mt-3 px-3 mx-3" onClick={cancelOrder}>Request to cancel order</button> :
                                 <button className="btn border-1 btn-white p-1 mb-1 px-3" >Share Feedback</button> }
                             </Link>
@@ -169,7 +169,7 @@ function TrackOrder() {
                                     </td>
                                     <hr />
                                     <td>
-                                        <tr>{orderType == 'Initiated' ? "Expected" :""} Delivery Date-</tr>
+                                        <tr>{orderType === 'Initiated' ? "Expected" :""} Delivery Date-</tr>
                                         <tr>{orderData.shipDate}</tr>
                                     </td>
                                     <hr />
@@ -211,7 +211,7 @@ function TrackOrder() {
                         </p>
                         </div>
                         </div>
-                        {orderType == 'Initiated' ? <button className="btnOrange mx-auto">Request to Change Address</button> :<></>}
+                        {orderType === 'Initiated' ? <button className="btnOrange mx-auto">Request to Change Address</button> :<></>}
                     </div>
                 </div>
             </div>

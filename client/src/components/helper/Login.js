@@ -27,7 +27,7 @@ const Login = () => {
             Https.login(userData).then((res)=>{
             console.log(res);
             
-            if(res.status==200){
+            if(res.status===200){
             localStorage.setItem("user",res.data)
             dispatch(UserName(res.data));
             Https.getUser(res.data).then((res) => {
@@ -39,7 +39,7 @@ const Login = () => {
             })
             history.goBack();
         }
-            if(res.status==201){
+            if(res.status===201){
             // alert(res.data)  
             }
         })}

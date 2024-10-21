@@ -25,7 +25,8 @@ function SingleOrder(props) {
         Https.cancelorder({id:orderId,USER}).then((res) => {
             // console.log(res.data);
             setOrderData(undefined)
-
+            console.log(res);
+            
             dispatch(setOrders(res.data.orders));
             dispatch(setDelivered(res.data.deliveredItems));
             // console.log(res.data.prod[0].prodName);
@@ -69,7 +70,7 @@ function SingleOrder(props) {
                        <button className="btnOrange  d-inline border-1 p-1 mt-3 px-3 mx-3" >Track this Order</button></Link>
                        <Link to={'/paygateway/' + orderData.prod[0]._id}>
                        <button className="btn border-1 btn-white p-1 mb-1 px-3">Buy Again</button></Link>
-                       { orderData.status == 'Initiated' ? <Link className="Link" onClick={cancelOrder}>
+                       { orderData.status === 'Initiated' ? <Link className="Link" to="#" onClick={cancelOrder}>
                        <button className="btnRed d-inline border-1 p-1 mt-3 px-3 mx-3">Request To Cancel Order</button></Link> :<></>}
                    </div>
                    </div>

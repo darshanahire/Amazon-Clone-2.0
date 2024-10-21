@@ -32,6 +32,10 @@ const username = {
     username:""
 }
 
+const infiScroll = {
+    infiScroll:true
+}
+
 
 export const productsReducer = (state = initialState, { type, payload }) => {
     switch (type) {
@@ -114,5 +118,16 @@ export const User = (state = username, { type, payload }) => {
             return state;
     }
 }
+
+export const switchInfiniteScroll = (state = infiScroll, { type, payload }) => {
+    switch (type) {
+        case ActionsTypes.SWITCH_INFI_SCROLL:
+            return { ...state, infiScroll : payload }
+        default:
+            return state;
+    }
+}
+
+
 
 // increment decrement likes login will have to write

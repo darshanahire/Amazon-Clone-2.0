@@ -22,7 +22,7 @@ export default function SingleCartComp(props) {
         if (USER) {
             let id = props.val;
             Https.removeFromCart(id, USER).then((res) => {
-                if (res.status == 200) {
+                if (res.status === 200) {
                     let obj = res.data;
                     dispatch(setAllDataToCart(obj))
                     dispatch(decressCartCount(1))
