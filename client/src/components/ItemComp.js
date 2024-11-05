@@ -18,8 +18,6 @@ function ItemComp() {
         Https.getAllProducts().then((res) => {
             dispatch(setProducts(res.data));
             setAllProds(res.data); 
-            console.log(res.data);
-             // Save to local state
             setLoading(false);
         });
 
@@ -34,13 +32,13 @@ function ItemComp() {
             localStorage.removeItem('user');
             console.log('localStorage cleared, user not found in db');
         });
-    }, [dispatch]);
+    }, []);
 
     // Infinite scrolling handler
     const handleInfiniteScrolling = () => {
-        if (infiSroll && window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight && !infiniteLoading) {
+        if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
             setInfiniteLoading(true);  // Start infinite scroll loading
-            console.log(allProds);
+           // console.log(allProds);
             
             Https.getAllProducts().then((res) => {
                 const newProds = res.data;
@@ -52,17 +50,17 @@ function ItemComp() {
         }
     };
 
+    const prods = useSelector((state) => state.allProducts.products);
     // Add the scroll event listener
     useEffect(() => {
-        console.log(infiSroll," infiSroll");
+       // console.log(infiSroll," infiSroll");
         if (infiSroll){
         window.addEventListener("scroll", handleInfiniteScrolling);
         return () => window.removeEventListener("scroll", handleInfiniteScrolling);  
-        }// Cleanup
-    }, [infiniteLoading]);  // Include infiniteLoading to avoid repeated calls
+       }// Cleanup
+    }, [allProds,infiSroll]);  // Include infiniteLoading to avoid repeated calls
 
     // Get data from the store
-    const prods = useSelector((state) => state.allProducts.products);
 
     const SingleItem = (prods) => {
         return prods.map((val, i, arr) => {
@@ -74,7 +72,7 @@ function ItemComp() {
 
     return (
         <>
-            {allProds.length === 0 && !loading ? (
+            {prods.length === 0 && !loading ? (
                 <div className="text-center w-100 mb-5">
                     <h3 className="pb-0">Oops! Items Not Found</h3>
                     <img className="pngImg" src="img/notfound2.png" width="400" alt="Not Found"/>

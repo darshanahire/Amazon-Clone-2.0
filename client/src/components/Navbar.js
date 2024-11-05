@@ -36,6 +36,7 @@ function Navbar() {
     const [searchInput, setSearchInput] = useState();
     const [isSearchBtn, setIsSearchBtn] = useState(true);
     const anchorRef = useRef(null);
+    const searchInputRef = useRef(null);
 
     const likeCount = useSelector((state) => state.likeordislike.count);
     const cartCount = useSelector((state) => state.cartHanddleing.count);
@@ -65,6 +66,7 @@ function Navbar() {
         setIsSearchBtn(true);
         dispatch(infiniteScroll(true));
         setSearchInput("")
+        searchInputRef.current.value = "";
         Https.getAllProducts().then((res) => {
         dispatch(setProducts(res.data));
     });
@@ -72,13 +74,16 @@ function Navbar() {
     // Filter products
     const filteredProducts = () => {
         let query = searchInput; 
-        console.log(searchInput);
+        //console.log(searchInput);
         if(query){
             setIsSearchBtn(false);
             dispatch(infiniteScroll(false));
             Https.searchProducts(query).then((res)=>{
-                console.log(res.data);
+                //console.log(res.data);
                 dispatch(setProducts(res.data));
+            }).catch((err)=>{
+                console.log(err);
+                dispatch(setProducts([]));
             })
         }
         // Https.getAllProducts().then((res) => {
@@ -128,6 +133,7 @@ function Navbar() {
                     type="search"
                     placeholder="Search Items"
                     aria-label="Search"
+                    ref={searchInputRef}
                     onChange={(e) => setSearchInput(e.target.value)}
                 />
                 {isSearchBtn ?
